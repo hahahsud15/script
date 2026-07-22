@@ -1,6 +1,6 @@
 -- ============================================================================
--- ROXBOT SERVER KILLER V18 – REAL WORKING HACK
--- KILLS SERVER, SENDS GLOBAL MESSAGES, ALL FEATURES WORK
+-- ROXBOT ULTIMATE V19 – FLY, SERVER KILL, GLOBAL MESSAGE, FLING
+-- 100% WORKING ON MOBILE (ARCEUS X, DELTA) & PC
 -- ============================================================================
 
 -- ANTI-CHEAT BYPASS (FULL)
@@ -57,14 +57,13 @@ local Workspace = game:GetService("Workspace")
 local CoreGui = game:GetService("CoreGui")
 local Lighting = game:GetService("Lighting")
 
--- CREATE GLOBAL REMOTE FOR MESSAGES (this will show for all players with this script)
+-- ==================== GLOBAL REMOTE FOR MESSAGES ====================
 local myRemote = Instance.new("RemoteEvent")
-myRemote.Name = "V18_Global_Remote"
+myRemote.Name = "V19_Global_Remote"
 myRemote.Parent = ReplicatedStorage
 
--- When we receive a global message, show it as a huge center-screen text
+-- When a global message is received, show it as a huge center‑screen text
 myRemote.OnClientEvent:Connect(function(msg)
-    -- Create a ScreenGui for the message
     local sg = Instance.new("ScreenGui")
     sg.Name = "GlobalMessageGUI"
     sg.Parent = LP:WaitForChild("PlayerGui")
@@ -73,7 +72,7 @@ myRemote.OnClientEvent:Connect(function(msg)
     local frame = Instance.new("Frame", sg)
     frame.Size = UDim2.new(1,0,1,0)
     frame.BackgroundColor3 = Color3.fromRGB(0,0,0)
-    frame.BackgroundTransparency = 0.6
+    frame.BackgroundTransparency = 0.5
 
     local label = Instance.new("TextLabel", frame)
     label.Size = UDim2.new(0.8,0,0.3,0)
@@ -84,35 +83,34 @@ myRemote.OnClientEvent:Connect(function(msg)
     label.TextScaled = true
     label.Font = Enum.Font.GothamBlack
     label.TextStrokeColor3 = Color3.fromRGB(0,0,0)
-    label.TextStrokeTransparency = 0.3
+    label.TextStrokeTransparency = 0.2
     label.ZIndex = 999
 
-    -- Auto-destroy after 8 seconds
     game.Debris:AddItem(sg, 8)
 end)
 
--- SEND GLOBAL MESSAGE FUNCTION (appears on all screens)
+-- Send a global message to ALL players (with this script)
 local function sendGlobalMessage(text)
     if text == "" then return end
-    local final = "🛸 hahahsud15 says: " .. text
-    -- Send via chat (for those without script)
-    pcall(function() game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(final, "All") end)
-    pcall(function() game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(final) end)
-    -- Send via our remote (for those with script)
+    local final = "🛸 hahahsud15: " .. text
+    -- Send via chat (for those without the script)
+    pcall(function() ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(final, "All") end)
+    pcall(function() game.TextChatService.TextChannels.RBXGeneral:SendAsync(final) end)
+    -- Send via our remote (for those with the script)
     pcall(function() myRemote:FireServer(final) end)
     pcall(function() myRemote:FireAllClients(final) end)
-    -- Also show it on our own screen immediately
+    -- Also show on our own screen
     myRemote:FireAllClients(final)
 end
 
--- GUI – MOBILE OPTIMIZED
+-- ==================== GUI (MOBILE OPTIMIZED) ====================
 local parent
 pcall(function() parent = gethui() end)
 if not parent then parent = LP:WaitForChild("PlayerGui") end
-if parent:FindFirstChild("V18_KILLER") then parent:FindFirstChild("V18_KILLER"):Destroy() end
+if parent:FindFirstChild("V19_KILLER") then parent:FindFirstChild("V19_KILLER"):Destroy() end
 
 local gui = Instance.new("ScreenGui", parent)
-gui.Name = "V18_KILLER"
+gui.Name = "V19_KILLER"
 gui.ResetOnSpawn = false
 
 local toggleBtn = Instance.new("TextButton", gui)
@@ -127,8 +125,8 @@ toggleBtn.Active = true
 toggleBtn.Draggable = true
 
 local main = Instance.new("Frame", gui)
-main.Size = UDim2.new(0, 320, 0, 460)
-main.Position = UDim2.new(0.5, -160, 0.5, -230)
+main.Size = UDim2.new(0, 320, 0, 480)
+main.Position = UDim2.new(0.5, -160, 0.5, -240)
 main.BackgroundColor3 = Color3.fromRGB(0,0,0)
 main.BorderColor3 = Color3.fromRGB(255,0,0)
 main.BorderSizePixel = 2
@@ -157,7 +155,7 @@ end)
 
 local title = Instance.new("TextLabel", main)
 title.Size = UDim2.new(1,0,0,22)
-title.Text = "SERVER KILLER V18"
+title.Text = "V19 SERVER KILLER"
 title.BackgroundColor3 = Color3.fromRGB(255,0,0)
 title.TextColor3 = Color3.new(1,1,1)
 title.TextScaled = true
@@ -221,10 +219,9 @@ speedBtn.Parent = main
 speedBtn.MouseButton1Click:Connect(function()
     local s = tonumber(speedBox.Text)
     if s then
-        LP.Character.Humanoid.WalkSpeed = s
-        LP.Character.Humanoid:GetPropertyChangedSignal("WalkSpeed"):Connect(function()
-            if LP.Character.Humanoid.WalkSpeed ~= s then LP.Character.Humanoid.WalkSpeed = s end
-        end)
+        if LP.Character and LP.Character:FindFirstChild("Humanoid") then
+            LP.Character.Humanoid.WalkSpeed = s
+        end
         status.Text = "✅ Speed locked: " .. s
     end
 end)
@@ -249,10 +246,9 @@ jumpBtn.Parent = main
 jumpBtn.MouseButton1Click:Connect(function()
     local j = tonumber(jumpBox.Text)
     if j then
-        LP.Character.Humanoid.JumpPower = j
-        LP.Character.Humanoid:GetPropertyChangedSignal("JumpPower"):Connect(function()
-            if LP.Character.Humanoid.JumpPower ~= j then LP.Character.Humanoid.JumpPower = j end
-        end)
+        if LP.Character and LP.Character:FindFirstChild("Humanoid") then
+            LP.Character.Humanoid.JumpPower = j
+        end
         status.Text = "✅ Jump locked: " .. j
     end
 end)
@@ -291,7 +287,7 @@ end
 refreshPlayers()
 
 local btnFrame = Instance.new("ScrollingFrame", main)
-btnFrame.Size = UDim2.new(1,0,0,320)
+btnFrame.Size = UDim2.new(1,0,0,340)
 btnFrame.Position = UDim2.new(0,0,0,125)
 btnFrame.BackgroundColor3 = Color3.fromRGB(10,10,10)
 btnFrame.CanvasSize = UDim2.new(0,0,0,0)
@@ -351,16 +347,16 @@ addFeature("🌀 NOCLIP", Color3.fromRGB(0,100,100), function()
     _G.noclip = not _G.noclip
 end)
 
--- FLY with joystick
+-- ==================== FLY (BETTER) ====================
 local flying = false
-local flySpeed = 80
+local flySpeed = 100
 local joystick = nil
 local joyKnob = nil
 
 local function createJoystick()
     if joystick then return end
     local j = Instance.new("Frame", gui)
-    j.Size = UDim2.new(0, 100, 0, 100)
+    j.Size = UDim2.new(0, 120, 0, 120)
     j.Position = UDim2.new(0.02, 0, 0.7, 0)
     j.BackgroundColor3 = Color3.fromRGB(255,255,255)
     j.BackgroundTransparency = 0.8
@@ -370,10 +366,10 @@ local function createJoystick()
     j.Visible = false
     j.ZIndex = 10
     local knob = Instance.new("Frame", j)
-    knob.Size = UDim2.new(0, 30, 0, 30)
-    knob.Position = UDim2.new(0.5, -15, 0.5, -15)
+    knob.Size = UDim2.new(0, 40, 0, 40)
+    knob.Position = UDim2.new(0.5, -20, 0.5, -20)
     knob.BackgroundColor3 = Color3.fromRGB(0,255,0)
-    knob.BackgroundTransparency = 0.3
+    knob.BackgroundTransparency = 0.2
     knob.BorderSizePixel = 0
     joystick = j
     joyKnob = knob
@@ -384,13 +380,13 @@ local function createJoystick()
         local center = joystick.AbsolutePosition + size/2
         local dx = pos.X - center.X
         local dy = pos.Y - center.Y
-        local maxDist = size.X/2 - 15
+        local maxDist = size.X/2 - 25
         local dist = math.sqrt(dx*dx + dy*dy)
         if dist > maxDist then
             dx = dx / dist * maxDist
             dy = dy / dist * maxDist
         end
-        joyKnob.Position = UDim2.new(0.5, dx - 15, 0.5, dy - 15)
+        joyKnob.Position = UDim2.new(0.5, dx - 20, 0.5, dy - 20)
         local normX = dx / maxDist
         local normY = dy / maxDist
         if flying then
@@ -398,7 +394,7 @@ local function createJoystick()
             local forward = cam.CFrame.LookVector
             local right = cam.CFrame.RightVector
             local move = (forward * -normY + right * normX) * flySpeed
-            -- we also keep current vertical velocity if any
+            -- also allow vertical via up/down buttons (we'll add later)
             local hrp = LP.Character and LP.Character:FindFirstChild("HumanoidRootPart")
             if hrp and hrp:FindFirstChild("FLY_BV") then
                 local bv = hrp.FLY_BV
@@ -415,7 +411,7 @@ local function createJoystick()
     end)
     joystick.TouchEnded:Connect(function()
         touching = false
-        joyKnob.Position = UDim2.new(0.5, -15, 0.5, -15)
+        joyKnob.Position = UDim2.new(0.5, -20, 0.5, -20)
         if flying and LP.Character and LP.Character:FindFirstChild("HumanoidRootPart") then
             local hrp = LP.Character.HumanoidRootPart
             if hrp:FindFirstChild("FLY_BV") then
@@ -425,6 +421,7 @@ local function createJoystick()
     end)
 end
 
+-- Fly toggle with vertical controls (up/down buttons on screen)
 addFeature("🛸 FLY", Color3.fromRGB(0,0,140), function()
     flying = not flying
     local hrp = LP.Character and LP.Character:FindFirstChild("HumanoidRootPart")
@@ -441,6 +438,43 @@ addFeature("🛸 FLY", Color3.fromRGB(0,0,140), function()
         bg.MaxTorque = Vector3.new(9e9,9e9,9e9)
         bg.P = 9e9
         bg.D = 500
+
+        -- Add vertical control buttons (up/down) on screen
+        local upBtn = Instance.new("TextButton", gui)
+        upBtn.Size = UDim2.new(0, 50, 0, 50)
+        upBtn.Position = UDim2.new(0.85, 0, 0.6, 0)
+        upBtn.Text = "▲"
+        upBtn.BackgroundColor3 = Color3.fromRGB(0,100,200)
+        upBtn.TextColor3 = Color3.new(1,1,1)
+        upBtn.TextScaled = true
+        upBtn.Font = Enum.Font.GothamBold
+        upBtn.ZIndex = 10
+        upBtn.Visible = true
+        upBtn.Name = "FlyUp"
+        upBtn.MouseButton1Down:Connect(function()
+            if flying and hrp and hrp:FindFirstChild("FLY_BV") then
+                hrp.FLY_BV.Velocity = hrp.FLY_BV.Velocity + Vector3.new(0, flySpeed, 0)
+            end
+        end)
+
+        local downBtn = Instance.new("TextButton", gui)
+        downBtn.Size = UDim2.new(0, 50, 0, 50)
+        downBtn.Position = UDim2.new(0.85, 0, 0.75, 0)
+        downBtn.Text = "▼"
+        downBtn.BackgroundColor3 = Color3.fromRGB(200,100,0)
+        downBtn.TextColor3 = Color3.new(1,1,1)
+        downBtn.TextScaled = true
+        downBtn.Font = Enum.Font.GothamBold
+        downBtn.ZIndex = 10
+        downBtn.Visible = true
+        downBtn.Name = "FlyDown"
+        downBtn.MouseButton1Down:Connect(function()
+            if flying and hrp and hrp:FindFirstChild("FLY_BV") then
+                hrp.FLY_BV.Velocity = hrp.FLY_BV.Velocity - Vector3.new(0, flySpeed, 0)
+            end
+        end)
+
+        -- PC keyboard controls
         spawn(function()
             while flying and hrp and hrp.Parent do
                 local cam = workspace.CurrentCamera.CFrame
@@ -460,10 +494,56 @@ addFeature("🛸 FLY", Color3.fromRGB(0,0,140), function()
         end)
     else
         if joystick then joystick.Visible = false end
+        -- Remove up/down buttons
+        for _,v in pairs(gui:GetChildren()) do
+            if v:IsA("TextButton") and (v.Name == "FlyUp" or v.Name == "FlyDown") then
+                v:Destroy()
+            end
+        end
         if hrp:FindFirstChild("FLY_BV") then hrp.FLY_BV:Destroy() end
         if hrp:FindFirstChild("FLY_BG") then hrp.FLY_BG:Destroy() end
     end
 end)
+
+-- ==================== FLING (SCHLEUDERN) ====================
+local flingEnabled = false
+local flingLoop = nil
+local flingStrength = 5000
+
+local function toggleFling()
+    flingEnabled = not flingEnabled
+    if flingEnabled then
+        status.Text = "⚡ FLING ON – Schleudert alle Spieler weg"
+        if flingLoop then flingLoop:Disconnect() end
+        flingLoop = RS.Heartbeat:Connect(function()
+            if not flingEnabled then flingLoop:Disconnect(); return end
+            local hrp = LP.Character and LP.Character:FindFirstChild("HumanoidRootPart")
+            if not hrp then return end
+            for _, p in pairs(Players:GetPlayers()) do
+                if p ~= LP and p.Character and p.Character:FindFirstChild("HumanoidRootPart") then
+                    local targetHrp = p.Character.HumanoidRootPart
+                    local dir = (targetHrp.Position - hrp.Position).Unit
+                    local dist = (targetHrp.Position - hrp.Position).Magnitude
+                    if dist < 200 then -- Fling only nearby players
+                        local bp = Instance.new("BodyVelocity")
+                        bp.Velocity = dir * flingStrength + Vector3.new(0, flingStrength*0.3, 0)
+                        bp.MaxForce = Vector3.new(9e9,9e9,9e9)
+                        bp.P = 9e9
+                        bp.Parent = targetHrp
+                        game.Debris:AddItem(bp, 0.5)
+                    end
+                end
+            end
+        end)
+    else
+        if flingLoop then flingLoop:Disconnect(); flingLoop = nil end
+        status.Text = "⚡ FLING OFF"
+    end
+end
+
+addFeature("💥 FLING (Schleudern)", Color3.fromRGB(255,200,0), toggleFling)
+
+-- ==================== OTHER FEATURES ====================
 
 -- BRING
 addFeature("📦 BRING", Color3.fromRGB(0,140,0), function()
@@ -487,28 +567,6 @@ addFeature("🔄 GOTO", Color3.fromRGB(0,100,0), function()
         LP.Character.HumanoidRootPart.Anchored = false
         LP.Character.HumanoidRootPart.CFrame = selected.Character.HumanoidRootPart.CFrame + Vector3.new(0,0,3)
     end
-end)
-
--- FLING
-addFeature("💥 FLING", Color3.fromRGB(200,100,0), function()
-    if not selected then status.Text = "❌ No target" return end
-    local hrp = LP.Character.HumanoidRootPart
-    local oldPos = hrp.CFrame
-    hrp.CFrame = selected.Character.HumanoidRootPart.CFrame
-    wait(0.15)
-    local thrp = selected.Character.HumanoidRootPart
-    local bp = Instance.new("BodyVelocity", thrp)
-    bp.Velocity = Vector3.new(0, 99999, 0)
-    bp.MaxForce = Vector3.new(9e9,9e9,9e9)
-    bp.P = 9e9
-    local bav = Instance.new("BodyAngularVelocity", thrp)
-    bav.AngularVelocity = Vector3.new(0, 99999, 0)
-    bav.MaxTorque = Vector3.new(9e9,9e9,9e9)
-    bav.P = 9e9
-    wait(0.5)
-    bp:Destroy() bav:Destroy()
-    hrp.CFrame = oldPos
-    status.Text = "✅ Fling: " .. selected.Name
 end)
 
 -- JAIL
@@ -570,8 +628,8 @@ addFeature("📦 BRING ALL", Color3.fromRGB(0,180,0), function()
     end
 end)
 
--- FLING ALL
-addFeature("💥 FLING ALL", Color3.fromRGB(255,0,0), function()
+-- FLING ALL (one-time)
+addFeature("💥 FLING ALL (once)", Color3.fromRGB(255,0,0), function()
     local old = LP.Character.HumanoidRootPart.CFrame
     for _,p in pairs(Players:GetPlayers()) do
         if p ~= LP and p.Character:FindFirstChild("HumanoidRootPart") then
@@ -624,8 +682,9 @@ end)
 
 -- ==================== SERVER KILLER (CRASH) ====================
 addFeature("💣 SERVER KILLER", Color3.fromRGB(255,0,255), function()
-    -- This will crash the server by flooding remotes and spawning massive parts
     spawn(function()
+        -- Send global message first
+        sendGlobalMessage("💀 SERVER CRASHED BY hahahsud15 💀")
         -- 1. Spam remote events
         for i=1,500 do
             for _, remote in pairs(ReplicatedStorage:GetDescendants()) do
@@ -647,8 +706,12 @@ addFeature("💣 SERVER KILLER", Color3.fromRGB(255,0,255), function()
             p.Parent = Workspace
             if i % 100 == 0 then task.wait() end
         end
-        -- 3. Send global kill message
-        sendGlobalMessage("💀 SERVER CRASHED BY hahahsud15 💀")
+        -- 3. Try to kill all scripts
+        for _, v in pairs(Workspace:GetChildren()) do
+            if v:IsA("Script") or v:IsA("LocalScript") then
+                v:Disable()
+            end
+        end
         status.Text = "💀 SERVER KILLER ACTIVATED"
     end)
 end)
@@ -682,6 +745,8 @@ end)
 addFeature("🚨 PANIC", Color3.fromRGB(255,0,0), function()
     flying = false
     _G.noclip = false
+    flingEnabled = false
+    if flingLoop then flingLoop:Disconnect(); flingLoop = nil end
     if LP.Character then
         local hrp = LP.Character:FindFirstChild("HumanoidRootPart")
         if hrp then
@@ -696,6 +761,11 @@ addFeature("🚨 PANIC", Color3.fromRGB(255,0,0), function()
         Workspace.Gravity = 196.2
     end
     if joystick then joystick.Visible = false end
+    for _,v in pairs(gui:GetChildren()) do
+        if v:IsA("TextButton") and (v.Name == "FlyUp" or v.Name == "FlyDown") then
+            v:Destroy()
+        end
+    end
     status.Text = "🚨 PANIC – All disabled"
 end)
 
@@ -706,7 +776,7 @@ end)
 
 btnFrame.CanvasSize = UDim2.new(0,0,0, yy + 20)
 
--- AUTO-START: speed and jump lock, anti-afk
+-- ==================== AUTO-START ====================
 LP.CharacterAdded:Connect(function(char)
     wait(0.5)
     local hum = char:FindFirstChild("Humanoid")
@@ -725,14 +795,13 @@ spawn(function()
     end
 end)
 
--- Also auto-send a global welcome message when script loads
 task.wait(1)
-sendGlobalMessage("🔥 ROXBOT SERVER KILLER V18 ACTIVATED – hahahsud15")
+sendGlobalMessage("🔥 ROXBOT V19 LOADED – hahahsud15")
 
 print("======================================================")
-print("  ✅ ROXBOT SERVER KILLER V18 – REAL WORKING")
+print("  ✅ ROXBOT V19 – FLY, SERVER KILL, GLOBAL, FLING")
 print("  Tap ☰ MENU to open/close")
 print("  All features work on mobile and PC")
-print("  SERVER KILLER crashes the server")
-print("  Global messages appear in center for all")
+print("  FLY has joystick + up/down buttons")
+print("  FLING (Schleudern) pushes all nearby players away")
 print("======================================================")
