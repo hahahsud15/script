@@ -1,330 +1,483 @@
--- V11 ULTIMATE UNIVERSAL by hahahsud15 - BEST UNIVERSAL 2026
--- WASSERZEICHEN: hahahsud15 IST DER GOAT - FREE FÜR ALLE
--- Features aus Google + YouTube + Infinite Yield + Dark Dex + Avocat Hub
+-- V12 ULTIMATE BABA by hahahsud15 - 2026 KRASSESTES UNIVERSAL SCRIPT
+-- Watermark: hahahsud15_ULTIMATE_2026_BABA_V12
+-- Features: Echte AN/AUS Buttons GRÜN/ROT, DE/EN, FPS/PING/MS, Universal Explorer BABA, Infinity Yield
+
+if getgenv().V12_LOADED then getgenv().V12_LOADED:Destroy() end
+getgenv().V12_WATERMARK = "hahahsud15_ULTIMATE_2026_BABA_V12"
+print("V12 by "..getgenv().V12_WATERMARK.." GELADEN!")
 
 local Players = game:GetService("Players")
-local LP = Players.LocalPlayer
-local UIS = game:GetService("UserInputService")
-local RS = game:GetService("RunService")
-local TS = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
 local Lighting = game:GetService("Lighting")
-local TeleportService = game:GetService("TeleportService")
+local Stats = game:GetService("Stats")
+local lp = Players.LocalPlayer
 
-getgenv().V11_WATERMARK = "hahahsud15_ULTIMATE_2026_FREE"
-getgenv().V11_CREATOR = "hahahsud15"
-
--- ANTI-AFK IMMER AN - AUTOMATISCH BEIM START - GEHT NIE AUS!
-task.spawn(function()
-    local vu = game:GetService("VirtualUser")
-    LP.Idled:Connect(function()
-        vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-        task.wait(1)
-        vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-    end)
-    print("✅ V11 ANTI-AFK IMMER AN by hahahsud15")
+-- Anti-AFK IMMER AN - WATERMARK SAFE
+local VirtualUser = game:GetService("VirtualUser")
+lp.Idled:Connect(function()
+    VirtualUser:CaptureController()
+    VirtualUser:ClickButton2(Vector2.new())
 end)
 
+-- ScreenGui
 local gui = Instance.new("ScreenGui")
-gui.Name = "V11_ULTIMATE_by_hahahsud15"
+gui.Name = "V12_ULTIMATE_BABA"
 gui.ResetOnSpawn = false
-gui.Parent = game:GetService("CoreGui")
+gui.Parent = getgenv().gethui and gethui() or game.CoreGui
+getgenv().V12_LOADED = gui
 
--- KLEINER OPEN BUTTON 50x50 - WIE DU WOLLTEST!
-local openBtn = Instance.new("TextButton")
+-- Kleiner OPEN Button 50x50
+local openBtn = Instance.new("TextButton", gui)
 openBtn.Size = UDim2.new(0,50,0,50)
 openBtn.Position = UDim2.new(0,20,0.5,-25)
-openBtn.BackgroundColor3 = Color3.fromRGB(0,0,0)
-openBtn.Text = "V11"
-openBtn.TextColor3 = Color3.fromRGB(0,255,255)
-openBtn.TextScaled = true
-openBtn.Font = Enum.Font.GothamBold
-openBtn.Parent = gui
-openBtn.Active = true
-openBtn.Draggable = true
-Instance.new("UICorner", openBtn).CornerRadius = UDim.new(1,0)
-local stroke = Instance.new("UIStroke", openBtn)
-stroke.Color = Color3.fromRGB(0,255,255)
-stroke.Thickness = 2
-stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+openBtn.BackgroundColor3 = Color3.fromRGB(20,20,20)
+openBtn.Text = "V12"
+openBtn.TextColor3 = Color3.fromRGB(0,255,150)
+openBtn.Font = Enum.Font.GothamBlack
+openBtn.TextSize = 14
+Instance.new("UICorner", openBtn).CornerRadius = UDim.new(0,12)
+local openStroke = Instance.new("UIStroke", openBtn)
+openStroke.Color = Color3.fromRGB(0,255,150)
+openStroke.Thickness = 2
 
-local mainFrame = Instance.new("Frame")
-mainFrame.Size = UDim2.new(0, 650, 0, 460)
-mainFrame.Position = UDim2.new(0.5, -325, 0.5, -230)
-mainFrame.BackgroundColor3 = Color3.fromRGB(15,15,15)
-mainFrame.Visible = false
-mainFrame.Parent = gui
-mainFrame.Active = true
-mainFrame.Draggable = true
-Instance.new("UICorner", mainFrame).CornerRadius = UDim.new(0,10)
-local mainStroke = Instance.new("UIStroke", mainFrame)
-mainStroke.Color = Color3.fromRGB(0,255,255)
+-- Main Frame
+local main = Instance.new("Frame", gui)
+main.Size = UDim2.new(0,750,0,520)
+main.Position = UDim2.new(0.5,-375,0.5,-260)
+main.BackgroundColor3 = Color3.fromRGB(15,15,15)
+main.Visible = false
+main.Active = true
+main.Draggable = true
+Instance.new("UICorner", main).CornerRadius = UDim.new(0,16)
+local mainStroke = Instance.new("UIStroke", main)
+mainStroke.Color = Color3.fromRGB(0,255,150)
 mainStroke.Thickness = 2
 
--- TITEL MIT WASSERZEICHEN
-local title = Instance.new("TextLabel")
+-- Title Bar
+local title = Instance.new("TextLabel", main)
 title.Size = UDim2.new(1,0,0,40)
 title.BackgroundColor3 = Color3.fromRGB(25,25,25)
-title.Text = "  V11 ULTIMATE by hahahsud15 | BEST UNIVERSAL FREE"
-title.TextColor3 = Color3.fromRGB(0,255,255)
-title.TextXAlignment = Enum.TextXAlignment.Left
+title.Text = "  V12 ULTIMATE BABA | by hahahsud15 | 2026 KRASSESTES SCRIPT"
+title.TextColor3 = Color3.fromRGB(255,255,255)
 title.Font = Enum.Font.GothamBold
-title.TextSize = 14
-title.Parent = mainFrame
-Instance.new("UICorner", title)
+title.TextSize = 13
+title.TextXAlignment = Enum.TextXAlignment.Left
+Instance.new("UICorner", title).CornerRadius = UDim.new(0,16)
 
--- TABS
-local tabFrame = Instance.new("Frame")
-tabFrame.Size = UDim2.new(0,120,1,-40)
-tabFrame.Position = UDim2.new(0,0,0,40)
-tabFrame.BackgroundColor3 = Color3.fromRGB(20,20,20)
-tabFrame.Parent = mainFrame
+local close = Instance.new("TextButton", main)
+close.Size = UDim2.new(0,30,0,30)
+close.Position = UDim2.new(1,-35,0,5)
+close.Text = "X"
+close.BackgroundColor3 = Color3.fromRGB(150,30,30)
+close.TextColor3 = Color3.new(1,1,1)
+close.Font = Enum.Font.GothamBold
+Instance.new("UICorner", close).CornerRadius = UDim.new(0,8)
 
-local contentFrame = Instance.new("Frame")
-contentFrame.Size = UDim2.new(1,-120,1,-40)
-contentFrame.Position = UDim2.new(0,120,0,40)
-contentFrame.BackgroundTransparency = 1
-contentFrame.Parent = mainFrame
+-- FPS / PING Label OBEN
+local perfLabel = Instance.new("TextLabel", main)
+perfLabel.Size = UDim2.new(0,250,0,20)
+perfLabel.Position = UDim2.new(0,10,0,45)
+perfLabel.BackgroundTransparency = 1
+perfLabel.Text = "FPS: 0 | PING: 0ms | WATERMARK: hahahsud15"
+perfLabel.TextColor3 = Color3.fromRGB(0,255,150)
+perfLabel.Font = Enum.Font.Code
+perfLabel.TextSize = 11
+perfLabel.TextXAlignment = Enum.TextXAlignment.Left
 
-local function makeScroll(name)
-    local sc = Instance.new("ScrollingFrame")
-    sc.Name = name
-    sc.Size = UDim2.new(1,0,1,0)
-    sc.BackgroundTransparency = 1
-    sc.ScrollBarThickness = 4
-    sc.Visible = false
-    sc.CanvasSize = UDim2.new(0,0,0,800)
-    sc.Parent = contentFrame
-    local list = Instance.new("UIListLayout", sc)
-    list.Padding = UDim.new(0,6)
-    list.SortOrder = Enum.SortOrder.LayoutOrder
-    return sc
-end
+-- Tab Buttons
+local tabFrame = Instance.new("Frame", main)
+tabFrame.Size = UDim2.new(1,0,0,35)
+tabFrame.Position = UDim2.new(0,0,0,65)
+tabFrame.BackgroundTransparency = 1
 
-local playerTab = makeScroll("Player")
-local visualTab = makeScroll("Visual")
-local worldTab = makeScroll("World")
-local utilTab = makeScroll("Util")
-local explorerTab = makeScroll("Explorer")
-playerTab.Visible = true
+local tabs = {"PLAYER","VISUAL","WELT","EXPLORER","SERVER","PERFORMANCE"}
+local tabBtns = {}
+local contentFrames = {}
 
-local function makeTabBtn(text, tab, y)
-    local b = Instance.new("TextButton")
-    b.Size = UDim2.new(1,0,0,40)
-    b.Position = UDim2.new(0,0,0,y)
-    b.Text = text
-    b.BackgroundColor3 = Color3.fromRGB(30,30,30)
-    b.TextColor3 = Color3.fromRGB(255,255,255)
+for i,name in ipairs(tabs) do
+    local b = Instance.new("TextButton", tabFrame)
+    b.Size = UDim2.new(0,110,0,30)
+    b.Position = UDim2.new(0,10 + (i-1)*120,0,0)
+    b.Text = name
+    b.BackgroundColor3 = Color3.fromRGB(35,35,35)
+    b.TextColor3 = Color3.new(1,1,1)
     b.Font = Enum.Font.GothamBold
-    b.TextSize = 12
-    b.Parent = tabFrame
-    Instance.new("UICorner", b)
+    b.TextSize = 11
+    Instance.new("UICorner", b).CornerRadius = UDim.new(0,8)
+    tabBtns[name]=b
+    
+    local f = Instance.new("ScrollingFrame", main)
+    f.Size = UDim2.new(1,-20,1,-110)
+    f.Position = UDim2.new(0,10,0,105)
+    f.BackgroundColor3 = Color3.fromRGB(20,20,20)
+    f.Visible = (i==1)
+    f.CanvasSize = UDim2.new(0,0,0,800)
+    f.ScrollBarThickness = 4
+    Instance.new("UICorner", f).CornerRadius = UDim.new(0,10)
+    local layout = Instance.new("UIListLayout", f)
+    layout.Padding = UDim.new(0,8)
+    layout.SortOrder = Enum.SortOrder.LayoutOrder
+    contentFrames[name]=f
+    
     b.MouseButton1Click:Connect(function()
-        for _,v in pairs(contentFrame:GetChildren()) do v.Visible=false end
-        tab.Visible=true
+        for _,v in pairs(contentFrames) do v.Visible=false end
+        for _,btn in pairs(tabBtns) do btn.BackgroundColor3=Color3.fromRGB(35,35,35) end
+        f.Visible=true
+        b.BackgroundColor3=Color3.fromRGB(0,255,150)
     end)
 end
+tabBtns["PLAYER"].BackgroundColor3=Color3.fromRGB(0,255,150)
 
-makeTabBtn("👤 PLAYER", playerTab, 0)
-makeTabBtn("👁️ VISUAL", visualTab, 45)
-makeTabBtn("🌍 WORLD", worldTab, 90)
-makeTabBtn("🔧 UTIL", utilTab, 135)
-makeTabBtn("🔍 EXPLORER", explorerTab, 180)
-
-local function makeBtn(text, color, parent, callback)
-    local btn = Instance.new("TextButton")
-    btn.Size = UDim2.new(1,-10,0,36)
-    btn.BackgroundColor3 = color
-    btn.Text = text
-    btn.TextColor3 = Color3.fromRGB(255,255,255)
-    btn.Font = Enum.Font.GothamBold
-    btn.TextSize = 12
-    btn.Parent = parent
-    Instance.new("UICorner", btn)
-    btn.MouseButton1Click:Connect(callback)
+-- ECHTE TOGGLE FUNCTION GRÜN/ROT
+local function makeToggle(parent, deName, enName, callback)
+    local holder = Instance.new("Frame", parent)
+    holder.Size = UDim2.new(1,-20,0,40)
+    holder.BackgroundColor3 = Color3.fromRGB(30,30,30)
+    holder.LayoutOrder = #parent:GetChildren()
+    Instance.new("UICorner", holder).CornerRadius = UDim.new(0,8)
+    
+    local label = Instance.new("TextLabel", holder)
+    label.Size = UDim2.new(0.6,0,1,0)
+    label.Position = UDim2.new(0,10,0,0)
+    label.BackgroundTransparency=1
+    label.Text = deName.." / "..enName
+    label.TextColor3=Color3.new(1,1,1)
+    label.Font=Enum.Font.Gotham
+    label.TextSize=12
+    label.TextXAlignment=Enum.TextXAlignment.Left
+    
+    local btn = Instance.new("TextButton", holder)
+    btn.Size = UDim2.new(0,110,0,28)
+    btn.Position = UDim2.new(1,-120,0.5,-14)
+    btn.Text = "❌ AUS / OFF"
+    btn.BackgroundColor3 = Color3.fromRGB(150,30,30)
+    btn.TextColor3=Color3.new(1,1,1)
+    btn.Font=Enum.Font.GothamBold
+    btn.TextSize=11
+    Instance.new("UICorner", btn).CornerRadius = UDim.new(0,6)
+    
+    local state=false
+    btn.MouseButton1Click:Connect(function()
+        state = not state
+        if state then
+            btn.Text="✅ AN / ON"
+            btn.BackgroundColor3=Color3.fromRGB(30,180,30)
+        else
+            btn.Text="❌ AUS / OFF"
+            btn.BackgroundColor3=Color3.fromRGB(150,30,30)
+        end
+        pcall(callback, state)
+    end)
     return btn
 end
 
--- VARIABLES
-local flyOn=false
-local flySpeed=50
-local flyLV, flyAtt
-local noclipOn=false
-local infJumpOn=false
-local clickTPOn=false
+local function makeButton(parent, text, color, callback)
+    local b = Instance.new("TextButton", parent)
+    b.Size = UDim2.new(1,-20,0,36)
+    b.BackgroundColor3 = color
+    b.Text = text
+    b.TextColor3=Color3.new(1,1,1)
+    b.Font=Enum.Font.GothamBold
+    b.TextSize=12
+    b.LayoutOrder = #parent:GetChildren()
+    Instance.new("UICorner", b).CornerRadius = UDim.new(0,8)
+    b.MouseButton1Click:Connect(function() pcall(callback) end)
+    return b
+end
 
--- FLY FUNCTION SMOOTH LINEARVELOCITY 2026
-local function toggleFly()
-    flyOn = not flyOn
-    local char = LP.Character
-    if not char then return end
-    local hrp = char:FindFirstChild("HumanoidRootPart")
-    if not hrp then return end
-    if flyOn then
-        flyAtt = Instance.new("Attachment", hrp)
-        flyLV = Instance.new("LinearVelocity")
-        flyLV.Attachment0 = flyAtt
-        flyLV.MaxForce = math.huge
-        flyLV.VectorVelocity = Vector3.new(0,0,0)
-        flyLV.Parent = hrp
-        
-        task.spawn(function()
-            while flyOn and char and hrp.Parent do
-                local moveDir = Vector3.new(0,0,0)
-                if UIS:IsKeyDown(Enum.KeyCode.W) then moveDir += workspace.CurrentCamera.CFrame.LookVector end
-                if UIS:IsKeyDown(Enum.KeyCode.S) then moveDir -= workspace.CurrentCamera.CFrame.LookVector end
-                if UIS:IsKeyDown(Enum.KeyCode.A) then moveDir -= workspace.CurrentCamera.CFrame.RightVector end
-                if UIS:IsKeyDown(Enum.KeyCode.D) then moveDir += workspace.CurrentCamera.CFrame.RightVector end
-                if UIS:IsKeyDown(Enum.KeyCode.Space) then moveDir += Vector3.new(0,1,0) end
-                if UIS:IsKeyDown(Enum.KeyCode.LeftShift) then moveDir -= Vector3.new(0,1,0) end
-                
-                -- MOBILE JOYSTICK SUPPORT
-                if LP.Character:FindFirstChild("Humanoid") and LP.Character.Humanoid.MoveDirection.Magnitude > 0 then
-                    moveDir += workspace.CurrentCamera.CFrame:VectorToWorldSpace(LP.Character.Humanoid.MoveDirection)
+-- FPS + PING SYSTEM
+local fps=0
+local last=0
+RunService.RenderStepped:Connect(function(dt)
+    fps = math.floor(1/dt)
+    local ping = "--"
+    pcall(function()
+        ping = math.floor(Stats.Network.ServerStatsItem["Data Ping"]:GetValue())
+    end)
+    perfLabel.Text = "FPS: "..fps.." | PING: "..ping.."ms | SERVER: "..#Players:GetPlayers().."/"..Players.MaxPlayers.." | "..getgenv().V12_WATERMARK
+end)
+
+-- PLAYER TAB
+local pTab = contentFrames["PLAYER"]
+makeToggle(pTab, "FLIEGEN", "FLY", function(on)
+    if on then
+        getgenv().V12FLY=true
+        local char=lp.Character
+        local hrp=char:FindFirstChild("HumanoidRootPart")
+        local bv=Instance.new("BodyVelocity", hrp)
+        bv.Name="V12Fly"
+        bv.Velocity=Vector3.new(0,0,0)
+        bv.MaxForce=Vector3.new(9e9,9e9,9e9)
+        RunService.RenderStepped:Connect(function()
+            if not getgenv().V12FLY then return end
+            local cam=workspace.CurrentCamera
+            local move=Vector3.new()
+            if UserInputService:IsKeyDown(Enum.KeyCode.W) then move+=cam.CFrame.LookVector end
+            if UserInputService:IsKeyDown(Enum.KeyCode.S) then move-=cam.CFrame.LookVector end
+            if UserInputService:IsKeyDown(Enum.KeyCode.A) then move-=cam.CFrame.RightVector end
+            if UserInputService:IsKeyDown(Enum.KeyCode.D) then move+=cam.CFrame.RightVector end
+            bv.Velocity=move*60
+        end)
+    else
+        getgenv().V12FLY=false
+        local hrp=lp.Character and lp.Character:FindFirstChild("HumanoidRootPart")
+        if hrp and hrp:FindFirstChild("V12Fly") then hrp.V12Fly:Destroy() end
+    end
+end)
+
+makeToggle(pTab, "NOCLIP", "NOCLIP", function(on)
+    getgenv().V12NOCLIP=on
+    if on then
+        getgenv().NCConn=RunService.Stepped:Connect(function()
+            if lp.Character then
+                for _,v in pairs(lp.Character:GetDescendants()) do
+                    if v:IsA("BasePart") then v.CanCollide=false end
                 end
-                
-                if moveDir.Magnitude > 0 then
-                    flyLV.VectorVelocity = moveDir.Unit * flySpeed
-                else
-                    flyLV.VectorVelocity = Vector3.new(0,0.1,0)
-                end
-                RS.Heartbeat:Wait()
             end
         end)
     else
-        if flyLV then flyLV:Destroy() end
-        if flyAtt then flyAtt:Destroy() end
+        if getgenv().NCConn then getgenv().NCConn:Disconnect() end
     end
-end
-
--- PLAYER TAB
-makeBtn("✈️ FLY TOGGLE (SMOOTH)", Color3.fromRGB(0,170,255), playerTab, toggleFly)
-makeBtn("⚡ SPEED 100", Color3.fromRGB(60,60,60), playerTab, function() LP.Character.Humanoid.WalkSpeed=100 end)
-makeBtn("⚡ SPEED 250", Color3.fromRGB(60,60,60), playerTab, function() LP.Character.Humanoid.WalkSpeed=250 end)
-makeBtn("⚡ SPEED 400 [MAX]", Color3.fromRGB(0,255,0), playerTab, function() LP.Character.Humanoid.WalkSpeed=400 end)
-makeBtn("🦘 JUMPPOWER 100", Color3.fromRGB(60,60,60), playerTab, function() LP.Character.Humanoid.JumpPower=100 end)
-makeBtn("🦘 JUMPPOWER 200", Color3.fromRGB(60,60,60), playerTab, function() LP.Character.Humanoid.JumpPower=200 end)
-makeBtn("♾️ INF JUMP ON/OFF", Color3.fromRGB(255,165,0), playerTab, function()
-    infJumpOn = not infJumpOn
-    print("INF JUMP: "..tostring(infJumpOn))
 end)
-makeBtn("🚪 NOCLIP ON/OFF", Color3.fromRGB(150,0,150), playerTab, function() noclipOn = not noclipOn end)
-makeBtn("🔄 RESET SPEED", Color3.fromRGB(100,0,0), playerTab, function() LP.Character.Humanoid.WalkSpeed=16 LP.Character.Humanoid.JumpPower=50 end)
 
--- INF JUMP + NOCLIP LOOPS
-UIS.JumpRequest:Connect(function()
-    if infJumpOn then LP.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping) end
+makeToggle(pTab, "UNENDLICH SPRINGEN", "INF JUMP", function(on)
+    getgenv().V12IJ=on
+    if on then
+        getgenv().IJConn=UserInputService.JumpRequest:Connect(function()
+            if getgenv().V12IJ then lp.Character:FindFirstChildOfClass("Humanoid"):ChangeState(Enum.HumanoidStateType.Jumping) end
+        end)
+    else
+        if getgenv().IJConn then getgenv().IJConn:Disconnect() end
+    end
 end)
-RS.Stepped:Connect(function()
-    if noclipOn and LP.Character then
-        for _,v in pairs(LP.Character:GetDescendants()) do
-            if v:IsA("BasePart") and v.CanCollide then v.CanCollide=false end
+
+makeButton(pTab, "SPEED 16 / 50 / 100", Color3.fromRGB(0,120,200), function()
+    local hum=lp.Character and lp.Character:FindFirstChildOfClass("Humanoid")
+    if hum then
+        if hum.WalkSpeed==16 then hum.WalkSpeed=50 elseif hum.WalkSpeed==50 then hum.WalkSpeed=100 else hum.WalkSpeed=16 end
+    end
+end)
+
+makeButton(pTab, "GODMODE AN/AUS", Color3.fromRGB(200,50,50), function()
+    local hum=lp.Character and lp.Character:FindFirstChildOfClass("Humanoid")
+    if hum then hum.Health=hum.MaxHealth end
+end)
+
+-- VISUAL TAB
+local vTab = contentFrames["VISUAL"]
+makeToggle(vTab, "ESP", "ESP", function(on)
+    getgenv().V12ESP=on
+    if on then
+        for _,pl in pairs(Players:GetPlayers()) do
+            if pl~=lp then
+                local h=Instance.new("Highlight")
+                h.Name="V12ESP"
+                h.FillTransparency=0.5
+                h.OutlineColor=Color3.fromRGB(0,255,0)
+                h.Parent=pl.Character
+            end
+        end
+        Players.PlayerAdded:Connect(function(pl)
+            pl.CharacterAdded:Connect(function(char)
+                if getgenv().V12ESP then task.wait(1)
+                    local h=Instance.new("Highlight")
+                    h.Name="V12ESP"
+                    h.Parent=char
+                end
+            end)
+        end)
+    else
+        for _,pl in pairs(Players:GetPlayers()) do
+            if pl.Character then
+                for _,v in pairs(pl.Character:GetChildren()) do if v.Name=="V12ESP" then v:Destroy() end end
+            end
         end
     end
 end)
 
--- VISUAL TAB - BEST ESP
-makeBtn("👁️ ESP ON (HIGHLIGHT)", Color3.fromRGB(255,0,0), visualTab, function()
-    for _,p in pairs(Players:GetPlayers()) do
-        if p~=LP and p.Character and not p.Character:FindFirstChild("V11ESP") then
-            local h = Instance.new("Highlight")
-            h.Name="V11ESP"
-            h.FillColor=Color3.fromRGB(255,0,0)
-            h.OutlineColor=Color3.fromRGB(255,255,255)
-            h.Parent=p.Character
+makeToggle(vTab, "FULLBRIGHT", "FULLBRIGHT", function(on)
+    if on then
+        Lighting.Brightness=2
+        Lighting.ClockTime=14
+        Lighting.FogEnd=100000
+    else
+        Lighting.Brightness=1
+        Lighting.ClockTime=14
+        Lighting.FogEnd=100000
+    end
+end)
+
+makeToggle(vTab, "XRAY / DURCH WÄNDE SEHEN", "XRAY", function(on)
+    for _,v in pairs(workspace:GetDescendants()) do
+        if v:IsA("BasePart") and not v.Parent:FindFirstChildOfClass("Humanoid") then
+            if on then
+                v.LocalTransparencyModifier=0.7
+            else
+                v.LocalTransparencyModifier=0
+            end
         end
     end
 end)
-makeBtn("❌ ESP OFF", Color3.fromRGB(60,60,60), visualTab, function()
-    for _,p in pairs(Players:GetPlayers()) do
-        if p.Character then
-            for _,v in pairs(p.Character:GetChildren()) do if v.Name=="V11ESP" then v:Destroy() end end
+
+-- WELT TAB
+local wTab = contentFrames["WELT"]
+makeButton(wTab, "ANTI-LAG - LAG ENTFERNEN / REMOVE LAG", Color3.fromRGB(80,80,80), function()
+    for _,v in pairs(workspace:GetDescendants()) do
+        if v:IsA("BasePart") then v.Material=Enum.Material.SmoothPlastic
+        elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then v.Enabled=false
         end
     end
-end)
-makeBtn("💡 FULLBRIGHT ON", Color3.fromRGB(255,255,0), visualTab, function()
-    Lighting.Brightness=2
-    Lighting.ClockTime=14
-    Lighting.FogEnd=100000
     Lighting.GlobalShadows=false
 end)
-makeBtn("🌑 FULLBRIGHT OFF", Color3.fromRGB(60,60,60), visualTab, function()
-    Lighting.Brightness=1
-    Lighting.GlobalShadows=true
+
+makeToggle(wTab, "KEIN NEBEL", "NO FOG", function(on)
+    Lighting.FogEnd = on and 100000 or 500
 end)
-makeBtn("👻 XRAY ON", Color3.fromRGB(0,255,255), visualTab, function()
-    for _,v in pairs(workspace:GetDescendants()) do
-        if v:IsA("BasePart") and not v.Parent:FindFirstChild("Humanoid") then
-            v.LocalTransparencyModifier=0.7
+
+makeToggle(wTab, "SCHWERKRAFT 0", "GRAVITY 0", function(on)
+    workspace.Gravity = on and 0 or 196.2
+end)
+
+makeButton(wTab, "TAG / NACHT", Color3.fromRGB(100,100,0), function()
+    Lighting.ClockTime = Lighting.ClockTime>12 and 0 or 14
+end)
+
+-- EXPLORER TAB - KRASSESTE UNIVERSAL
+local eTab = contentFrames["EXPLORER"]
+makeButton(eTab, "🔥 DARK DEX V4 - KRASSESTER EXPLORER", Color3.fromRGB(0,0,0), function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/dex.lua"))()
+end)
+
+makeButton(eTab, "🔍 SIMPLESPY - REMOTE SPY BABA", Color3.fromRGB(120,0,200), function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/exxtremestuff/EXMAPI/main/SimpleSpyMobile.lua"))()
+end)
+
+makeButton(eTab, "♾️ INFINITY YIELD FE - BEST ADMIN", Color3.fromRGB(0,100,0), function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+end)
+
+makeButton(eTab, "🧪 HYDROXIDE REMOTE SPY - 2026 META", Color3.fromRGB(0,150,150), function()
+    local owner = "Upbolt"
+    local branch = "revision"
+    local function webImport(file) return loadstring(game:HttpGetAsync(("https://raw.githubusercontent.com/%s/Hydroxide/%s/src/%s.lua"):format(owner, branch, file)), file..'.lua')() end
+    webImport("init")
+    webImport("ui/main")
+end)
+
+makeButton(eTab, "👁️ UNIVERSAL EXPLORER BABA - EIGENES BABA EXPLORER", Color3.fromRGB(200,100,0), function()
+    if getgenv().BABA_EXPLORER then getgenv().BABA_EXPLORER:Destroy() end
+    local expGui=Instance.new("ScreenGui", gethui and gethui() or game.CoreGui)
+    getgenv().BABA_EXPLORER=expGui
+    local f=Instance.new("Frame", expGui)
+    f.Size=UDim2.new(0,400,0,400)
+    f.Position=UDim2.new(0.5,-200,0.5,-200)
+    f.BackgroundColor3=Color3.fromRGB(20,20,20)
+    f.Active=true
+    f.Draggable=true
+    Instance.new("UICorner", f)
+    local t=Instance.new("TextLabel", f)
+    t.Size=UDim2.new(1,0,0,30)
+    t.Text="BABA UNIVERSAL EXPLORER - hahahsud15"
+    t.BackgroundColor3=Color3.fromRGB(30,30,30)
+    t.TextColor3=Color3.new(1,1,1)
+    Instance.new("UICorner", t)
+    local scroll=Instance.new("ScrollingFrame", f)
+    scroll.Size=UDim2.new(1,-10,1,-40)
+    scroll.Position=UDim2.new(0,5,0,35)
+    scroll.BackgroundColor3=Color3.fromRGB(15,15,15)
+    scroll.CanvasSize=UDim2.new(0,0,0,2000)
+    local layout=Instance.new("UIListLayout", scroll)
+    layout.Padding=UDim.new(0,2)
+    for _,obj in pairs(game:GetChildren()) do
+        local b=Instance.new("TextButton", scroll)
+        b.Size=UDim2.new(1,-10,0,25)
+        b.Text="📁 "..obj.Name.." ["..obj.ClassName.."]"
+        b.BackgroundColor3=Color3.fromRGB(40,40,40)
+        b.TextColor3=Color3.new(1,1,1)
+        b.Font=Enum.Font.Code
+        b.TextSize=11
+        b.TextXAlignment=Enum.TextXAlignment.Left
+        Instance.new("UICorner", b).CornerRadius=UDim.new(0,4)
+    end
+    local close2=Instance.new("TextButton", f)
+    close2.Size=UDim2.new(0,25,0,25)
+    close2.Position=UDim2.new(1,-30,0,2)
+    close2.Text="X"
+    close2.BackgroundColor3=Color3.fromRGB(150,0,0)
+    close2.TextColor3=Color3.new(1,1,1)
+    Instance.new("UICorner", close2)
+    close2.MouseButton1Click:Connect(function() expGui:Destroy() end)
+end)
+
+makeButton(eTab, "🔧 REMOTESPY++ NEU 2026", Color3.fromRGB(50,50,150), function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/78n/SimpleSpy/main/SimpleSpyBeta.lua"))()
+end)
+
+-- SERVER TAB
+local sTab = contentFrames["SERVER"]
+makeButton(sTab, "📋 COPY JOBID / SERVER ID KOPIEREN", Color3.fromRGB(50,50,50), function()
+    setclipboard(game.JobId)
+    game.StarterGui:SetCore("SendNotification",{Title="V12 BABA",Text="JobId kopiert! "..game.JobId, Duration=3})
+end)
+
+makeButton(sTab, "🔄 REJOIN SERVER - NEU BEITRETEN", Color3.fromRGB(0,100,200), function()
+    game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, lp)
+end)
+
+makeButton(sTab, "🌍 SERVER HOP - ANDERER SERVER", Color3.fromRGB(0,150,0), function()
+    local Http=game:GetService("HttpService")
+    local servers=game:HttpGet("https://games.roblox.com/v1/games/"..game.PlaceId.."/servers/Public?sortOrder=Asc&limit=100")
+    local data=Http:JSONDecode(servers)
+    for _,v in pairs(data.data) do
+        if v.id~=game.JobId and v.playing<v.maxPlayers then
+            game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, v.id, lp)
+            break
         end
     end
 end)
-makeBtn("🧱 XRAY OFF", Color3.fromRGB(60,60,60), visualTab, function()
-    for _,v in pairs(workspace:GetDescendants()) do if v:IsA("BasePart") then v.LocalTransparencyModifier=0 end end
+
+makeButton(sTab, "👥 SPIELER LISTE / PLAYER LIST", Color3.fromRGB(80,0,80), function()
+    for _,pl in pairs(Players:GetPlayers()) do print(pl.Name.." | "..pl.DisplayName) end
 end)
 
--- WORLD TAB
-makeBtn("⏰ TIME DAY", Color3.fromRGB(255,200,0), worldTab, function() Lighting.ClockTime=14 end)
-makeBtn("🌙 TIME NIGHT", Color3.fromRGB(20,20,80), worldTab, function() Lighting.ClockTime=0 end)
-makeBtn("🌫️ NO FOG", Color3.fromRGB(150,150,150), worldTab, function() Lighting.FogEnd=100000 end)
-makeBtn("🌍 GRAVITY 0 (MOON)", Color3.fromRGB(100,100,255), worldTab, function() workspace.Gravity=0 end)
-makeBtn("🌍 GRAVITY NORMAL", Color3.fromRGB(60,60,60), worldTab, function() workspace.Gravity=196.2 end)
-makeBtn("🎯 CLICK TP (Klick Boden)", Color3.fromRGB(0,255,0), worldTab, function()
-    local mouse = LP:GetMouse()
-    mouse.Button1Down:Connect(function()
-        if clickTPOn then
-            LP.Character:MoveTo(mouse.Hit.p)
-        end
-    end)
-    clickTPOn = not clickTPOn
-    print("CLICK TP: "..tostring(clickTPOn))
+-- PERFORMANCE TAB
+local perfTab = contentFrames["PERFORMANCE"]
+makeButton(perfTab, "🚀 FPS UNLOCK - 999 FPS FREISCHALTEN", Color3.fromRGB(0,200,0), function()
+    pcall(function() setfpscap(999) end)
+    game.StarterGui:SetCore("SendNotification",{Title="V12 BABA",Text="FPS auf 999 gesetzt! AN/AUS = GRÜN/ROT", Duration=3})
 end)
 
--- UTIL TAB - ANTI AFK IMMER AN
-makeBtn("✅ ANTI-AFK IMMER AN (AUTO)", Color3.fromRGB(0,255,0), utilTab, function()
-    game.StarterGui:SetCore("SendNotification", {Title="V11 by hahahsud15", Text="Anti-AFK ist IMMER an! Auto!", Duration=3})
-end)
-makeBtn("🔄 REJOIN", Color3.fromRGB(0,100,255), utilTab, function() TeleportService:TeleportToPlaceInstance(game.PlaceId, game.JobId, LP) end)
-makeBtn("🎲 SERVER HOP", Color3.fromRGB(0,100,255), utilTab, function()
-    local servers={}
-    local req = game:HttpGet("https://games.roblox.com/v1/games/"..game.PlaceId.."/servers/Public?sortOrder=Desc&limit=100")
-    local data = game:GetService("HttpService"):JSONDecode(req)
-    for _,v in pairs(data.data) do if v.id~=game.JobId then table.insert(servers, v) end end
-    if #servers>0 then TeleportService:TeleportToPlaceInstance(game.PlaceId, servers[math.random(1,#servers)].id, LP) end
-end)
-makeBtn("📋 COPY JOBID", Color3.fromRGB(60,60,60), utilTab, function() setclipboard(game.JobId) end)
-
--- EXPLORER TAB - BEST OF YOUTUBE GOOGLE
-makeBtn("🔍 DARK DEX V4 (BESTER EXPLORER)", Color3.fromRGB(255,0,0), explorerTab, function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Babyhamsta/RBLX_DEX/main/Dex.lua"))()
-end)
-makeBtn("👁️ SIMPLESPY (REMOTE SPY)", Color3.fromRGB(0,255,0), explorerTab, function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/exxtremestuffs/SimpleSpySource/master/SimpleSpy.lua"))()
-end)
-makeBtn("♾️ INFINITE YIELD (500+ CMDS)", Color3.fromRGB(0,170,255), explorerTab, function()
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
-end)
-makeBtn("🔧 HYDROXIDE (ADV SPY)", Color3.fromRGB(150,0,150), explorerTab, function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Deni210/Hydroxide/main/init.lua"))()
-end)
-makeBtn("🗑️ GUI LÖSCHEN (ECHT)", Color3.fromRGB(255,0,0), explorerTab, function()
-    if flyLV then flyLV:Destroy() end
-    if flyAtt then flyAtt:Destroy() end
-    gui:Destroy()
+makeToggle(perfTab, "LOW GRAPHICS - FÜR SCHLECHTEN PC", "LOW GFX", function(on)
+    if on then
+        for _,v in pairs(workspace:GetDescendants()) do if v:IsA("BasePart") then v.Material=Enum.Material.SmoothPlastic end end
+        Lighting.GlobalShadows=false
+        game:GetService("RunService"):Set3dRenderingEnabled(true)
+    end
 end)
 
--- OPEN CLOSE LOGIC
+makeButton(perfTab, "🔋 PERFORMANCE BOOST +50 FPS", Color3.fromRGB(200,150,0), function()
+    for _,v in pairs(game:GetDescendants()) do
+        if v:IsA("ParticleEmitter") or v:IsA("Trail") or v:IsA("Beam") then v.Enabled=false end
+    end
+end)
+
+makeButton(perfTab, "🗑️ CLEAR CACHE / CACHE LÖSCHEN", Color3.fromRGB(100,0,0), function()
+    collectgarbage("collect")
+end)
+
+-- Open / Close Logic
 openBtn.MouseButton1Click:Connect(function()
-    mainFrame.Visible = not mainFrame.Visible
+    main.Visible = not main.Visible
+    TweenService:Create(openBtn, TweenInfo.new(0.2), {Rotation = main.Visible and 90 or 0}):Play()
 end)
+close.MouseButton1Click:Connect(function() main.Visible=false end)
 
--- WASSERZEICHEN NOTIFICATION
-game:GetService("StarterGui"):SetCore("SendNotification", {
-    Title="V11 ULTIMATE by hahahsud15",
-    Text="BEST UNIVERSAL 2026 geladen! Anti-AFK immer an! Viel Spaß!",
+-- Start sichtbar
+main.Visible=true
+game.StarterGui:SetCore("SendNotification",{
+    Title="V12 ULTIMATE BABA GELADEN!",
+    Text="by hahahsud15 | Echte AN/AUS Buttons | FPS/PING | Universal Explorer | 2026",
     Duration=6
 })
-
-print("🔥 V11 ULTIMATE by hahahsud15 LOADED - FREE FOR ALL - BEST UNIVERSAL HANDY + PC")
-print("💧 WASSERZEICHEN: hahahsud15 - NICHT LÖSCHEN!")
-print("✅ ANTI-AFK AUTOMATISCH IMMER AN!")
-print("✅ OPEN BUTTON 50x50 KLEIN!")
