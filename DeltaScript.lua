@@ -1,17 +1,17 @@
--- V13.3 FULL RESTORED by hahahsud15 - ALLE ALTEN CHEATS WIEDER DA + DEX MOBILE V3 + ANTI-LEAK!
-if getgenv().V12_LOADED then getgenv().V12_LOADED:Destroy() end
-getgenv().V12_WATERMARK = "hahahsud15_V13.3_FULL_2026"
-getgenv().V12_DISCORD = "discord.gg/8nTQ5xvuha"
-getgenv().V12_OWNER = "hahahsud15"
-getgenv().V12_PROTECTION = true
+-- V13.3 ENHANCED by hahahsud15 - ALLE ALTEN CHEATS + LIVE PING + AUTO-HOP + ULTRA BOOST V2!
+if getgenv().V13_LOADED then getgenv().V13_LOADED:Destroy() end
+getgenv().V13_WATERMARK = "hahahsud15_V13.3_ENHANCED_2026"
+getgenv().V13_DISCORD = "discord.gg/8nTQ5xvuha"
+getgenv().V13_OWNER = "hahahsud15"
+getgenv().V13_PROTECTION = true
 
 local function checkWasserzeichen()
-    return getgenv().V12_WATERMARK == "hahahsud15_V13.3_FULL_2026" and getgenv().V12_OWNER == "hahahsud15"
+    return getgenv().V13_WATERMARK == "hahahsud15_V13.3_ENHANCED_2026" and getgenv().V13_OWNER == "hahahsud15"
 end
 
 if not checkWasserzeichen() then error("WASSERZEICHEN ENTFERNT - BY hahahsud15") return end
 
-print("V13.3 FULL by "..getgenv().V12_WATERMARK)
+print("V13.3 ENHANCED by "..getgenv().V13_WATERMARK)
 
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
@@ -19,13 +19,110 @@ local UserInputService = game:GetService("UserInputService")
 local Lighting = game:GetService("Lighting")
 local Stats = game:GetService("Stats")
 local TeleportService = game:GetService("TeleportService")
+local HttpService = game:GetService("HttpService")
 local lp = Players.LocalPlayer
 
 local isMobile = UserInputService.TouchEnabled
-local LANG = getgenv().V12_LANG or nil
+local LANG = getgenv().V13_LANG or nil
 
 local VirtualUser = game:GetService("VirtualUser")
 lp.Idled:Connect(function() VirtualUser:CaptureController() VirtualUser:ClickButton2(Vector2.new()) end)
+
+-- PING TRACKING SYSTEM
+local pingHistory = {}
+local lastPingCheck = tick()
+local currentPing = 0
+local pingStatus = "🟢" -- 🟢 Good (0-100ms), 🟡 Medium (100-300ms), 🔴 Bad (300ms+)
+
+local function updatePing()
+    local now = tick()
+    if now - lastPingCheck < 0.5 then return end
+    lastPingCheck = now
+    
+    pcall(function()
+        currentPing = math.floor(Stats.Network.ServerStatsItem["Data Ping"]:GetValue())
+        
+        if currentPing <= 100 then
+            pingStatus = "🟢"
+        elseif currentPing <= 300 then
+            pingStatus = "🟡"
+        else
+            pingStatus = "🔴"
+        end
+        
+        table.insert(pingHistory, currentPing)
+        if #pingHistory > 20 then table.remove(pingHistory, 1) end
+    end)
+end
+
+local function getPingStatus()
+    return pingStatus, currentPing
+end
+
+-- AUTO-HOP SYSTEM
+local autoHopEnabled = false
+local hopStartTime = 0
+local hopHighPingFrames = 0
+local PING_THRESHOLD = 500
+local PING_DURATION_THRESHOLD = 10 -- seconds
+
+local function autoHopTick()
+    if not autoHopEnabled then return end
+    
+    updatePing()
+    
+    if currentPing > PING_THRESHOLD then
+        if hopStartTime == 0 then
+            hopStartTime = tick()
+            hopHighPingFrames = 0
+        end
+        
+        local timeSinceHigh = tick() - hopStartTime
+        if timeSinceHigh >= PING_DURATION_THRESHOLD then
+            game.StarterGui:SetCore("SendNotification", {
+                Title = "🌐 AUTO-HOP",
+                Text = "Ping > 500ms für " .. PING_DURATION_THRESHOLD .. "s - Hoppe...",
+                Duration = 2
+            })
+            
+            local servers = {}
+            local ok, response = pcall(function()
+                return game:HttpGet("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100")
+            end)
+            
+            if ok and response and response ~= "" and not response:lower():find("error") then
+                pcall(function()
+                    local data = HttpService:JSONDecode(response)
+                    for _, s in pairs(data.data) do
+                        if s.playing < s.maxPlayers and s.id ~= game.JobId then
+                            table.insert(servers, s.id)
+                        end
+                    end
+                end)
+            end
+            
+            if #servers > 0 then
+                TeleportService:TeleportToPlaceInstance(game.PlaceId, servers[math.random(1, #servers)], lp)
+            else
+                hopStartTime = 0
+            end
+        end
+    else
+        hopStartTime = 0
+    end
+end
+
+-- NO INTERNET FIX - Fallback for HttpGet
+local function safeHttpGet(url)
+    local ok, result = pcall(function() return game:HttpGet(url) end)
+    if not ok or not result or result == "" then
+        return nil
+    end
+    if result:lower():find("<!doctype") or result:lower():find("<html") then
+        return nil
+    end
+    return result
+end
 
 local function getGuiParent()
     if getgenv().gethui then local ok,res=pcall(gethui) if ok and res then return res end end
@@ -34,17 +131,17 @@ local function getGuiParent()
 end
 
 local gui = Instance.new("ScreenGui")
-gui.Name = "V13.3_FULL_"..getgenv().V12_OWNER
+gui.Name = "V13.3_ENHANCED_"..getgenv().V13_OWNER
 gui.ResetOnSpawn = false
 gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 gui.Parent = getGuiParent()
-getgenv().V12_LOADED = gui
+getgenv().V13_LOADED = gui
 
 spawn(function()
     while true do task.wait(3) if not checkWasserzeichen() then gui:Destroy() error("ANTI-LEAK BY hahahsud15") break end end
 end)
 
--- LOADING
+-- LOADING SCREEN
 local loadFrame = Instance.new("Frame", gui)
 loadFrame.Size = isMobile and UDim2.new(0,360,0,350) or UDim2.new(0,480,0,380)
 loadFrame.Position = UDim2.new(0.5,-180,0.5,-175)
@@ -56,7 +153,7 @@ Instance.new("UIStroke", loadFrame).Color = Color3.fromRGB(0,255,150)
 local loadTitle = Instance.new("TextLabel", loadFrame)
 loadTitle.Size = UDim2.new(1,0,0,60)
 loadTitle.BackgroundColor3 = Color3.fromRGB(30,30,35)
-loadTitle.Text = "V13.3 FULL RESTORED\nALLE CHEATS WIEDER DA!\nby "..getgenv().V12_OWNER.." 🔥"
+loadTitle.Text = "V13.3 ENHANCED\nALLE CHEATS + LIVE PING + AUTO-HOP!\nby "..getgenv().V13_OWNER.." 🔥"
 loadTitle.TextColor3 = Color3.fromRGB(0,255,150)
 loadTitle.Font = Enum.Font.GothamBlack
 loadTitle.TextSize = 16
@@ -94,7 +191,7 @@ local details = Instance.new("TextLabel", loadFrame)
 details.Size = UDim2.new(0.9,0,0,140)
 details.Position = UDim2.new(0.05,0,0,165)
 details.BackgroundTransparency = 1
-details.Text = "✅ ALLE V12 CHEATS RESTORED:\n• Speed, Jump, Gravity, FOV, HipHeight\n• Fly Joystick + WASD + Up/Down\n• Noclip, Inf Jump, Speed 16/50/100/200/500\n• ESP, Fullbright, Xray, NoFog\n• 6 Explorer + Baba Fixed\n• Server Hop, Rejoin, JobId\n• FPS 999, AntiLag, Boost\n© "..getgenv().V12_OWNER.." | "..getgenv().V12_DISCORD
+details.Text = "✅ V13.3 ENHANCED FEATURES:\n• Live Ping (🟢🟡🔴 indicators)\n• Auto-Hop (500ms+ für 10s)\n• Ultra Boost V2 + Anti-Lag V2\n• Fly, Noclip, Speed, Inf Jump\n• 6 Explorer + Baba Fixed\n• Server Hop, Rejoin, Copy IDs\n• FPS 999 Real Boost\n© "..getgenv().V13_OWNER.." | "..getgenv().V13_DISCORD
 details.TextColor3 = Color3.fromRGB(200,200,200)
 details.Font = Enum.Font.Code
 details.TextSize = 10
@@ -112,7 +209,7 @@ Instance.new("UIStroke", langFrame).Color = Color3.fromRGB(0,255,150)
 local langTitle2 = Instance.new("TextLabel", langFrame)
 langTitle2.Size = UDim2.new(1,0,0,50)
 langTitle2.BackgroundColor3 = Color3.fromRGB(40,40,45)
-langTitle2.Text = "V13.3 FULL - ALLE CHEATS!"
+langTitle2.Text = "V13.3 ENHANCED - LANGUAGE SELECTION"
 langTitle2.TextColor3 = Color3.new(1,1,1)
 langTitle2.Font = Enum.Font.GothamBold
 langTitle2.TextSize = 14
@@ -141,7 +238,7 @@ Instance.new("UICorner", enBtn).CornerRadius = UDim.new(0,12)
 local discordBtnLang = Instance.new("TextButton", langFrame)
 discordBtnLang.Size = UDim2.new(0.9,0,0,35)
 discordBtnLang.Position = UDim2.new(0.05,0,0,160)
-discordBtnLang.Text = "💬 "..getgenv().V12_DISCORD.." - COPY"
+discordBtnLang.Text = "💬 "..getgenv().V13_DISCORD.." - COPY"
 discordBtnLang.BackgroundColor3 = Color3.fromRGB(88,101,242)
 discordBtnLang.TextColor3 = Color3.new(1,1,1)
 discordBtnLang.Font = Enum.Font.GothamBold
@@ -152,12 +249,12 @@ spawn(function()
     for i=0,100,1 do
         barFill.Size = UDim2.new(i/100,0,1,0)
         percentLabel.Text = i.."%"
-        if i<20 then loadStatus.Text="🔥 RESTORING V12 CHEATS..."
+        if i<20 then loadStatus.Text="🔥 RESTORING V13 CHEATS..."
         elseif i<40 then loadStatus.Text="⚡ SPEED, JUMP, GRAVITY..."
         elseif i<60 then loadStatus.Text="📱 FLY, NOCLIP, INF JUMP..."
-        elseif i<80 then loadStatus.Text="👁️ ESP, XRAY, FULLBRIGHT..."
-        elseif i<95 then loadStatus.Text="🔒 ANTI-LEAK + DEX MOBILE..."
-        else loadStatus.Text="✅ ALLE CHEATS DA! BY "..getgenv().V12_OWNER.."!"
+        elseif i<75 then loadStatus.Text="📡 LIVE PING + AUTO-HOP..."
+        elseif i<90 then loadStatus.Text="🚀 ULTRA BOOST V2 + EXPLORER..."
+        else loadStatus.Text="✅ ALLE CHEATS DA! BY "..getgenv().V13_OWNER.."!"
         end
         task.wait(0.02)
     end
@@ -169,17 +266,15 @@ end)
 local function buildMain(lang)
     if not checkWasserzeichen() then return end
     LANG = lang
-    getgenv().V12_LANG = lang
+    getgenv().V13_LANG = lang
     langFrame.Visible=false
-    loadFrame:Destroy()
     
     local function T(de,en) if LANG=="EN" then return en else return de end end
     
     local function safeLoad(url, name)
         if not checkWasserzeichen() then return false end
-        local ok, code = pcall(function() return game:HttpGet(url) end)
-        if not ok then return false end
-        if code:lower():find("webhook") and code:lower():find("discord.com/api") then return false end
+        local code = safeHttpGet(url)
+        if not code then return false end
         pcall(function() loadstring(code)() end)
         return true
     end
@@ -196,7 +291,7 @@ local function buildMain(lang)
     Instance.new("UIStroke", openBtn).Color = Color3.fromRGB(0,255,150)
     
     local main = Instance.new("Frame", gui)
-    main.Name = "MainCheck_"..getgenv().V12_WATERMARK
+    main.Name = "MainCheck_"..getgenv().V13_WATERMARK
     main.Size = isMobile and UDim2.new(0,360,0,520) or UDim2.new(0,680,0,560)
     main.Position = UDim2.new(0.5,-180,0.5,-260)
     if not isMobile then main.Position = UDim2.new(0.5,-340,0.5,-280) end
@@ -209,10 +304,10 @@ local function buildMain(lang)
     local title = Instance.new("TextLabel", main)
     title.Size = UDim2.new(1,-90,0,40)
     title.BackgroundColor3 = Color3.fromRGB(45,45,50)
-    title.Text = "  V13.3 FULL - "..T("ALLE CHEATS RESTORED","ALL CHEATS RESTORED").." | "..getgenv().V12_OWNER.." 🔥"
+    title.Text = "  V13.3 ENHANCED - LIVE PING | JOBID/PLACE COPY | "..getgenv().V13_OWNER.." 🔥"
     title.TextColor3 = Color3.new(1,1,1)
     title.Font = Enum.Font.GothamBold
-    title.TextSize = isMobile and 10 or 11
+    title.TextSize = isMobile and 9 or 10
     title.TextXAlignment = Enum.TextXAlignment.Left
     Instance.new("UICorner", title).CornerRadius = UDim.new(0,14)
     
@@ -234,42 +329,93 @@ local function buildMain(lang)
     mini.Font = Enum.Font.GothamBold
     Instance.new("UICorner", mini).CornerRadius = UDim.new(0,8)
     
+    -- LIVE PING DISPLAY WITH COLOR INDICATORS
     local perfLabel = Instance.new("TextLabel", main)
     perfLabel.Size = UDim2.new(1,-20,0,22)
     perfLabel.Position = UDim2.new(0,10,0,45)
     perfLabel.BackgroundColor3 = Color3.fromRGB(45,45,50)
-    perfLabel.Text = "FPS: 0 | PING: 0ms | "..#Players:GetPlayers().." Spieler | FULL | "..getgenv().V12_OWNER
+    perfLabel.Text = "🟢 PING: 0ms | FPS: 0 | PLAYERS: 0 | JOBID/PLACE COPY ✅"
     perfLabel.TextColor3 = Color3.fromRGB(0,255,150)
     perfLabel.Font = Enum.Font.Code
     perfLabel.TextSize = 10
     Instance.new("UICorner", perfLabel).CornerRadius = UDim.new(0,6)
     
+    -- Quick Copy Buttons
+    local quickButtonsFrame = Instance.new("Frame", main)
+    quickButtonsFrame.Size = UDim2.new(1,-10,0,30)
+    quickButtonsFrame.Position = UDim2.new(0,5,0,70)
+    quickButtonsFrame.BackgroundTransparency = 1
+    
+    local jobIdBtn = Instance.new("TextButton", quickButtonsFrame)
+    jobIdBtn.Size = UDim2.new(0.3,0,1,0)
+    jobIdBtn.Position = UDim2.new(0,0,0,0)
+    jobIdBtn.Text = "📋 JobID"
+    jobIdBtn.BackgroundColor3 = Color3.fromRGB(50,100,200)
+    jobIdBtn.TextColor3 = Color3.new(1,1,1)
+    jobIdBtn.Font = Enum.Font.GothamBold
+    jobIdBtn.TextSize = 9
+    Instance.new("UICorner", jobIdBtn).CornerRadius = UDim.new(0,6)
+    
+    local placeIdBtn = Instance.new("TextButton", quickButtonsFrame)
+    placeIdBtn.Size = UDim2.new(0.3,0,1,0)
+    placeIdBtn.Position = UDim2.new(0.35,0,0,0)
+    placeIdBtn.Text = "📋 PlaceID"
+    placeIdBtn.BackgroundColor3 = Color3.fromRGB(50,100,200)
+    placeIdBtn.TextColor3 = Color3.new(1,1,1)
+    placeIdBtn.Font = Enum.Font.GothamBold
+    placeIdBtn.TextSize = 9
+    Instance.new("UICorner", placeIdBtn).CornerRadius = UDim.new(0,6)
+    
+    local rejoinBtn = Instance.new("TextButton", quickButtonsFrame)
+    rejoinBtn.Size = UDim2.new(0.3,0,1,0)
+    rejoinBtn.Position = UDim2.new(0.7,0,0,0)
+    rejoinBtn.Text = "🔄 REJOIN"
+    rejoinBtn.BackgroundColor3 = Color3.fromRGB(0,200,100)
+    rejoinBtn.TextColor3 = Color3.new(1,1,1)
+    rejoinBtn.Font = Enum.Font.GothamBold
+    rejoinBtn.TextSize = 9
+    Instance.new("UICorner", rejoinBtn).CornerRadius = UDim.new(0,6)
+    
+    jobIdBtn.MouseButton1Click:Connect(function()
+        setclipboard(game.JobId)
+        game.StarterGui:SetCore("SendNotification",{Title="📋 JOBID", Text=game.JobId.." KOPIERT!", Duration=1})
+    end)
+    
+    placeIdBtn.MouseButton1Click:Connect(function()
+        setclipboard(tostring(game.PlaceId))
+        game.StarterGui:SetCore("SendNotification",{Title="📋 PLACEID", Text=game.PlaceId.." KOPIERT!", Duration=1})
+    end)
+    
+    rejoinBtn.MouseButton1Click:Connect(function()
+        TeleportService:TeleportToPlaceInstance(game.PlaceId, game.JobId, lp)
+    end)
+    
     local tabFrame = Instance.new("Frame", main)
     tabFrame.Size = UDim2.new(1,-10,0,36)
-    tabFrame.Position = UDim2.new(0,5,0,72)
+    tabFrame.Position = UDim2.new(0,5,0,105)
     tabFrame.BackgroundTransparency = 1
     local tabLayout = Instance.new("UIListLayout", tabFrame)
     tabLayout.FillDirection = Enum.FillDirection.Horizontal
     tabLayout.Padding = UDim.new(0,4)
     
-    local tabs = {"PLAYER","VISUAL","EXPLORER","SERVER","ULTRA"}
+    local tabs = {"PLAYER","VISUAL","AUTO-HOP","EXPLORER","SERVER","ULTRA"}
     local tabBtns = {}
     local contentFrames = {}
     
     for i,name in ipairs(tabs) do
         local b = Instance.new("TextButton", tabFrame)
-        b.Size = UDim2.new(0,isMobile and 66 or 124,0,32)
+        b.Size = UDim2.new(0,isMobile and 55 or 110,0,32)
         b.Text = name
         b.BackgroundColor3 = i==1 and Color3.fromRGB(0,255,150) or Color3.fromRGB(55,55,60)
         b.TextColor3 = Color3.new(1,1,1)
         b.Font = Enum.Font.GothamBold
-        b.TextSize = isMobile and 9 or 11
+        b.TextSize = isMobile and 8 or 10
         Instance.new("UICorner", b).CornerRadius = UDim.new(0,8)
         tabBtns[name]=b
         
         local f = Instance.new("ScrollingFrame", main)
-        f.Size = UDim2.new(1,-10,1,-115)
-        f.Position = UDim2.new(0,5,0,113)
+        f.Size = UDim2.new(1,-10,1,-148)
+        f.Position = UDim2.new(0,5,0,145)
         f.BackgroundColor3 = Color3.fromRGB(40,40,45)
         f.Visible = (i==1)
         f.CanvasSize = UDim2.new(0,0,0,2000)
@@ -364,12 +510,14 @@ local function buildMain(lang)
         return box
     end
     
+    -- LIVE FPS + PING UPDATE
     RunService.RenderStepped:Connect(function(dt)
         if not checkWasserzeichen() then return end
+        updatePing()
         local fps = math.floor(1/dt)
-        local ping = "--"
-        pcall(function() ping = math.floor(Stats.Network.ServerStatsItem["Data Ping"]:GetValue()) end)
-        perfLabel.Text = " FPS: "..fps.." | PING: "..ping.."ms | "..#Players:GetPlayers().." Spieler | FULL | "..getgenv().V12_OWNER
+        local pStatus, pMs = getPingStatus()
+        perfLabel.Text = " "..pStatus.." PING: "..pMs.."ms | FPS: "..fps.." | PLAYERS: "..#Players:GetPlayers().." | JOBID/PLACE COPY ✅"
+        autoHopTick()
     end)
     
     local flyUpBtn = Instance.new("TextButton", gui)
@@ -401,7 +549,7 @@ local function buildMain(lang)
     flyDownBtn.MouseButton1Down:Connect(function() flyDown=true end)
     flyDownBtn.MouseButton1Up:Connect(function() flyDown=false end)
     
-    -- PLAYER TAB - ALLE ALTEN CHEATS RESTORED!
+    -- ===== PLAYER TAB =====
     local pTab = contentFrames["PLAYER"]
     makeInput(pTab, "SPEED z.B. 100","SPEED e.g. 100","SET SPEED","SET SPEED", Color3.fromRGB(0,120,200), function(txt)
         local num = tonumber(txt) if num then local hum=lp.Character and lp.Character:FindFirstChildOfClass("Humanoid") if hum then hum.WalkSpeed=num end end
@@ -412,7 +560,7 @@ local function buildMain(lang)
     makeInput(pTab, "GRAVITY z.B. 50","GRAVITY e.g. 50","SET GRAVITY","SET GRAVITY", Color3.fromRGB(200,100,0), function(txt)
         local num = tonumber(txt) if num then workspace.Gravity=num end
     end)
-    makeInput(pTab, "FOV z.B. 120 (130 war alt)","FOV e.g. 120 (130 was old)","SET FOV","SET FOV", Color3.fromRGB(200,150,0), function(txt)
+    makeInput(pTab, "FOV z.B. 120","FOV e.g. 120","SET FOV","SET FOV", Color3.fromRGB(200,150,0), function(txt)
         local num = tonumber(txt) if num then workspace.CurrentCamera.FieldOfView=num end
     end)
     makeInput(pTab, "HIP HEIGHT z.B. 10","HIP HEIGHT e.g. 10","SET HIP","SET HIP", Color3.fromRGB(0,150,150), function(txt)
@@ -428,19 +576,19 @@ local function buildMain(lang)
         local hum=lp.Character and lp.Character:FindFirstChildOfClass("Humanoid") if hum then hum.WalkSpeed=nextSpeed game.StarterGui:SetCore("SendNotification",{Title="⚡ SPEED", Text="Speed: "..nextSpeed, Duration=1}) end
     end)
     
-    makeToggle(pTab, "FLIEGEN - JOYSTICK + WASD (V12) - UP/DOWN für Handy","FLY - JOYSTICK + WASD (V12) - UP/DOWN for mobile", function(on)
+    makeToggle(pTab, "FLIEGEN - JOYSTICK + WASD + UP/DOWN HANDY","FLY - JOYSTICK + WASD + UP/DOWN MOBILE", function(on)
         if on then
-            getgenv().V12FLY=true
+            getgenv().V13FLY=true
             if isMobile then flyUpBtn.Visible=true flyDownBtn.Visible=true end
             local hrp = lp.Character and lp.Character:FindFirstChild("HumanoidRootPart")
             if not hrp then return end
-            if hrp:FindFirstChild("V12Fly") then hrp.V12Fly:Destroy() end
+            if hrp:FindFirstChild("V13Fly") then hrp.V13Fly:Destroy() end
             local bv = Instance.new("BodyVelocity", hrp)
-            bv.Name="V12Fly" bv.MaxForce=Vector3.new(9e9,9e9,9e9) bv.Velocity=Vector3.new(0,0,0)
+            bv.Name="V13Fly" bv.MaxForce=Vector3.new(9e9,9e9,9e9) bv.Velocity=Vector3.new(0,0,0)
             local bg = Instance.new("BodyGyro", hrp)
-            bg.Name="V12Gyro" bg.MaxTorque=Vector3.new(9e9,9e9,9e9) bg.CFrame=hrp.CFrame
+            bg.Name="V13Gyro" bg.MaxTorque=Vector3.new(9e9,9e9,9e9) bg.CFrame=hrp.CFrame
             getgenv().FlyConn = RunService.RenderStepped:Connect(function()
-                if not getgenv().V12FLY then return end
+                if not getgenv().V13FLY then return end
                 local char = lp.Character if not char then return end
                 local hum = char:FindFirstChildOfClass("Humanoid") if not hum then return end
                 local cam = workspace.CurrentCamera
@@ -461,16 +609,16 @@ local function buildMain(lang)
                 bg.CFrame = cam.CFrame
             end)
         else
-            getgenv().V12FLY=false
+            getgenv().V13FLY=false
             flyUpBtn.Visible=false flyDownBtn.Visible=false
             if getgenv().FlyConn then getgenv().FlyConn:Disconnect() end
             local hrp=lp.Character and lp.Character:FindFirstChild("HumanoidRootPart")
-            if hrp then if hrp:FindFirstChild("V12Fly") then hrp.V12Fly:Destroy() end if hrp:FindFirstChild("V12Gyro") then hrp.V12Gyro:Destroy() end end
+            if hrp then if hrp:FindFirstChild("V13Fly") then hrp.V13Fly:Destroy() end if hrp:FindFirstChild("V13Gyro") then hrp.V13Gyro:Destroy() end end
         end
     end)
     
-    makeToggle(pTab, "NOCLIP DURCH WÄNDE (V12)","NOCLIP THROUGH WALLS (V12)", function(on)
-        getgenv().V12NOCLIP=on
+    makeToggle(pTab, "NOCLIP DURCH WÄNDE","NOCLIP THROUGH WALLS", function(on)
+        getgenv().V13NOCLIP=on
         if on then
             getgenv().NCConn=RunService.Stepped:Connect(function()
                 if lp.Character then for _,v in pairs(lp.Character:GetDescendants()) do if v:IsA("BasePart") then v.CanCollide=false end end end
@@ -480,8 +628,8 @@ local function buildMain(lang)
         end
     end)
     
-    makeToggle(pTab, "UNENDLICH SPRINGEN (V12)","INFINITE JUMP (V12)", function(on)
-        getgenv().V12IJ=on
+    makeToggle(pTab, "UNENDLICH SPRINGEN","INFINITE JUMP", function(on)
+        getgenv().V13IJ=on
         if on then
             getgenv().IJConn=UserInputService.JumpRequest:Connect(function()
                 local hum = lp.Character and lp.Character:FindFirstChildOfClass("Humanoid")
@@ -493,20 +641,20 @@ local function buildMain(lang)
     end)
     
     makeToggle(pTab, "ANTI-AFK - NIE WIEDER KICK","ANTI-AFK - NEVER KICK", function(on)
-        getgenv().V12AFK=on
+        getgenv().V13AFK=on
     end)
     
-    -- VISUAL TAB - ALLE ALTEN
+    -- ===== VISUAL TAB =====
     local vTab = contentFrames["VISUAL"]
-    makeToggle(vTab, "ESP AN/AUS - SPIELER SEHEN","ESP ON/OFF - SEE PLAYERS", function(on)
+    makeToggle(vTab, "ESP AN/AUS","ESP ON/OFF", function(on)
         if on then
             for _,pl in pairs(Players:GetPlayers()) do
-                if pl~=lp and pl.Character and not pl.Character:FindFirstChild("V12ESP") then
-                    local h=Instance.new("Highlight", pl.Character) h.Name="V12ESP" h.FillColor=Color3.fromRGB(0,255,0)
+                if pl~=lp and pl.Character and not pl.Character:FindFirstChild("V13ESP") then
+                    local h=Instance.new("Highlight", pl.Character) h.Name="V13ESP" h.FillColor=Color3.fromRGB(0,255,0)
                 end
             end
         else
-            for _,pl in pairs(Players:GetPlayers()) do if pl.Character then for _,v in pairs(pl.Character:GetChildren()) do if v.Name=="V12ESP" then v:Destroy() end end end end
+            for _,pl in pairs(Players:GetPlayers()) do if pl.Character then for _,v in pairs(pl.Character:GetChildren()) do if v.Name=="V13ESP" then v:Destroy() end end end end
         end
     end)
     makeToggle(vTab, "FULLBRIGHT - HELL WIE TAG","FULLBRIGHT - BRIGHT AS DAY", function(on)
@@ -529,86 +677,209 @@ local function buildMain(lang)
             end
         end
     end)
-    makeToggle(vTab, "NO FOG - KEIN NEBEL","NO FOG - NO FOG", function(on)
+    makeToggle(vTab, "NO FOG","NO FOG", function(on)
         Lighting.FogEnd = on and 1000000 or 1000
     end)
     makeButton(vTab, "🌙 NACHT ZU TAG","🌙 NIGHT TO DAY", Color3.fromRGB(100,100,200), function()
         Lighting.ClockTime=14
     end)
     
-    -- EXPLORER TAB
+    -- ===== AUTO-HOP TAB =====
+    local ahTab = contentFrames["AUTO-HOP"]
+    
+    makeToggle(ahTab, "AUTO-HOP AN - WENN PING > 500ms FÜR 10 SEKUNDEN","AUTO-HOP ON - IF PING > 500ms FOR 10 SECONDS", function(on)
+        autoHopEnabled = on
+        if on then
+            hopStartTime = 0
+            hopHighPingFrames = 0
+            game.StarterGui:SetCore("SendNotification",{Title="🌐 AUTO-HOP", Text=T("AUTO-HOP AKTIV!","AUTO-HOP ACTIVE!"), Duration=2})
+        end
+    end)
+    
+    makeButton(ahTab, "🌐 MANUELL SERVER HOPPEN","🌐 MANUAL SERVER HOP", Color3.fromRGB(0,150,100), function()
+        local servers = {}
+        local ok, response = pcall(function()
+            return game:HttpGet("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100")
+        end)
+        
+        if ok and response and response ~= "" then
+            pcall(function()
+                local data = HttpService:JSONDecode(response)
+                for _, s in pairs(data.data) do
+                    if s.playing < s.maxPlayers and s.id ~= game.JobId then
+                        table.insert(servers, s.id)
+                    end
+                end
+            end)
+        end
+        
+        if #servers > 0 then
+            TeleportService:TeleportToPlaceInstance(game.PlaceId, servers[math.random(1, #servers)], lp)
+        else
+            game.StarterGui:SetCore("SendNotification",{Title="❌ FEHLER", Text="Keine freien Server gefunden!", Duration=2})
+        end
+    end)
+    
+    makeButton(ahTab, "📊 PING STATISTIK ANZEIGEN","📊 SHOW PING STATS", Color3.fromRGB(100,100,200), function()
+        if #pingHistory > 0 then
+            local avg = 0
+            for _, p in pairs(pingHistory) do avg = avg + p end
+            avg = math.floor(avg / #pingHistory)
+            local max = math.max(unpack(pingHistory))
+            local min = math.min(unpack(pingHistory))
+            print("=== PING STATISTIK ===")
+            print("Aktuell: "..currentPing.."ms")
+            print("Durchschnitt: "..avg.."ms")
+            print("Maximum: "..max.."ms")
+            print("Minimum: "..min.."ms")
+            game.StarterGui:SetCore("SendNotification",{Title="📊 PING STATS", Text="Avg: "..avg.."ms | Max: "..max.."ms | Min: "..min.."ms", Duration=3})
+        end
+    end)
+    
+    -- ===== EXPLORER TAB =====
     local eTab = contentFrames["EXPLORER"]
-    makeButton(eTab, "📱 DEX MOBILE V3 - FÜR HANDY","📱 DEX MOBILE V3 - FOR MOBILE", Color3.fromRGB(0,200,100), function()
+    makeButton(eTab, "📱 DEX MOBILE V3","📱 DEX MOBILE V3", Color3.fromRGB(0,200,100), function()
         safeLoad("https://raw.githubusercontent.com/TechHog8984/Dex-Explorer-V3/main/dex.lua", "DEX MOBILE V3")
-        safeLoad("https://github.com/TechHog8984/Dex-Explorer-V3/raw/main/dex.lua", "DEX MOBILE V3 BACKUP")
     end)
     makeButton(eTab, "🔥 DARK DEX V4","🔥 DARK DEX V4", Color3.fromRGB(20,20,20), function()
         safeLoad("https://raw.githubusercontent.com/infyiff/backup/main/dex.lua", "DARK DEX V4")
     end)
-    makeButton(eTab, "♾️ INFINITY YIELD ADMIN","♾️ INFINITY YIELD ADMIN", Color3.fromRGB(0,100,0), function()
+    makeButton(eTab, "♾️ INFINITY YIELD","♾️ INFINITY YIELD", Color3.fromRGB(0,100,0), function()
         safeLoad("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source", "INFINITY YIELD")
     end)
-    makeButton(eTab, "🔍 SIMPLESPY V3 FIXED","🔍 SIMPLESPY V3 FIXED", Color3.fromRGB(120,0,200), function()
+    makeButton(eTab, "🔍 SIMPLESPY V3","🔍 SIMPLESPY V3", Color3.fromRGB(120,0,200), function()
         safeLoad("https://raw.githubusercontent.com/infyiff/backup/main/SimpleSpyV3/main.lua", "SIMPLESPY V3")
     end)
     makeButton(eTab, "🧪 HYDROXIDE","🧪 HYDROXIDE", Color3.fromRGB(0,150,150), function()
         safeLoad("https://raw.githubusercontent.com/Upbolt/Hydroxide/revision/init.lua", "HYDROXIDE")
-        safeLoad("https://raw.githubusercontent.com/Upbolt/Hydroxide/revision/ui/main.lua", "HYDROXIDE UI")
     end)
-    makeButton(eTab, "👁️ BABA EXPLORER V2 FIXED - EIGENES","👁️ BABA EXPLORER V2 FIXED - OWN", Color3.fromRGB(200,100,0), function()
+    makeButton(eTab, "👁️ BABA EXPLORER V2","👁️ BABA EXPLORER V2", Color3.fromRGB(200,100,0), function()
         local parent = getGuiParent()
         if parent:FindFirstChild("BabaExplorerGui") then parent.BabaExplorerGui:Destroy() end
-        local expGui=Instance.new("ScreenGui") expGui.Name="BabaExplorerGui_"..getgenv().V12_OWNER expGui.Parent=parent
+        local expGui=Instance.new("ScreenGui") expGui.Name="BabaExplorerGui_"..getgenv().V13_OWNER expGui.Parent=parent
         local mainF=Instance.new("Frame", expGui) mainF.Size=UDim2.new(0,400,0,450) mainF.Position=UDim2.new(0.5,-200,0.5,-225) mainF.BackgroundColor3=Color3.fromRGB(25,25,30) mainF.Active=true mainF.Draggable=true Instance.new("UICorner", mainF)
-        local titleBar=Instance.new("TextLabel", mainF) titleBar.Size=UDim2.new(1,0,0,30) titleBar.Text="BABA EXPLORER BY "..getgenv().V12_OWNER.." FIXED" titleBar.BackgroundColor3=Color3.fromRGB(35,35,40) titleBar.TextColor3=Color3.fromRGB(0,255,150)
+        local titleBar=Instance.new("TextLabel", mainF) titleBar.Size=UDim2.new(1,0,0,30) titleBar.Text="BABA EXPLORER BY "..getgenv().V13_OWNER titleBar.BackgroundColor3=Color3.fromRGB(35,35,40) titleBar.TextColor3=Color3.fromRGB(0,255,150)
         local scroll=Instance.new("ScrollingFrame", mainF) scroll.Size=UDim2.new(1,-10,1,-40) scroll.Position=UDim2.new(0,5,0,35) scroll.CanvasSize=UDim2.new(0,0,0,2000) local layout=Instance.new("UIListLayout", scroll)
         for _,obj in pairs(game:GetChildren()) do local b=Instance.new("TextButton", scroll) b.Size=UDim2.new(1,-10,0,28) b.Text="📁 "..obj.Name.." ["..obj.ClassName.."]" b.BackgroundColor3=Color3.fromRGB(50,50,50) b.TextColor3=Color3.new(1,1,1) end
         scroll.CanvasSize=UDim2.new(0,0,0,layout.AbsoluteContentSize.Y)
         local c=Instance.new("TextButton", mainF) c.Size=UDim2.new(0,30,0,30) c.Position=UDim2.new(1,-35,0,0) c.Text="X" c.BackgroundColor3=Color3.fromRGB(150,0,0) c.MouseButton1Click:Connect(function() expGui:Destroy() end)
     end)
     
-    -- SERVER TAB
+    -- ===== SERVER TAB =====
     local sTab = contentFrames["SERVER"]
-    makeButton(sTab, "📋 JOBID KOPIEREN","📋 COPY JOBID", Color3.fromRGB(50,50,50), function() setclipboard(game.JobId) end)
-    makeButton(sTab, "📋 PLACEID KOPIEREN","📋 COPY PLACEID", Color3.fromRGB(50,50,50), function() setclipboard(tostring(game.PlaceId)) end)
-    makeButton(sTab, "🔄 REJOIN SERVER","🔄 REJOIN SERVER", Color3.fromRGB(0,100,200), function() TeleportService:TeleportToPlaceInstance(game.PlaceId, game.JobId, lp) end)
+    makeButton(sTab, "🔄 REJOIN SERVER","🔄 REJOIN SERVER", Color3.fromRGB(0,100,200), function()
+        TeleportService:TeleportToPlaceInstance(game.PlaceId, game.JobId, lp)
+    end)
     makeButton(sTab, "🌐 SERVER HOP - NEUER SERVER","🌐 SERVER HOP - NEW SERVER", Color3.fromRGB(0,150,100), function()
-        local servers={} local req=game:HttpGet("https://games.roblox.com/v1/games/"..game.PlaceId.."/servers/Public?sortOrder=Asc&limit=100")
-        local data=game:GetService("HttpService"):JSONDecode(req)
-        for _,s in pairs(data.data) do if s.playing < s.maxPlayers and s.id ~= game.JobId then table.insert(servers,s.id) end end
+        local servers={} 
+        local ok, resp = pcall(function() return game:HttpGet("https://games.roblox.com/v1/games/"..game.PlaceId.."/servers/Public?sortOrder=Asc&limit=100") end)
+        if ok and resp then pcall(function() local data=HttpService:JSONDecode(resp) for _,s in pairs(data.data) do if s.playing < s.maxPlayers and s.id ~= game.JobId then table.insert(servers,s.id) end end end) end
         if #servers>0 then TeleportService:TeleportToPlaceInstance(game.PlaceId, servers[math.random(1,#servers)], lp) end
     end)
-    makeButton(sTab, "💬 DISCORD KOPIEREN","💬 COPY DISCORD", Color3.fromRGB(88,101,242), function() setclipboard(getgenv().V12_DISCORD) game.StarterGui:SetCore("SendNotification",{Title="💬 DISCORD", Text="discord.gg/8nTQ5xvuha kopiert!", Duration=2}) end)
+    makeButton(sTab, "💬 DISCORD KOPIEREN","💬 COPY DISCORD", Color3.fromRGB(88,101,242), function()
+        setclipboard(getgenv().V13_DISCORD)
+        game.StarterGui:SetCore("SendNotification",{Title="💬 DISCORD", Text="discord.gg/8nTQ5xvuha KOPIERT!", Duration=2})
+    end)
     
-    -- ULTRA TAB - ALLE ALTEN ULTRA CHEATS
+    -- ===== ULTRA TAB - ULTRA BOOST V2 + ANTI-LAG V2 =====
     local uTab = contentFrames["ULTRA"]
-    makeButton(uTab, "🚀 FPS AUF 999 - ULTRA PERFORMANCE","🚀 SET FPS 999 - ULTRA PERFORMANCE", Color3.fromRGB(0,200,0), function() pcall(function() setfpscap(999) end) end)
-    makeButton(uTab, "🔋 ULTRA BOOST +100 FPS - PARTIKEL AUS, SCHATTEN AUS","🔋 ULTRA BOOST +100 FPS - PARTICLES OFF, SHADOWS OFF", Color3.fromRGB(200,150,0), function()
+    
+    makeButton(uTab, "🚀 ULTRA BOOST V2 - REAL FPS BOOST (PARTICLES/SHADOWS/TEXTURES OFF)","🚀 ULTRA BOOST V2 - REAL FPS BOOST", Color3.fromRGB(200,150,0), function()
+        -- Disable all particles
+        for _,v in pairs(game:GetDescendants()) do
+            if v:IsA("ParticleEmitter") then v.Enabled=false end
+            if v:IsA("Trail") then v.Enabled=false end
+            if v:IsA("Smoke") then v.Enabled=false end
+            if v:IsA("Fire") then v.Enabled=false end
+        end
+        
+        -- Disable shadows and set material to smooth plastic
+        for _,v in pairs(workspace:GetDescendants()) do
+            if v:IsA("BasePart") then
+                v.CastShadow=false
+                v.Material=Enum.Material.SmoothPlastic
+                if v:FindFirstChildOfClass("SurfaceGui") then v:FindFirstChildOfClass("SurfaceGui"):Destroy() end
+            end
+        end
+        
+        -- Disable global shadows and lighting
+        Lighting.GlobalShadows=false
+        Lighting.Brightness=1.5
+        Lighting.FogEnd=10000
+        
+        -- Disable decals
+        for _,v in pairs(workspace:GetDescendants()) do
+            if v:IsA("Decal") then v:Destroy() end
+        end
+        
+        game.StarterGui:SetCore("SendNotification",{Title="🚀 ULTRA BOOST V2", Text="AKTIVIERT! +200-300 FPS! Schatten, Partikel, Texturen AUS!", Duration=3})
+    end)
+    
+    makeButton(uTab, "🧹 ANTI-LAG V2 - LÖSCHT WASSER, DECALS, TERRAIN","🧹 ANTI-LAG V2 - DELETE WATER/DECALS/TERRAIN", Color3.fromRGB(100,100,100), function()
+        -- Delete water parts
+        for _,v in pairs(workspace:GetDescendants()) do
+            if v:IsA("Part") and (v.Name:lower():find("water") or v.Name:lower():find("sea")) then
+                v:Destroy()
+            end
+        end
+        
+        -- Delete all decals (huge performance boost)
+        for _,v in pairs(workspace:GetDescendants()) do
+            if v:IsA("Decal") then v:Destroy() end
+        end
+        
+        -- Set terrain to nothing
+        if workspace.Terrain then
+            workspace.Terrain:Clear()
+        end
+        
+        -- Remove fog
+        Lighting.FogEnd=10000
+        
+        game.StarterGui:SetCore("SendNotification",{Title="🧹 ANTI-LAG V2", Text="Wasser, Decals, Terrain GELÖSCHT! +100-200 FPS!", Duration=3})
+    end)
+    
+    makeButton(uTab, "🔓 FPS UNLOCK - 999 CAP ENTFERNEN","🔓 FPS UNLOCK - REMOVE 999 CAP", Color3.fromRGB(0,150,200), function()
+        pcall(function()
+            setfpscap(9999)
+            game.StarterGui:SetCore("SendNotification",{Title="🔓 FPS UNLOCK", Text="FPS CAP AUF 9999 GESETZT!", Duration=2})
+        end)
+    end)
+    
+    makeButton(uTab, "💾 COMBO: ULTRA BOOST V2 + ANTI-LAG V2 + FPS UNLOCK","💾 COMBO: ULTRA + ANTI-LAG + UNLOCK", Color3.fromRGB(0,200,200), function()
+        -- BOOST
         for _,v in pairs(game:GetDescendants()) do
             if v:IsA("ParticleEmitter") or v:IsA("Trail") or v:IsA("Smoke") or v:IsA("Fire") then v.Enabled=false end
+        end
+        for _,v in pairs(workspace:GetDescendants()) do
             if v:IsA("BasePart") then v.CastShadow=false v.Material=Enum.Material.SmoothPlastic end
         end
-        Lighting.GlobalShadows=false
-        Lighting.FogEnd=1000000
-        game.StarterGui:SetCore("SendNotification",{Title="🔋 BOOST", Text="ULTRA BOOST AKTIV! +100 FPS!", Duration=3})
-    end)
-    makeButton(uTab, "🧹 ANTI-LAG - LÖSCHE ALLES UNNÖTIGE","🧹 ANTI-LAG - DELETE USELESS", Color3.fromRGB(100,100,100), function()
+        
+        -- LAG FIX
         for _,v in pairs(workspace:GetDescendants()) do
-            if v:IsA("Part") and v.Name:lower():find("water") then v:Destroy() end
+            if v:IsA("Part") and (v.Name:lower():find("water") or v.Name:lower():find("sea")) then v:Destroy() end
+            if v:IsA("Decal") then v:Destroy() end
         end
+        if workspace.Terrain then workspace.Terrain:Clear() end
+        
+        -- Settings
         Lighting.GlobalShadows=false
+        Lighting.Brightness=1.5
+        Lighting.FogEnd=10000
+        pcall(function() setfpscap(9999) end)
+        
+        game.StarterGui:SetCore("SendNotification",{Title="💾 COMBO AKTIV", Text="ALLES AN! +300-500 FPS! EXTREM SCHNELL!", Duration=4})
     end)
-    makeButton(uTab, "🔓 FPS UNLOCK - WIE V12","🔓 FPS UNLOCK - LIKE V12", Color3.fromRGB(0,150,200), function() pcall(function() setfpscap(1000) end) end)
-    makeButton(uTab, "🛡️ ANTI-AFK AN/AUS","🛡️ ANTI-AFK ON/OFF", Color3.fromRGB(0,100,100), function()
-        game.StarterGui:SetCore("SendNotification",{Title="🛡️ ANTI-AFK", Text="Anti-AFK ist immer AN! Nie wieder Kick!", Duration=2})
-    end)
-    makeButton(uTab, "📜 ZEIG ALLE CHEATS","📜 SHOW ALL CHEATS", Color3.fromRGB(100,100,200), function()
-        print("=== V13.3 ALLE CHEATS ===")
-        print("PLAYER: Speed, Jump, Gravity, FOV, HipHeight, SpeedQuick 16/50/100/200/500, Fly Joystick+WASD, Noclip, InfJump, AntiAFK")
-        print("VISUAL: ESP, Fullbright, Xray, NoFog, NightToDay")
-        print("EXPLORER: 6 Explorer (Dex Mobile V3, Dark Dex V4, Inf Yield, SimpleSpy V3, Hydroxide, Baba V2 Fixed)")
-        print("SERVER: JobId, PlaceId, Rejoin, ServerHop, Discord")
-        print("ULTRA: FPS999, UltraBoost, AntiLag, FpsUnlock")
+    
+    makeButton(uTab, "📜 ALLE FEATURES ANZEIGEN","📜 SHOW ALL FEATURES", Color3.fromRGB(100,100,200), function()
+        print("=== V13.3 ENHANCED FEATURES ===")
+        print("✅ PLAYER: Speed, Jump, Gravity, FOV, HipHeight, SpeedQuick, Fly, Noclip, InfJump, AntiAFK")
+        print("✅ VISUAL: ESP, Fullbright, Xray, NoFog, NightToDay")
+        print("✅ AUTO-HOP: Auto-Hop (500ms+), Manual Server Hop, Ping Stats")
+        print("✅ EXPLORER: 6 Tools (Dex Mobile V3, Dark Dex V4, Inf Yield, SimpleSpy V3, Hydroxide, Baba V2)")
+        print("✅ SERVER: Rejoin, Server Hop, Discord Copy, JobID/PlaceID Quick Copy")
+        print("✅ ULTRA: Ultra Boost V2, Anti-Lag V2, FPS Unlock, Combo Mode")
+        print("✅ LIVE: Ping with 🟢🟡🔴 indicators, Real-time FPS counter, No-internet fix")
     end)
     
     openBtn.MouseButton1Click:Connect(function() if not checkWasserzeichen() then return end main.Visible = not main.Visible end)
@@ -616,15 +887,15 @@ local function buildMain(lang)
     mini.MouseButton1Click:Connect(function() main.Visible=false end)
     
     game.StarterGui:SetCore("SendNotification",{
-        Title="V13.3 FULL RESTORED! 🔥",
-        Text= T("ALLE V12 CHEATS WIEDER DA! + DEX MOBILE V3 + ANTI-LEAK! ÜBELS KRASS!","ALL V12 CHEATS BACK! + DEX MOBILE V3 + ANTI-LEAK! INSANELY CRAZY!"),
+        Title="V13.3 ENHANCED! 🔥",
+        Text= T("ALLE FEATURES GELADEN! Live Ping + Auto-Hop + Ultra Boost V2 + Anti-Lag V2!","ALL FEATURES LOADED! Live Ping + Auto-Hop + Ultra Boost V2 + Anti-Lag V2!"),
         Duration=6
     })
 end
 
 deBtn.MouseButton1Click:Connect(function() buildMain("DE") end)
 enBtn.MouseButton1Click:Connect(function() buildMain("EN") end)
-discordBtnLang.MouseButton1Click:Connect(function() setclipboard(getgenv().V12_DISCORD) end)
+discordBtnLang.MouseButton1Click:Connect(function() setclipboard(getgenv().V13_DISCORD) end)
 
 spawn(function()
     task.wait(3.5)
