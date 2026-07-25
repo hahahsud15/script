@@ -22,7 +22,7 @@ local HttpService = game:GetService("HttpService")
 local lp = Players.LocalPlayer
 
 local isMobile = UserInputService.TouchEnabled
-local LANG = getgenv().V13_LANG or nil
+local LANG = getgenv().V14_LANG or "DE"
 
 local VirtualUser = game:GetService("VirtualUser")
 lp.Idled:Connect(function() VirtualUser:CaptureController() VirtualUser:ClickButton2(Vector2.new()) end)
@@ -130,11 +130,11 @@ local function getGuiParent()
 end
 
 local gui = Instance.new("ScreenGui")
-gui.Name = "V13.3_ENHANCED_"..getgenv().V13_OWNER
+gui.Name = "V14_ENHANCED_"..getgenv().V14_OWNER
 gui.ResetOnSpawn = false
 gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 gui.Parent = getGuiParent()
-getgenv().V13_LOADED = gui
+getgenv().V14_LOADED = gui
 
 spawn(function()
     while true do task.wait(3) if not checkWasserzeichen() then gui:Destroy() error("ANTI-LEAK BY hahahsud15") break end end
@@ -152,7 +152,7 @@ Instance.new("UIStroke", loadFrame).Color = Color3.fromRGB(0,255,150)
 local loadTitle = Instance.new("TextLabel", loadFrame)
 loadTitle.Size = UDim2.new(1,0,0,60)
 loadTitle.BackgroundColor3 = Color3.fromRGB(30,30,35)
-loadTitle.Text = "V13.3 ENHANCED\nALLE CHEATS + LIVE PING + AUTO-HOP!\nby "..getgenv().V13_OWNER.." 🔥"
+loadTitle.Text = "V14 ENHANCED\nALLE CHEATS + LIVE PING + AUTO-HOP!\nby "..getgenv().V14_OWNER.." 🔥"
 loadTitle.TextColor3 = Color3.fromRGB(0,255,150)
 loadTitle.Font = Enum.Font.GothamBlack
 loadTitle.TextSize = 16
@@ -190,7 +190,7 @@ local details = Instance.new("TextLabel", loadFrame)
 details.Size = UDim2.new(0.9,0,0,140)
 details.Position = UDim2.new(0.05,0,0,165)
 details.BackgroundTransparency = 1
-details.Text = "✅ V13.4 FEATURES:\n• Live Ping (🟢🟡🔴 indicators)\n• Auto-Hop (500ms+ für 10s)\n• Ultra Boost V2 + Anti-Lag V2\n• Fly, Noclip, Speed, Inf Jump\n• 6 Explorer + Baba Fixed\n• Server Hop, Rejoin, Copy IDs\n• FPS 999 Real Boost\n© "..getgenv().V13_OWNER.." | "..getgenv().V13_DISCORD
+details.Text = "✅ V14 FEATURES:\n• Live Ping (🟢🟡🔴 indicators)\n• Auto-Hop (500ms+ für 10s)\n• Ultra Boost V2 + Anti-Lag V2\n• Fly, Noclip, Speed, Inf Jump\n• 6 Explorer + Baba Fixed\n• Server Hop, Rejoin, Copy IDs\n• FPS 999 Real Boost\n© "..getgenv().V14_OWNER.." | "..getgenv().V14_DISCORD
 details.TextColor3 = Color3.fromRGB(200,200,200)
 details.Font = Enum.Font.Code
 details.TextSize = 10
@@ -208,7 +208,7 @@ Instance.new("UIStroke", langFrame).Color = Color3.fromRGB(0,255,150)
 local langTitle2 = Instance.new("TextLabel", langFrame)
 langTitle2.Size = UDim2.new(1,0,0,50)
 langTitle2.BackgroundColor3 = Color3.fromRGB(40,40,45)
-langTitle2.Text = "V13.3 ENHANCED - LANGUAGE SELECTION"
+langTitle2.Text = "V14 ENHANCED - LANGUAGE SELECTION"
 langTitle2.TextColor3 = Color3.new(1,1,1)
 langTitle2.Font = Enum.Font.GothamBold
 langTitle2.TextSize = 14
@@ -237,7 +237,7 @@ Instance.new("UICorner", enBtn).CornerRadius = UDim.new(0,12)
 local discordBtnLang = Instance.new("TextButton", langFrame)
 discordBtnLang.Size = UDim2.new(0.9,0,0,35)
 discordBtnLang.Position = UDim2.new(0.05,0,0,160)
-discordBtnLang.Text = "💬 "..getgenv().V13_DISCORD.." - COPY"
+discordBtnLang.Text = "💬 "..getgenv().V14_DISCORD.." - COPY"
 discordBtnLang.BackgroundColor3 = Color3.fromRGB(88,101,242)
 discordBtnLang.TextColor3 = Color3.new(1,1,1)
 discordBtnLang.Font = Enum.Font.GothamBold
@@ -248,12 +248,12 @@ spawn(function()
     for i=0,100,1 do
         barFill.Size = UDim2.new(i/100,0,1,0)
         percentLabel.Text = i.."%"
-        if i<20 then loadStatus.Text="🔥 RESTORING V13 CHEATS..."
+        if i<20 then loadStatus.Text="🔥 RESTORING V14 CHEATS..."
         elseif i<40 then loadStatus.Text="⚡ SPEED, JUMP, GRAVITY..."
         elseif i<60 then loadStatus.Text="📱 FLY, NOCLIP, INF JUMP..."
         elseif i<75 then loadStatus.Text="📡 LIVE PING + AUTO-HOP..."
         elseif i<90 then loadStatus.Text="🚀 ULTRA BOOST V2 + EXPLORER..."
-        else loadStatus.Text="✅ ALLE CHEATS DA! BY "..getgenv().V13_OWNER.."!"
+        else loadStatus.Text= T("✅ ALLE CHEATS DA! BY ","✅ ALL CHEATS READY! BY ")..getgenv().V14_OWNER.."!"..getgenv().V14_OWNER.."!"
         end
         task.wait(0.02)
     end
@@ -265,10 +265,17 @@ end)
 local function buildMain(lang)
     if not checkWasserzeichen() then return end
     LANG = lang
-    getgenv().V13_LANG = lang
+    getgenv().V14_LANG = lang
     langFrame.Visible=false
     
-    local function T(de,en) if LANG=="EN" then return en else return de end end
+    -- ECHTE SPRACH-TRENNUNG: DE sieht NUR Deutsch, EN sieht NUR Englisch
+    local function T(de,en) 
+        if LANG=="EN" then 
+            return en 
+        else 
+            return de 
+        end 
+    end
     
     local function safeLoad(url, name)
         if not checkWasserzeichen() then return false end
@@ -282,7 +289,7 @@ local function buildMain(lang)
     openBtn.Size = isMobile and UDim2.new(0,60,0,60) or UDim2.new(0,55,0,55)
     openBtn.Position = UDim2.new(0,15,0.5,-30)
     openBtn.BackgroundColor3 = Color3.fromRGB(35,35,40)
-    openBtn.Text = "V13\nOPEN"
+    openBtn.Text = (LANG=="EN" and "V14\nOPEN" or "V14\nOPEN")
     openBtn.TextColor3 = Color3.fromRGB(0,255,150)
     openBtn.Font = Enum.Font.GothamBlack
     openBtn.TextSize = 11
@@ -290,7 +297,7 @@ local function buildMain(lang)
     Instance.new("UIStroke", openBtn).Color = Color3.fromRGB(0,255,150)
     
     local main = Instance.new("Frame", gui)
-    main.Name = "MainCheck_"..getgenv().V13_WATERMARK
+    main.Name = "MainCheck_"..getgenv().V14_WATERMARK
     main.Size = isMobile and UDim2.new(0,360,0,520) or UDim2.new(0,680,0,560)
     main.Position = UDim2.new(0.5,-180,0.5,-260)
     if not isMobile then main.Position = UDim2.new(0.5,-340,0.5,-280) end
@@ -303,7 +310,7 @@ local function buildMain(lang)
     local title = Instance.new("TextLabel", main)
     title.Size = UDim2.new(1,-90,0,40)
     title.BackgroundColor3 = Color3.fromRGB(45,45,50)
-    title.Text = "  V13.3 ENHANCED - LIVE PING | JOBID/PLACE COPY | "..getgenv().V13_OWNER.." 🔥"
+    title.Text = "  V14 ENHANCED - LIVE PING | JOBID/PLACE COPY | "..getgenv().V14_OWNER.." 🔥"
     title.TextColor3 = Color3.new(1,1,1)
     title.Font = Enum.Font.GothamBold
     title.TextSize = isMobile and 9 or 10
@@ -577,17 +584,17 @@ local function buildMain(lang)
     
     makeToggle(pTab, "FLIEGEN - JOYSTICK + WASD + UP/DOWN HANDY","FLY - JOYSTICK + WASD + UP/DOWN MOBILE", function(on)
         if on then
-            getgenv().V13FLY=true
+            getgenv().V14FLY=true
             if isMobile then flyUpBtn.Visible=true flyDownBtn.Visible=true end
             local hrp = lp.Character and lp.Character:FindFirstChild("HumanoidRootPart")
             if not hrp then return end
-            if hrp:FindFirstChild("V13Fly") then hrp.V13Fly:Destroy() end
+            if hrp:FindFirstChild("V14Fly") then hrp.V14Fly:Destroy() end
             local bv = Instance.new("BodyVelocity", hrp)
-            bv.Name="V13Fly" bv.MaxForce=Vector3.new(9e9,9e9,9e9) bv.Velocity=Vector3.new(0,0,0)
+            bv.Name="V14Fly" bv.MaxForce=Vector3.new(9e9,9e9,9e9) bv.Velocity=Vector3.new(0,0,0)
             local bg = Instance.new("BodyGyro", hrp)
-            bg.Name="V13Gyro" bg.MaxTorque=Vector3.new(9e9,9e9,9e9) bg.CFrame=hrp.CFrame
+            bg.Name="V14Gyro" bg.MaxTorque=Vector3.new(9e9,9e9,9e9) bg.CFrame=hrp.CFrame
             getgenv().FlyConn = RunService.RenderStepped:Connect(function()
-                if not getgenv().V13FLY then return end
+                if not getgenv().V14FLY then return end
                 local char = lp.Character if not char then return end
                 local hum = char:FindFirstChildOfClass("Humanoid") if not hum then return end
                 local cam = workspace.CurrentCamera
@@ -608,16 +615,16 @@ local function buildMain(lang)
                 bg.CFrame = cam.CFrame
             end)
         else
-            getgenv().V13FLY=false
+            getgenv().V14FLY=false
             flyUpBtn.Visible=false flyDownBtn.Visible=false
             if getgenv().FlyConn then getgenv().FlyConn:Disconnect() end
             local hrp=lp.Character and lp.Character:FindFirstChild("HumanoidRootPart")
-            if hrp then if hrp:FindFirstChild("V13Fly") then hrp.V13Fly:Destroy() end if hrp:FindFirstChild("V13Gyro") then hrp.V13Gyro:Destroy() end end
+            if hrp then if hrp:FindFirstChild("V14Fly") then hrp.V14Fly:Destroy() end if hrp:FindFirstChild("V14Gyro") then hrp.V14Gyro:Destroy() end end
         end
     end)
     
     makeToggle(pTab, "NOCLIP DURCH WÄNDE","NOCLIP THROUGH WALLS", function(on)
-        getgenv().V13NOCLIP=on
+        getgenv().V14NOCLIP=on
         if on then
             getgenv().NCConn=RunService.Stepped:Connect(function()
                 if lp.Character then for _,v in pairs(lp.Character:GetDescendants()) do if v:IsA("BasePart") then v.CanCollide=false end end end
@@ -628,7 +635,7 @@ local function buildMain(lang)
     end)
     
     makeToggle(pTab, "UNENDLICH SPRINGEN","INFINITE JUMP", function(on)
-        getgenv().V13IJ=on
+        getgenv().V14IJ=on
         if on then
             getgenv().IJConn=UserInputService.JumpRequest:Connect(function()
                 local hum = lp.Character and lp.Character:FindFirstChildOfClass("Humanoid")
@@ -640,7 +647,7 @@ local function buildMain(lang)
     end)
     
     makeToggle(pTab, "ANTI-AFK - NIE WIEDER KICK","ANTI-AFK - NEVER KICK", function(on)
-        getgenv().V13AFK=on
+        getgenv().V14AFK=on
     end)
     
     -- ===== VISUAL TAB =====
@@ -648,12 +655,12 @@ local function buildMain(lang)
     makeToggle(vTab, "ESP AN/AUS","ESP ON/OFF", function(on)
         if on then
             for _,pl in pairs(Players:GetPlayers()) do
-                if pl~=lp and pl.Character and not pl.Character:FindFirstChild("V13ESP") then
-                    local h=Instance.new("Highlight", pl.Character) h.Name="V13ESP" h.FillColor=Color3.fromRGB(0,255,0)
+                if pl~=lp and pl.Character and not pl.Character:FindFirstChild("V14ESP") then
+                    local h=Instance.new("Highlight", pl.Character) h.Name="V14ESP" h.FillColor=Color3.fromRGB(0,255,0)
                 end
             end
         else
-            for _,pl in pairs(Players:GetPlayers()) do if pl.Character then for _,v in pairs(pl.Character:GetChildren()) do if v.Name=="V13ESP" then v:Destroy() end end end end
+            for _,pl in pairs(Players:GetPlayers()) do if pl.Character then for _,v in pairs(pl.Character:GetChildren()) do if v.Name=="V14ESP" then v:Destroy() end end end end
         end
     end)
     makeToggle(vTab, "FULLBRIGHT - HELL WIE TAG","FULLBRIGHT - BRIGHT AS DAY", function(on)
@@ -755,9 +762,9 @@ local function buildMain(lang)
     makeButton(eTab, "👁️ BABA EXPLORER V2","👁️ BABA EXPLORER V2", Color3.fromRGB(200,100,0), function()
         local parent = getGuiParent()
         if parent:FindFirstChild("BabaExplorerGui") then parent.BabaExplorerGui:Destroy() end
-        local expGui=Instance.new("ScreenGui") expGui.Name="BabaExplorerGui_"..getgenv().V13_OWNER expGui.Parent=parent
+        local expGui=Instance.new("ScreenGui") expGui.Name="BabaExplorerGui_"..getgenv().V14_OWNER expGui.Parent=parent
         local mainF=Instance.new("Frame", expGui) mainF.Size=UDim2.new(0,400,0,450) mainF.Position=UDim2.new(0.5,-200,0.5,-225) mainF.BackgroundColor3=Color3.fromRGB(25,25,30) mainF.Active=true mainF.Draggable=true Instance.new("UICorner", mainF)
-        local titleBar=Instance.new("TextLabel", mainF) titleBar.Size=UDim2.new(1,0,0,30) titleBar.Text="BABA EXPLORER BY "..getgenv().V13_OWNER titleBar.BackgroundColor3=Color3.fromRGB(35,35,40) titleBar.TextColor3=Color3.fromRGB(0,255,150)
+        local titleBar=Instance.new("TextLabel", mainF) titleBar.Size=UDim2.new(1,0,0,30) titleBar.Text="BABA EXPLORER BY "..getgenv().V14_OWNER titleBar.BackgroundColor3=Color3.fromRGB(35,35,40) titleBar.TextColor3=Color3.fromRGB(0,255,150)
         local scroll=Instance.new("ScrollingFrame", mainF) scroll.Size=UDim2.new(1,-10,1,-40) scroll.Position=UDim2.new(0,5,0,35) scroll.CanvasSize=UDim2.new(0,0,0,2000) local layout=Instance.new("UIListLayout", scroll)
         for _,obj in pairs(game:GetChildren()) do local b=Instance.new("TextButton", scroll) b.Size=UDim2.new(1,-10,0,28) b.Text="📁 "..obj.Name.." ["..obj.ClassName.."]" b.BackgroundColor3=Color3.fromRGB(50,50,50) b.TextColor3=Color3.new(1,1,1) end
         scroll.CanvasSize=UDim2.new(0,0,0,layout.AbsoluteContentSize.Y)
@@ -776,7 +783,7 @@ local function buildMain(lang)
         if #servers>0 then TeleportService:TeleportToPlaceInstance(game.PlaceId, servers[math.random(1,#servers)], lp) end
     end)
     makeButton(sTab, "💬 DISCORD KOPIEREN","💬 COPY DISCORD", Color3.fromRGB(88,101,242), function()
-        setclipboard(getgenv().V13_DISCORD)
+        setclipboard(getgenv().V14_DISCORD)
         game.StarterGui:SetCore("SendNotification",{Title="💬 DISCORD", Text="discord.gg/8nTQ5xvuha KOPIERT!", Duration=2})
     end)
     
@@ -871,7 +878,7 @@ local function buildMain(lang)
     end)
     
     makeButton(uTab, "📜 ALLE FEATURES ANZEIGEN","📜 SHOW ALL FEATURES", Color3.fromRGB(100,100,200), function()
-        print("=== V13.3 ENHANCED FEATURES ===")
+        print("=== V14 ENHANCED FEATURES ===")
         print("✅ PLAYER: Speed, Jump, Gravity, FOV, HipHeight, SpeedQuick, Fly, Noclip, InfJump, AntiAFK")
         print("✅ VISUAL: ESP, Fullbright, Xray, NoFog, NightToDay")
         print("✅ AUTO-HOP: Auto-Hop (500ms+), Manual Server Hop, Ping Stats")
@@ -886,7 +893,7 @@ local function buildMain(lang)
     mini.MouseButton1Click:Connect(function() main.Visible=false end)
     
     game.StarterGui:SetCore("SendNotification",{
-        Title="V13.3 ENHANCED! 🔥",
+        Title="V14 ENHANCED! 🔥",
         Text= T("ALLE FEATURES GELADEN! Live Ping + Auto-Hop + Ultra Boost V2 + Anti-Lag V2!","ALL FEATURES LOADED! Live Ping + Auto-Hop + Ultra Boost V2 + Anti-Lag V2!"),
         Duration=6
     })
@@ -894,7 +901,7 @@ end
 
 deBtn.MouseButton1Click:Connect(function() buildMain("DE") end)
 enBtn.MouseButton1Click:Connect(function() buildMain("EN") end)
-discordBtnLang.MouseButton1Click:Connect(function() setclipboard(getgenv().V13_DISCORD) end)
+discordBtnLang.MouseButton1Click:Connect(function() setclipboard(getgenv().V14_DISCORD) end)
 
 spawn(function()
     task.wait(3.5)
