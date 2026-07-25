@@ -6,7 +6,7 @@ getgenv().V14_OWNER = "hahahsud15"
 getgenv().V14_PROTECTION = true
 
 local function checkWasserzeichen()
-    return getgenv().V13_WATERMARK == "hahahsud15_V14_2026" and getgenv().V13_OWNER == "hahahsud15"
+    return getgenv().V13_WATERMARK == "hahahsud15_V14_2026" and getgenv().V14_OWNER == "hahahsud15"
 end
 
 if not checkWasserzeichen() then error("WATERMARK DELETED - BY hahahsud15") return end
