@@ -1,17 +1,17 @@
 -- V13.4 hahahsud15 - language fix
 if getgenv().V14_LOADED then getgenv().V13_LOADED:Destroy() end
-getgenv().V14_WATERMARK = "hahahsud15_V13.3_ENHANCED_2026"
+getgenv().V14_WATERMARK = "hahahsud15_V14_2026"
 getgenv().V14_DISCORD = "discord.gg/8nTQ5xvuha"
 getgenv().V14_OWNER = "hahahsud15"
 getgenv().V14_PROTECTION = true
 
 local function checkWasserzeichen()
-    return getgenv().V13_WATERMARK == "hahahsud15_V13.3_ENHANCED_2026" and getgenv().V13_OWNER == "hahahsud15"
+    return getgenv().V13_WATERMARK == "hahahsud15_V14_2026" and getgenv().V13_OWNER == "hahahsud15"
 end
 
 if not checkWasserzeichen() then error("WATERMARK DELETED - BY hahahsud15") return end
 
-print("V13.4 by "..getgenv().V13_WATERMARK)
+print("V14 by "..getgenv().V14_WATERMARK)
 
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
