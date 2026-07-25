@@ -1,9 +1,9 @@
 -- V13.4 hahahsud15 - language fix
-if getgenv().V13_LOADED then getgenv().V13_LOADED:Destroy() end
+if getgenv().V14_LOADED then getgenv().V13_LOADED:Destroy() end
 getgenv().V14_WATERMARK = "hahahsud15_V13.3_ENHANCED_2026"
-getgenv().V13_DISCORD = "discord.gg/8nTQ5xvuha"
-getgenv().V13_OWNER = "hahahsud15"
-getgenv().V13_PROTECTION = true
+getgenv().V14_DISCORD = "discord.gg/8nTQ5xvuha"
+getgenv().V14_OWNER = "hahahsud15"
+getgenv().V14_PROTECTION = true
 
 local function checkWasserzeichen()
     return getgenv().V13_WATERMARK == "hahahsud15_V13.3_ENHANCED_2026" and getgenv().V13_OWNER == "hahahsud15"
