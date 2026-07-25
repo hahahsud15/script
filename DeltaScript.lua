@@ -1,6 +1,6 @@
--- V13.3 ENHANCED by hahahsud15 - ALLE ALTEN CHEATS + LIVE PING + AUTO-HOP + ULTRA BOOST V2!
+-- V13.4 hahahsud15 - language fix
 if getgenv().V13_LOADED then getgenv().V13_LOADED:Destroy() end
-getgenv().V13_WATERMARK = "hahahsud15_V13.3_ENHANCED_2026"
+getgenv().V14_WATERMARK = "hahahsud15_V13.3_ENHANCED_2026"
 getgenv().V13_DISCORD = "discord.gg/8nTQ5xvuha"
 getgenv().V13_OWNER = "hahahsud15"
 getgenv().V13_PROTECTION = true
@@ -9,9 +9,9 @@ local function checkWasserzeichen()
     return getgenv().V13_WATERMARK == "hahahsud15_V13.3_ENHANCED_2026" and getgenv().V13_OWNER == "hahahsud15"
 end
 
-if not checkWasserzeichen() then error("WASSERZEICHEN ENTFERNT - BY hahahsud15") return end
+if not checkWasserzeichen() then error("WATERMARK DELETED - BY hahahsud15") return end
 
-print("V13.3 ENHANCED by "..getgenv().V13_WATERMARK)
+print("V13.4 by "..getgenv().V13_WATERMARK)
 
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
@@ -163,7 +163,7 @@ local loadStatus = Instance.new("TextLabel", loadFrame)
 loadStatus.Size = UDim2.new(1,0,0,30)
 loadStatus.Position = UDim2.new(0,0,0,70)
 loadStatus.BackgroundTransparency = 1
-loadStatus.Text = "🔥 LADE ALLE ALTEN CHEATS..."
+loadStatus.Text = "🔥 Loading all cheats ..."
 loadStatus.TextColor3 = Color3.new(1,1,1)
 loadStatus.Font = Enum.Font.GothamBold
 loadStatus.TextSize = 12
@@ -191,7 +191,7 @@ local details = Instance.new("TextLabel", loadFrame)
 details.Size = UDim2.new(0.9,0,0,140)
 details.Position = UDim2.new(0.05,0,0,165)
 details.BackgroundTransparency = 1
-details.Text = "✅ V13.3 ENHANCED FEATURES:\n• Live Ping (🟢🟡🔴 indicators)\n• Auto-Hop (500ms+ für 10s)\n• Ultra Boost V2 + Anti-Lag V2\n• Fly, Noclip, Speed, Inf Jump\n• 6 Explorer + Baba Fixed\n• Server Hop, Rejoin, Copy IDs\n• FPS 999 Real Boost\n© "..getgenv().V13_OWNER.." | "..getgenv().V13_DISCORD
+details.Text = "✅ V13.4 FEATURES:\n• Live Ping (🟢🟡🔴 indicators)\n• Auto-Hop (500ms+ für 10s)\n• Ultra Boost V2 + Anti-Lag V2\n• Fly, Noclip, Speed, Inf Jump\n• 6 Explorer + Baba Fixed\n• Server Hop, Rejoin, Copy IDs\n• FPS 999 Real Boost\n© "..getgenv().V13_OWNER.." | "..getgenv().V13_DISCORD
 details.TextColor3 = Color3.fromRGB(200,200,200)
 details.Font = Enum.Font.Code
 details.TextSize = 10
