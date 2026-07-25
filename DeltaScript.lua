@@ -5,26 +5,11 @@ getgenv().V14_DISCORD = "discord.gg/8nTQ5x..."
 getgenv().V14_OWNER = "hahahsud15"
 getgenv().V14_PROTECTION = true
 
--- DELTA WATERMARK V2 - SICHERER SCHUTZ
-getgenv().V14_WATERMARK = "hahahsud15_V14_2026"
-getgenv().V14_OWNER = "hahahsud15"
-getgenv().V14_DISCORD = "discord.gg/8nTQ5xvuha"
-getgenv().V14_PROTECTION = true
-getgenv().V14_VERSION = "V14 DELTA"
-
 local function checkWasserzeichen()
-    if getgenv().V14_WATERMARK ~= "hahahsud15_V14_2026" then return false end
-    if getgenv().V14_OWNER ~= "hahahsud15" then return false end
-    if getgenv().V14_PROTECTION ~= true then return false end
-    if getgenv().V14_VERSION ~= "V14 DELTA" then return false end
-    return true
+    return getgenv().V14_WATERMARK == "hahahsud15_V14_2026" and getgenv().V14_OWNER == "hahahsud15"
 end
 
-if not checkWasserzeichen() then 
-    warn("❌ DELTA WATERMARK FEHLER - Original: hahahsud15_V14_2026")
-    error("WATERMARK DELETED - BY hahahsud15 | DeltaScript V14") 
-    return 
-end
+if not checkWasserzeichen() then error("WATERMARK DELETED - BY hahahsud15") return end
 
 print("V14 by "..getgenv().V14_WATERMARK)
 local Players = game:GetService("Players")
@@ -152,7 +137,7 @@ gui.Parent = getGuiParent()
 getgenv().V14_LOADED = gui
 
 spawn(function()
-    while true do task.wait(3) if not checkWasserzeichen() then gui:Destroy() error("ANTI-LEAK BY hahahsud15 - DeltaScript V14 Protected") break end end
+    while true do task.wait(3) if not checkWasserzeichen() then gui:Destroy() error("ANTI-LEAK BY hahahsud15") break end end
 end)
 
 -- LOADING SCREEN
@@ -399,12 +384,12 @@ local function buildMain(lang)
     
     jobIdBtn.MouseButton1Click:Connect(function()
         setclipboard(game.JobId)
-        game.StarterGui:SetCore("SendNotification",{Title="📋 JOBID", Text=game.JobId..T(" KOPIERT!"," COPIED!"), Duration=1})
+        game.StarterGui:SetCore("SendNotification",{Title="📋 JOBID", Text=game.JobId.." KOPIERT!", Duration=1})
     end)
     
     placeIdBtn.MouseButton1Click:Connect(function()
         setclipboard(tostring(game.PlaceId))
-        game.StarterGui:SetCore("SendNotification",{Title="📋 PLACEID", Text=tostring(game.PlaceId)..T(" KOPIERT!"," COPIED!"), Duration=1})
+        game.StarterGui:SetCore("SendNotification",{Title="📋 PLACEID", Text=game.PlaceId.." KOPIERT!", Duration=1})
     end)
     
     rejoinBtn.MouseButton1Click:Connect(function()
@@ -594,7 +579,7 @@ local function buildMain(lang)
         local nextSpeed = 16
         for i,s in ipairs(speeds) do if cur==s then nextSpeed = speeds[(i%#speeds)+1] break end end
         if cur~=16 and cur~=50 and cur~=100 and cur~=200 and cur~=500 then nextSpeed=50 end
-        local hum=lp.Character and lp.Character:FindFirstChildOfClass("Humanoid") if hum then hum.WalkSpeed=nextSpeed game.StarterGui:SetCore("SendNotification",{Title="⚡ SPEED", Text=T("Geschwindigkeit: ","Speed: ")..nextSpeed, Duration=1}) end
+        local hum=lp.Character and lp.Character:FindFirstChildOfClass("Humanoid") if hum then hum.WalkSpeed=nextSpeed game.StarterGui:SetCore("SendNotification",{Title="⚡ SPEED", Text="Speed: "..nextSpeed, Duration=1}) end
     end)
     
     makeToggle(pTab, "FLIEGEN - JOYSTICK + WASD + UP/DOWN HANDY","FLY - JOYSTICK + WASD + UP/DOWN MOBILE", function(on)
@@ -799,7 +784,7 @@ local function buildMain(lang)
     end)
     makeButton(sTab, "💬 DISCORD KOPIEREN","💬 COPY DISCORD", Color3.fromRGB(88,101,242), function()
         setclipboard(getgenv().V14_DISCORD)
-        game.StarterGui:SetCore("SendNotification",{Title="💬 DISCORD", Text=T("discord.gg/8nTQ5xvuha KOPIERT!","discord.gg/8nTQ5xvuha COPIED!"), Duration=2})
+        game.StarterGui:SetCore("SendNotification",{Title="💬 DISCORD", Text="discord.gg/8nTQ5xvuha KOPIERT!", Duration=2})
     end)
     
     -- ===== ULTRA TAB - ULTRA BOOST V2 + ANTI-LAG V2 =====
@@ -833,7 +818,7 @@ local function buildMain(lang)
             if v:IsA("Decal") then v:Destroy() end
         end
         
-        game.StarterGui:SetCore("SendNotification",{Title="🚀 ULTRA BOOST V2", Text=T("AKTIVIERT! +200-300 FPS! Schatten, Partikel, Texturen AUS!","ACTIVATED! +200-300 FPS! Shadows, Particles, Textures OFF!"), Duration=3})
+        game.StarterGui:SetCore("SendNotification",{Title="🚀 ULTRA BOOST V2", Text="AKTIVIERT! +200-300 FPS! Schatten, Partikel, Texturen AUS!", Duration=3})
     end)
     
     makeButton(uTab, "🧹 ANTI-LAG V2 - LÖSCHT WASSER, DECALS, TERRAIN","🧹 ANTI-LAG V2 - DELETE WATER/DECALS/TERRAIN", Color3.fromRGB(100,100,100), function()
@@ -857,13 +842,13 @@ local function buildMain(lang)
         -- Remove fog
         Lighting.FogEnd=10000
         
-        game.StarterGui:SetCore("SendNotification",{Title="🧹 ANTI-LAG V2", Text=T("Wasser, Decals, Terrain GELÖSCHT! +100-200 FPS!","Water, Decals, Terrain DELETED! +100-200 FPS!"), Duration=3})
+        game.StarterGui:SetCore("SendNotification",{Title="🧹 ANTI-LAG V2", Text="Wasser, Decals, Terrain GELÖSCHT! +100-200 FPS!", Duration=3})
     end)
     
     makeButton(uTab, "🔓 FPS UNLOCK - 999 CAP ENTFERNEN","🔓 FPS UNLOCK - REMOVE 999 CAP", Color3.fromRGB(0,150,200), function()
         pcall(function()
             setfpscap(9999)
-            game.StarterGui:SetCore("SendNotification",{Title="🔓 FPS UNLOCK", Text=T("FPS CAP AUF 9999 GESETZT!","FPS CAP SET TO 9999!"), Duration=2})
+            game.StarterGui:SetCore("SendNotification",{Title="🔓 FPS UNLOCK", Text="FPS CAP AUF 9999 GESETZT!", Duration=2})
         end)
     end)
     
@@ -889,7 +874,7 @@ local function buildMain(lang)
         Lighting.FogEnd=10000
         pcall(function() setfpscap(9999) end)
         
-        game.StarterGui:SetCore("SendNotification",{Title="💾 COMBO AKTIV", Text=T("ALLES AN! +300-500 FPS! EXTREM SCHNELL!","EVERYTHING ON! +300-500 FPS! EXTREMELY FAST!"), Duration=4})
+        game.StarterGui:SetCore("SendNotification",{Title="💾 COMBO AKTIV", Text="ALLES AN! +300-500 FPS! EXTREM SCHNELL!", Duration=4})
     end)
     
     makeButton(uTab, "📜 ALLE FEATURES ANZEIGEN","📜 SHOW ALL FEATURES", Color3.fromRGB(100,100,200), function()
