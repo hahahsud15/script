@@ -1,7 +1,7 @@
 -- V14 hahahsud15 - DeltaScript - FINAL V5
 if getgenv().V14_LOADED then getgenv().V14_LOADED:Destroy() end
-getgenv().V14_WATERMARK = "hahahsud15_V14_2026"
-getgenv().V14_OWNER = "hahahsud15"
+getgenv().V14_WATERMARK = "hahahsud1_V14_2026"
+getgenv().V14_OWNER = "hahahsud1"
 getgenv().V14_DISCORD = "discord.gg/8nTQ5xvuha"
 getgenv().V14_PROTECTION = true
 getgenv().V14_VERSION = "V14 DELTA"
