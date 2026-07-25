@@ -22,7 +22,7 @@ local HttpService = game:GetService("HttpService")
 local lp = Players.LocalPlayer
 
 local isMobile = UserInputService.TouchEnabled
-local LANG = getgenv().V14_LANG or "DE"
+local LANG = getgenv().V14_LANG or nil
 
 local VirtualUser = game:GetService("VirtualUser")
 lp.Idled:Connect(function() VirtualUser:CaptureController() VirtualUser:ClickButton2(Vector2.new()) end)
@@ -253,13 +253,17 @@ spawn(function()
         elseif i<60 then loadStatus.Text="📱 FLY, NOCLIP, INF JUMP..."
         elseif i<75 then loadStatus.Text="📡 LIVE PING + AUTO-HOP..."
         elseif i<90 then loadStatus.Text="🚀 ULTRA BOOST V2 + EXPLORER..."
-        else loadStatus.Text= T("✅ ALLE CHEATS DA! BY ","✅ ALL CHEATS READY! BY ")..getgenv().V14_OWNER.."!"..getgenv().V14_OWNER.."!"
+        else loadStatus.Text="✅ ALLE CHEATS DA! BY "..getgenv().V14_OWNER.."!"
         end
         task.wait(0.02)
     end
     task.wait(0.3)
     loadFrame:Destroy()
-    if not LANG then langFrame.Visible=true end
+    if not LANG then 
+        langFrame.Visible=true 
+    else
+        buildMain(LANG)
+    end
 end)
 
 local function buildMain(lang)
@@ -903,7 +907,10 @@ deBtn.MouseButton1Click:Connect(function() buildMain("DE") end)
 enBtn.MouseButton1Click:Connect(function() buildMain("EN") end)
 discordBtnLang.MouseButton1Click:Connect(function() setclipboard(getgenv().V14_DISCORD) end)
 
+-- Auto-start if language was already saved
 spawn(function()
-    task.wait(3.5)
-    if LANG and not langFrame.Visible then buildMain(LANG) end
+    task.wait(1)
+    if LANG and langFrame and not langFrame.Visible then 
+        -- already handled above
+    end
 end)
