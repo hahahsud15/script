@@ -1,17 +1,18 @@
--- V14 hahahsud15 - language fix
+-- V14 hahahsud15 - DeltaScript - FINAL V5
 if getgenv().V14_LOADED then getgenv().V14_LOADED:Destroy() end
 getgenv().V14_WATERMARK = "hahahsud15_V14_2026"
-getgenv().V14_DISCORD = "discord.gg/8nTQ5x..."
 getgenv().V14_OWNER = "hahahsud15"
+getgenv().V14_DISCORD = "discord.gg/8nTQ5xvuha"
 getgenv().V14_PROTECTION = true
-
+getgenv().V14_VERSION = "V14 DELTA"
 local function checkWasserzeichen()
-    return getgenv().V14_WATERMARK == "hahahsud15_V14_2026" and getgenv().V14_OWNER == "hahahsud15"
+    if getgenv().V14_WATERMARK ~= "hahahsud15_V14_2026" then return false end
+    if getgenv().V14_OWNER ~= "hahahsud15" then return false end
+    if getgenv().V14_PROTECTION ~= true then return false end
+    return true
 end
-
 if not checkWasserzeichen() then error("WATERMARK DELETED - BY hahahsud15") return end
-
-print("V14 by "..getgenv().V14_WATERMARK)
+print("V14 DELTA by "..getgenv().V14_WATERMARK)
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
@@ -22,7 +23,9 @@ local HttpService = game:GetService("HttpService")
 local lp = Players.LocalPlayer
 
 local isMobile = UserInputService.TouchEnabled
-local LANG = getgenv().V14_LANG or "DE"
+-- FIX: Reset LANG damit Auswahl nicht geskippt wird
+getgenv().V14_LANG = nil
+local LANG = nil
 
 local VirtualUser = game:GetService("VirtualUser")
 lp.Idled:Connect(function() VirtualUser:CaptureController() VirtualUser:ClickButton2(Vector2.new()) end)
@@ -190,7 +193,7 @@ local details = Instance.new("TextLabel", loadFrame)
 details.Size = UDim2.new(0.9,0,0,140)
 details.Position = UDim2.new(0.05,0,0,165)
 details.BackgroundTransparency = 1
-details.Text = "✅ V14 FEATURES:\n• Live Ping (🟢🟡🔴 indicators)\n• Auto-Hop (500ms+ für 10s)\n• Ultra Boost V2 + Anti-Lag V2\n• Fly, Noclip, Speed, Inf Jump\n• 6 Explorer + Baba Fixed\n• Server Hop, Rejoin, Copy IDs\n• FPS 999 Real Boost\n© "..getgenv().V14_OWNER.." | "..getgenv().V14_DISCORD
+details.Text = "✅ V14.4 FEATURES:\n• Live Ping (🟢🟡🔴 indicators)\n• Auto-Hop (500ms+ für 10s)\n• Ultra Boost V2 + Anti-Lag V2\n• Fly, Noclip, Speed, Inf Jump\n• 6 Explorer + Baba Fixed\n• Server Hop, Rejoin, Copy IDs\n• FPS 999 Real Boost\n© "..getgenv().V14_OWNER.." | "..getgenv().V14_DISCORD
 details.TextColor3 = Color3.fromRGB(200,200,200)
 details.Font = Enum.Font.Code
 details.TextSize = 10
@@ -246,6 +249,7 @@ Instance.new("UICorner", discordBtnLang).CornerRadius = UDim.new(0,8)
 
 spawn(function()
     for i=0,100,1 do
+        if not loadFrame or not loadFrame.Parent then break end
         barFill.Size = UDim2.new(i/100,0,1,0)
         percentLabel.Text = i.."%"
         if i<20 then loadStatus.Text="🔥 RESTORING V14 CHEATS..."
@@ -253,13 +257,15 @@ spawn(function()
         elseif i<60 then loadStatus.Text="📱 FLY, NOCLIP, INF JUMP..."
         elseif i<75 then loadStatus.Text="📡 LIVE PING + AUTO-HOP..."
         elseif i<90 then loadStatus.Text="🚀 ULTRA BOOST V2 + EXPLORER..."
-        else loadStatus.Text= T("✅ ALLE CHEATS DA! BY ","✅ ALL CHEATS READY! BY ")..getgenv().V14_OWNER.."!"..getgenv().V14_OWNER.."!"
+        else loadStatus.Text="✅ READY! BY "..getgenv().V14_OWNER.."! - 100%"
         end
-        task.wait(0.02)
+        task.wait(0.03) -- FIX: etwas langsamer damit man es sieht
     end
-    task.wait(0.3)
-    loadFrame:Destroy()
-    if not LANG then langFrame.Visible=true end
+    task.wait(0.8) -- FIX: 100% länger anzeigen
+    if loadFrame then loadFrame:Destroy() end
+    -- FIX: Sprache IMMER anzeigen, nicht skippen
+    langFrame.Visible=true
+    langFrame.ZIndex = 10
 end)
 
 local function buildMain(lang)
@@ -268,14 +274,7 @@ local function buildMain(lang)
     getgenv().V14_LANG = lang
     langFrame.Visible=false
     
-    -- ECHTE SPRACH-TRENNUNG: DE sieht NUR Deutsch, EN sieht NUR Englisch
-    local function T(de,en) 
-        if LANG=="EN" then 
-            return en 
-        else 
-            return de 
-        end 
-    end
+    local function T(de,en) if LANG=="EN" then return en else return de end end
     
     local function safeLoad(url, name)
         if not checkWasserzeichen() then return false end
@@ -289,7 +288,7 @@ local function buildMain(lang)
     openBtn.Size = isMobile and UDim2.new(0,60,0,60) or UDim2.new(0,55,0,55)
     openBtn.Position = UDim2.new(0,15,0.5,-30)
     openBtn.BackgroundColor3 = Color3.fromRGB(35,35,40)
-    openBtn.Text = (LANG=="EN" and "V14\nOPEN" or "V14\nOPEN")
+    openBtn.Text = "V14\nOPEN"
     openBtn.TextColor3 = Color3.fromRGB(0,255,150)
     openBtn.Font = Enum.Font.GothamBlack
     openBtn.TextSize = 11
@@ -579,7 +578,7 @@ local function buildMain(lang)
         local nextSpeed = 16
         for i,s in ipairs(speeds) do if cur==s then nextSpeed = speeds[(i%#speeds)+1] break end end
         if cur~=16 and cur~=50 and cur~=100 and cur~=200 and cur~=500 then nextSpeed=50 end
-        local hum=lp.Character and lp.Character:FindFirstChildOfClass("Humanoid") if hum then hum.WalkSpeed=nextSpeed game.StarterGui:SetCore("SendNotification",{Title="⚡ SPEED", Text=T("Geschwindigkeit: ","Speed: ")..nextSpeed, Duration=1}) end
+        local hum=lp.Character and lp.Character:FindFirstChildOfClass("Humanoid") if hum then hum.WalkSpeed=nextSpeed game.StarterGui:SetCore("SendNotification",{Title="⚡ SPEED", Text="Speed: "..nextSpeed, Duration=1}) end
     end)
     
     makeToggle(pTab, "FLIEGEN - JOYSTICK + WASD + UP/DOWN HANDY","FLY - JOYSTICK + WASD + UP/DOWN MOBILE", function(on)
@@ -903,7 +902,4 @@ deBtn.MouseButton1Click:Connect(function() buildMain("DE") end)
 enBtn.MouseButton1Click:Connect(function() buildMain("EN") end)
 discordBtnLang.MouseButton1Click:Connect(function() setclipboard(getgenv().V14_DISCORD) end)
 
-spawn(function()
-    task.wait(3.5)
-    if LANG and not langFrame.Visible then buildMain(LANG) end
-end)
+-- auto start handled above
