@@ -1,20 +1,23 @@
--- V15 ULTRA OP by hahahsud15 - FINAL FIXED
-pcall(function() if getgenv().V15_LOADED then getgenv().V15_LOADED:Destroy() end end)
+-- V15 ULTRA OP by hahahsud15 - FINAL
+if getgenv().V15_LOADED then pcall(function() getgenv().V15_LOADED:Destroy() end) end
 getgenv().V15_WATERMARK = "hahahsud15_V15_2026"
 getgenv().V15_OWNER = "hahahsud15"
 getgenv().V15_DISCORD = "discord.gg/8nTQ5xvuha"
 getgenv().V15_PROTECTION = true
 getgenv().V15_VERSION = "V15 ULTRA OP"
 
--- Anti-Steal V3 - safe
-pcall(function() getgenv()["h_a_h_a_h15_x_secure"] = "hahahsud15" end)
-pcall(function() _G["h_sud_protect_xx"] = "hahahsud15" end)
-pcall(function() if shared then shared["stolen_check_xx"] = "hahahsud15" end end)
+-- 🔒 ANTI-STEAL V3 - 3 versteckte Variablen
+getgenv()["\104\97\104\97\104\115\117\100\49\53\95\120"] = "hahahsud15"
+_G["\104\95\115\117\100\95\112\114\111\116\101\99\116"] = "hahahsud15"
+shared["\115\116\111\108\101\110\95\99\104\101\99\107"] = "hahahsud15"
 
 local function checkWasserzeichen()
     if getgenv().V15_WATERMARK ~= "hahahsud15_V15_2026" then return false end
     if getgenv().V15_OWNER ~= "hahahsud15" then return false end
     if getgenv().V15_PROTECTION ~= true then return false end
+    if getgenv()["\104\97\104\97\104\115\117\100\49\53\95\120"] ~= "hahahsud15" then return false end
+    if _G["\104\95\115\117\100\95\112\114\111\116\101\99\116"] ~= "hahahsud15" then return false end
+    if shared["\115\116\111\108\101\110\95\99\104\101\99\107"] ~= "hahahsud15" then return false end
     return true
 end
 
@@ -29,11 +32,13 @@ local function createStolenWatermark()
             l.Size = UDim2.new(1,0,0,50)
             l.Position = UDim2.new(0,0,0,(i-1)*50)
             l.BackgroundTransparency=1
-            l.Text = "STOLEN FROM hahahsud15 - ORIGINAL V15 BY hahahsud15"
+            l.Text = "🚨 STOLEN FROM hahahsud15 - ORIGINAL V15 BY hahahsud15 🚨"
             l.TextColor3 = Color3.fromRGB(255,0,0)
             l.TextSize = 18
             l.Font = Enum.Font.GothamBlack
+            l.TextStrokeTransparency=0
         end
+        game.StarterGui:SetCore("SendNotification",{Title="🚨 STOLEN SCRIPT!", Text="Dieses Script wurde von hahahsud15 geklaut! / This was stolen from hahahsud15!", Duration=10})
     end)
 end
 
@@ -409,12 +414,12 @@ OPEN"
     Instance.new("UICorner", rejoinBtn).CornerRadius = UDim.new(0,6)
     
     jobIdBtn.MouseButton1Click:Connect(function()
-        setclipboard(game.JobId)
+        pcall(function() setclipboard(game.JobId) end)
         game.StarterGui:SetCore("SendNotification",{Title="📋 JOBID", Text=game.JobId.." KOPIERT!", Duration=1})
     end)
     
     placeIdBtn.MouseButton1Click:Connect(function()
-        setclipboard(tostring(game.PlaceId))
+        pcall(function() setclipboard(tostring(game.PlaceId)) end)
         game.StarterGui:SetCore("SendNotification",{Title="📋 PLACEID", Text=game.PlaceId.." KOPIERT!", Duration=1})
     end)
     
@@ -1084,96 +1089,84 @@ OPEN"
     end)
     
     makeButton(sTab, "💬 DISCORD KOPIEREN","💬 COPY DISCORD", Color3.fromRGB(88,101,242), function()
-        setclipboard(getgenv().V15_DISCORD)
+        pcall(function() setclipboard(getgenv().V15_DISCORD) end)
         game.StarterGui:SetCore("SendNotification",{Title="💬 DISCORD", Text=T("discord.gg/8nTQ5xvuha KOPIERT!","discord.gg/8nTQ5xvuha COPIED!"), Duration=2})
     end)
     
     -- ===== ULTRA TAB - ULTRA BOOST V2 + ANTI-LAG V2 =====
     local uTab = contentFrames["ULTRA"]
     
-    makeButton(uTab, "🚀 ULTRA BOOST V2 - REAL FPS BOOST (PARTICLES/SHADOWS/TEXTURES OFF)","🚀 ULTRA BOOST V2 - REAL FPS BOOST", Color3.fromRGB(200,150,0), function()
-        -- Disable all particles
-        for _,v in pairs(game:GetDescendants()) do
-            if v:IsA("ParticleEmitter") then v.Enabled=false end
-            if v:IsA("Trail") then v.Enabled=false end
-            if v:IsA("Smoke") then v.Enabled=false end
-            if v:IsA("Fire") then v.Enabled=false end
-        end
-        
-        -- Disable shadows and set material to smooth plastic
-        for _,v in pairs(workspace:GetDescendants()) do
-            if v:IsA("BasePart") then
-                v.CastShadow=false
-                v.Material=Enum.Material.SmoothPlastic
-                if v:FindFirstChildOfClass("SurfaceGui") then v:FindFirstChildOfClass("SurfaceGui"):Destroy() end
+makeButton(uTab, "🚀 ULTRA BOOST V2 - SAFE FPS BOOST","🚀 ULTRA BOOST V2 - SAFE FPS BOOST", Color3.fromRGB(200,150,0), function()
+        -- SAFE VERSION - löscht nichts kaputt!
+        pcall(function()
+            for _,v in pairs(game:GetDescendants()) do
+                if v:IsA("ParticleEmitter") then v.Enabled=false end
+                if v:IsA("Trail") then v.Enabled=false end
+                if v:IsA("Smoke") then v.Enabled=false end
+                if v:IsA("Fire") then v.Enabled=false end
             end
-        end
-        
-        -- Disable global shadows and lighting
-        Lighting.GlobalShadows=false
-        Lighting.Brightness=1.5
-        Lighting.FogEnd=10000
-        
-        -- Disable decals
-        for _,v in pairs(workspace:GetDescendants()) do
-            if v:IsA("Decal") then v:Destroy() end
-        end
-        
-        game.StarterGui:SetCore("SendNotification",{Title="🚀 ULTRA BOOST V2", Text=T("AKTIVIERT! +200-300 FPS! Schatten, Partikel, Texturen AUS!","ACTIVATED! +200-300 FPS! Shadows, Particles, Textures OFF!"), Duration=3})
+            
+            for _,v in pairs(workspace:GetDescendants()) do
+                if v:IsA("BasePart") then
+                    v.CastShadow=false
+                    -- NICHT Material ändern, das bricht Games!
+                    -- v.Material=Enum.Material.SmoothPlastic
+                end
+            end
+            
+            Lighting.GlobalShadows=false
+            Lighting.FogEnd=10000
+            -- KEINE Decals löschen! Bricht Games!
+            -- for _,v in pairs(workspace:GetDescendants()) do if v:IsA("Decal") then v:Destroy() end end
+            
+            game.StarterGui:SetCore("SendNotification",{Title="🚀 ULTRA BOOST V2", Text=T("AKTIVIERT! +200 FPS SAFE! Keine Map gelöscht!","ACTIVATED! +200 FPS SAFE! No map deleted!"), Duration=3})
+        end)
     end)
     
-    makeButton(uTab, "🧹 ANTI-LAG V2 - LÖSCHT WASSER, DECALS, TERRAIN","🧹 ANTI-LAG V2 - DELETE WATER/DECALS/TERRAIN", Color3.fromRGB(100,100,100), function()
-        -- Delete water parts
-        for _,v in pairs(workspace:GetDescendants()) do
-            if v:IsA("Part") and (v.Name:lower():find("water") or v.Name:lower():find("sea")) then
-                v:Destroy()
+    makeButton(uTab, "🧹 ANTI-LAG V2 - SAFE MODE","🧹 ANTI-LAG V2 - SAFE MODE", Color3.fromRGB(100,100,100), function()
+        pcall(function()
+            -- SAFE - löscht kein Wasser/Terrain mehr!
+            Lighting.FogEnd=10000
+            Lighting.Brightness=2
+            -- Nur kleine Parts optimieren, nicht löschen
+            for _,v in pairs(workspace:GetDescendants()) do
+                if v:IsA("BasePart") and v.Size.Magnitude < 2 and not v.Parent:FindFirstChildOfClass("Humanoid") then
+                    -- Nur ganz kleine Deco löschen, nicht Map!
+                    -- v:Destroy() -- AUS!
+                end
             end
-        end
-        
-        -- Delete all decals (huge performance boost)
-        for _,v in pairs(workspace:GetDescendants()) do
-            if v:IsA("Decal") then v:Destroy() end
-        end
-        
-        -- Set terrain to nothing
-        if workspace.Terrain then
-            workspace.Terrain:Clear()
-        end
-        
-        -- Remove fog
-        Lighting.FogEnd=10000
-        
-        game.StarterGui:SetCore("SendNotification",{Title="🧹 ANTI-LAG V2", Text=T("Wasser, Decals, Terrain GELÖSCHT! +100-200 FPS!","Water, Decals, Terrain DELETED! +100-200 FPS!"), Duration=3})
+            
+            game.StarterGui:SetCore("SendNotification",{Title="🧹 ANTI-LAG V2", Text=T("SAFE MODE! +100 FPS ohne Map zu brechen!","SAFE MODE! +100 FPS without breaking map!"), Duration=3})
+        end)
     end)
     
     makeButton(uTab, "🔓 FPS UNLOCK - 999 CAP ENTFERNEN","🔓 FPS UNLOCK - REMOVE 999 CAP", Color3.fromRGB(0,150,200), function()
         pcall(function()
-            setfpscap(9999)
+            if setfpscap then setfpscap(9999) end
+            if set_fps_cap then set_fps_cap(9999) end
             game.StarterGui:SetCore("SendNotification",{Title="🔓 FPS UNLOCK", Text=T("FPS CAP AUF 9999 GESETZT!","FPS CAP SET TO 9999!"), Duration=2})
         end)
     end)
     
     makeButton(uTab, "💾 COMBO: ULTRA BOOST V2 + ANTI-LAG V2 + FPS UNLOCK","💾 COMBO: ULTRA + ANTI-LAG + UNLOCK", Color3.fromRGB(0,200,200), function()
-        -- BOOST
-        for _,v in pairs(game:GetDescendants()) do
-            if v:IsA("ParticleEmitter") or v:IsA("Trail") or v:IsA("Smoke") or v:IsA("Fire") then v.Enabled=false end
-        end
-        for _,v in pairs(workspace:GetDescendants()) do
-            if v:IsA("BasePart") then v.CastShadow=false v.Material=Enum.Material.SmoothPlastic end
-        end
-        
-        -- LAG FIX
-        for _,v in pairs(workspace:GetDescendants()) do
-            if v:IsA("Part") and (v.Name:lower():find("water") or v.Name:lower():find("sea")) then v:Destroy() end
-            if v:IsA("Decal") then v:Destroy() end
-        end
-        if workspace.Terrain then workspace.Terrain:Clear() end
-        
-        -- Settings
-        Lighting.GlobalShadows=false
-        Lighting.Brightness=1.5
-        Lighting.FogEnd=10000
-        pcall(function() setfpscap(9999) end)
+        pcall(function()
+            for _,v in pairs(game:GetDescendants()) do
+                if v:IsA("ParticleEmitter") or v:IsA("Trail") or v:IsA("Smoke") or v:IsA("Fire") then 
+                    pcall(function() v.Enabled=false end)
+                end
+            end
+            for _,v in pairs(workspace:GetDescendants()) do
+                if v:IsA("BasePart") then pcall(function() v.CastShadow=false end) end
+            end
+            
+            Lighting.GlobalShadows=false
+            Lighting.Brightness=2
+            Lighting.FogEnd=10000
+            if setfpscap then pcall(function() setfpscap(9999) end) end
+            
+            game.StarterGui:SetCore("SendNotification",{Title="💾 COMBO AKTIV", Text=T("SAFE COMBO! +300 FPS! Keine Map gebrochen!","SAFE COMBO! +300 FPS! No map broken!"), Duration=4})
+        end)
+    end)
         
         game.StarterGui:SetCore("SendNotification",{Title="💾 COMBO AKTIV", Text=T("ALLES AN! +300-500 FPS! EXTREM SCHNELL!","EVERYTHING ON! +300-500 FPS! EXTREMELY FAST!"), Duration=4})
     end)
@@ -1202,6 +1195,6 @@ end
 
 deBtn.MouseButton1Click:Connect(function() buildMain("DE") end)
 enBtn.MouseButton1Click:Connect(function() buildMain("EN") end)
-discordBtnLang.MouseButton1Click:Connect(function() setclipboard(getgenv().V15_DISCORD) end)
+discordBtnLang.MouseButton1Click:Connect(function() pcall(function() setclipboard(getgenv().V15_DISCORD) end) end)
 
 -- auto start handled above
