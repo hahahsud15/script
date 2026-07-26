@@ -1,23 +1,20 @@
--- V15 ULTRA OP by hahahsud15 - FINAL
-if getgenv().V15_LOADED then pcall(function() getgenv().V15_LOADED:Destroy() end) end
+-- V15 ULTRA OP by hahahsud15 - FINAL FIXED
+pcall(function() if getgenv().V15_LOADED then getgenv().V15_LOADED:Destroy() end end)
 getgenv().V15_WATERMARK = "hahahsud15_V15_2026"
 getgenv().V15_OWNER = "hahahsud15"
 getgenv().V15_DISCORD = "discord.gg/8nTQ5xvuha"
 getgenv().V15_PROTECTION = true
 getgenv().V15_VERSION = "V15 ULTRA OP"
 
--- 🔒 ANTI-STEAL V3 - 3 versteckte Variablen
-getgenv()["\104\97\104\97\104\115\117\100\49\53\95\120"] = "hahahsud15"
-_G["\104\95\115\117\100\95\112\114\111\116\101\99\116"] = "hahahsud15"
-shared["\115\116\111\108\101\110\95\99\104\101\99\107"] = "hahahsud15"
+-- Anti-Steal V3 - safe
+pcall(function() getgenv()["h_a_h_a_h15_x_secure"] = "hahahsud15" end)
+pcall(function() _G["h_sud_protect_xx"] = "hahahsud15" end)
+pcall(function() if shared then shared["stolen_check_xx"] = "hahahsud15" end end)
 
 local function checkWasserzeichen()
     if getgenv().V15_WATERMARK ~= "hahahsud15_V15_2026" then return false end
     if getgenv().V15_OWNER ~= "hahahsud15" then return false end
     if getgenv().V15_PROTECTION ~= true then return false end
-    if getgenv()["\104\97\104\97\104\115\117\100\49\53\95\120"] ~= "hahahsud15" then return false end
-    if _G["\104\95\115\117\100\95\112\114\111\116\101\99\116"] ~= "hahahsud15" then return false end
-    if shared["\115\116\111\108\101\110\95\99\104\101\99\107"] ~= "hahahsud15" then return false end
     return true
 end
 
@@ -32,13 +29,11 @@ local function createStolenWatermark()
             l.Size = UDim2.new(1,0,0,50)
             l.Position = UDim2.new(0,0,0,(i-1)*50)
             l.BackgroundTransparency=1
-            l.Text = "🚨 STOLEN FROM hahahsud15 - ORIGINAL V15 BY hahahsud15 🚨"
+            l.Text = "STOLEN FROM hahahsud15 - ORIGINAL V15 BY hahahsud15"
             l.TextColor3 = Color3.fromRGB(255,0,0)
             l.TextSize = 18
             l.Font = Enum.Font.GothamBlack
-            l.TextStrokeTransparency=0
         end
-        game.StarterGui:SetCore("SendNotification",{Title="🚨 STOLEN SCRIPT!", Text="Dieses Script wurde von hahahsud15 geklaut! / This was stolen from hahahsud15!", Duration=10})
     end)
 end
 
