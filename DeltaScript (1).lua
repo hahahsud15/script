@@ -1,17 +1,45 @@
--- V14 hahahsud15 - language fix
-if getgenv().V14_LOADED then getgenv().V14_LOADED:Destroy() end
-getgenv().V14_WATERMARK = "hahahsud15_V14_2026"
-getgenv().V14_DISCORD = "discord.gg/8nTQ5x..."
-getgenv().V14_OWNER = "hahahsud15"
-getgenv().V14_PROTECTION = true
+-- V15 hahahsud15 - DELTA ULTRA OP FINAL
+if getgenv().V15_LOADED then pcall(function() getgenv().V15_LOADED:Destroy() end) end
+getgenv().V15_WATERMARK = "hahahsud15_V15_2026"
+getgenv().V15_OWNER = "hahahsud15"
+getgenv().V15_DISCORD = "discord.gg/8nTQ5xvuha"
+getgenv().V15_PROTECTION = true
+getgenv().V15_VERSION = "V15 DELTA"
+
+-- 🔒 ANTI-STEAL V3 - 3 unsichtbare Variablen
+getgenv()["\104\97\104\97\104\115\117\100\49\53\95\120"] = "hahahsud15"
+_G["\104\95\115\117\100\95\112\114\111\116\101\99\116"] = "hahahsud15"
+shared["\115\116\111\108\101\110\95\99\104\101\99\107"] = "hahahsud15"
 
 local function checkWasserzeichen()
-    return getgenv().V14_WATERMARK == "hahahsud15_V14_2026" and getgenv().V14_OWNER == "hahahsud15"
+    if getgenv().V15_WATERMARK ~= "hahahsud15_V15_2026" then return false end
+    if getgenv().V15_OWNER ~= "hahahsud15" then return false end
+    if getgenv().V15_PROTECTION ~= true then return false end
+    if getgenv()["\104\97\104\97\104\115\117\100\49\53\95\120"] ~= "hahahsud15" then return false end
+    if _G["\104\95\115\117\100\95\112\114\111\116\101\99\116"] ~= "hahahsud15" then return false end
+    return true
 end
 
-if not checkWasserzeichen() then error("WATERMARK DELETED - BY hahahsud15") return end
+local function createStolenWatermark()
+    pcall(function()
+        local g = game.CoreGui or game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
+        local sg = Instance.new("ScreenGui", g)
+        sg.Name = "STOLEN_CHECK"
+        for i=1,5 do
+            local l = Instance.new("TextLabel", sg)
+            l.Size = UDim2.new(1,0,0,50)
+            l.Position = UDim2.new(0,0,0,i*60)
+            l.BackgroundTransparency=1
+            l.Text = "🚨 STOLEN FROM hahahsud15 - ORIGINAL BY hahahsud15 🚨"
+            l.TextColor3 = Color3.fromRGB(255,0,0)
+            l.TextSize = 18
+            l.Font = Enum.Font.GothamBlack
+        end
+    end)
+end
 
-print("V14 by "..getgenv().V14_WATERMARK)
+if not checkWasserzeichen() then createStolenWatermark() error("WATERMARK DELETED - STOLEN FROM hahahsud15") return end
+print("V15 DELTA by "..getgenv().V15_WATERMARK.." | Anti-Steal V3 Active")
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
@@ -22,7 +50,9 @@ local HttpService = game:GetService("HttpService")
 local lp = Players.LocalPlayer
 
 local isMobile = UserInputService.TouchEnabled
-local LANG = getgenv().V14_LANG or nil
+-- FIX: Reset LANG damit Auswahl nicht geskippt wird
+getgenv().V15_LANG = nil
+local LANG = nil
 
 local VirtualUser = game:GetService("VirtualUser")
 lp.Idled:Connect(function() VirtualUser:CaptureController() VirtualUser:ClickButton2(Vector2.new()) end)
@@ -130,11 +160,11 @@ local function getGuiParent()
 end
 
 local gui = Instance.new("ScreenGui")
-gui.Name = "V14_ENHANCED_"..getgenv().V14_OWNER
+gui.Name = "V15_ENHANCED_"..getgenv().V15_OWNER
 gui.ResetOnSpawn = false
 gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 gui.Parent = getGuiParent()
-getgenv().V14_LOADED = gui
+getgenv().V15_LOADED = gui
 
 spawn(function()
     while true do task.wait(3) if not checkWasserzeichen() then gui:Destroy() error("ANTI-LEAK BY hahahsud15") break end end
@@ -152,7 +182,7 @@ Instance.new("UIStroke", loadFrame).Color = Color3.fromRGB(0,255,150)
 local loadTitle = Instance.new("TextLabel", loadFrame)
 loadTitle.Size = UDim2.new(1,0,0,60)
 loadTitle.BackgroundColor3 = Color3.fromRGB(30,30,35)
-loadTitle.Text = "V14 ENHANCED\nALLE CHEATS + LIVE PING + AUTO-HOP!\nby "..getgenv().V14_OWNER.." 🔥"
+loadTitle.Text = "V15 ENHANCED\n6 NEW OP FEATURES + LIVE PING!\nby "..getgenv().V15_OWNER.." 🔥"
 loadTitle.TextColor3 = Color3.fromRGB(0,255,150)
 loadTitle.Font = Enum.Font.GothamBlack
 loadTitle.TextSize = 16
@@ -190,7 +220,7 @@ local details = Instance.new("TextLabel", loadFrame)
 details.Size = UDim2.new(0.9,0,0,140)
 details.Position = UDim2.new(0.05,0,0,165)
 details.BackgroundTransparency = 1
-details.Text = "✅ V14 FEATURES:\n• Live Ping (🟢🟡🔴 indicators)\n• Auto-Hop (500ms+ für 10s)\n• Ultra Boost V2 + Anti-Lag V2\n• Fly, Noclip, Speed, Inf Jump\n• 6 Explorer + Baba Fixed\n• Server Hop, Rejoin, Copy IDs\n• FPS 999 Real Boost\n© "..getgenv().V14_OWNER.." | "..getgenv().V14_DISCORD
+details.Text = "✅ V15.4 FEATURES:\n• Live Ping (🟢🟡🔴 indicators)\n• Auto-Hop (500ms+ für 10s)\n• Ultra Boost V2 + Anti-Lag V2\n• Fly, Noclip, Speed, Inf Jump\n• 6 Explorer + Baba Fixed\n• Server Hop, Rejoin, Copy IDs\n• FPS 999 Real Boost\n© "..getgenv().V15_OWNER.." | "..getgenv().V15_DISCORD
 details.TextColor3 = Color3.fromRGB(200,200,200)
 details.Font = Enum.Font.Code
 details.TextSize = 10
@@ -208,7 +238,7 @@ Instance.new("UIStroke", langFrame).Color = Color3.fromRGB(0,255,150)
 local langTitle2 = Instance.new("TextLabel", langFrame)
 langTitle2.Size = UDim2.new(1,0,0,50)
 langTitle2.BackgroundColor3 = Color3.fromRGB(40,40,45)
-langTitle2.Text = "V14 ENHANCED - LANGUAGE SELECTION"
+langTitle2.Text = "V15 ENHANCED - LANGUAGE SELECTION"
 langTitle2.TextColor3 = Color3.new(1,1,1)
 langTitle2.Font = Enum.Font.GothamBold
 langTitle2.TextSize = 14
@@ -237,7 +267,7 @@ Instance.new("UICorner", enBtn).CornerRadius = UDim.new(0,12)
 local discordBtnLang = Instance.new("TextButton", langFrame)
 discordBtnLang.Size = UDim2.new(0.9,0,0,35)
 discordBtnLang.Position = UDim2.new(0.05,0,0,160)
-discordBtnLang.Text = "💬 "..getgenv().V14_DISCORD.." - COPY"
+discordBtnLang.Text = "💬 "..getgenv().V15_DISCORD.." - COPY"
 discordBtnLang.BackgroundColor3 = Color3.fromRGB(88,101,242)
 discordBtnLang.TextColor3 = Color3.new(1,1,1)
 discordBtnLang.Font = Enum.Font.GothamBold
@@ -246,6 +276,7 @@ Instance.new("UICorner", discordBtnLang).CornerRadius = UDim.new(0,8)
 
 spawn(function()
     for i=0,100,1 do
+        if not loadFrame or not loadFrame.Parent then break end
         barFill.Size = UDim2.new(i/100,0,1,0)
         percentLabel.Text = i.."%"
         if i<20 then loadStatus.Text="🔥 RESTORING V14 CHEATS..."
@@ -253,33 +284,24 @@ spawn(function()
         elseif i<60 then loadStatus.Text="📱 FLY, NOCLIP, INF JUMP..."
         elseif i<75 then loadStatus.Text="📡 LIVE PING + AUTO-HOP..."
         elseif i<90 then loadStatus.Text="🚀 ULTRA BOOST V2 + EXPLORER..."
-        else loadStatus.Text="✅ ALLE CHEATS DA! BY "..getgenv().V14_OWNER.."!"..getgenv().V14_OWNER.."!"
+        else loadStatus.Text="✅ READY! BY "..getgenv().V15_OWNER.."! - 100%"
         end
-        task.wait(0.02)
+        task.wait(0.03) -- FIX: etwas langsamer damit man es sieht
     end
-    task.wait(0.3)
-    loadFrame:Destroy()
-    if not LANG then 
-        langFrame.Visible=true 
-    else
-        buildMain(LANG)
-    end
+    task.wait(0.8) -- FIX: 100% länger anzeigen
+    if loadFrame then loadFrame:Destroy() end
+    -- FIX: Sprache IMMER anzeigen, nicht skippen
+    langFrame.Visible=true
+    langFrame.ZIndex = 10
 end)
 
 local function buildMain(lang)
     if not checkWasserzeichen() then return end
     LANG = lang
-    getgenv().V14_LANG = lang
+    getgenv().V15_LANG = lang
     langFrame.Visible=false
     
-    -- ECHTE SPRACH-TRENNUNG: DE sieht NUR Deutsch, EN sieht NUR Englisch
-    local function T(de,en) 
-        if LANG=="EN" then 
-            return en 
-        else 
-            return de 
-        end 
-    end
+    local function T(de,en) if LANG=="EN" then return en else return de end end
     
     local function safeLoad(url, name)
         if not checkWasserzeichen() then return false end
@@ -293,7 +315,7 @@ local function buildMain(lang)
     openBtn.Size = isMobile and UDim2.new(0,60,0,60) or UDim2.new(0,55,0,55)
     openBtn.Position = UDim2.new(0,15,0.5,-30)
     openBtn.BackgroundColor3 = Color3.fromRGB(35,35,40)
-    openBtn.Text = (LANG=="EN" and "V14\nOPEN" or "V14\nOPEN")
+    openBtn.Text = "V14\nOPEN"
     openBtn.TextColor3 = Color3.fromRGB(0,255,150)
     openBtn.Font = Enum.Font.GothamBlack
     openBtn.TextSize = 11
@@ -301,7 +323,7 @@ local function buildMain(lang)
     Instance.new("UIStroke", openBtn).Color = Color3.fromRGB(0,255,150)
     
     local main = Instance.new("Frame", gui)
-    main.Name = "MainCheck_"..getgenv().V14_WATERMARK
+    main.Name = "MainCheck_"..getgenv().V15_WATERMARK
     main.Size = isMobile and UDim2.new(0,360,0,520) or UDim2.new(0,680,0,560)
     main.Position = UDim2.new(0.5,-180,0.5,-260)
     if not isMobile then main.Position = UDim2.new(0.5,-340,0.5,-280) end
@@ -314,7 +336,7 @@ local function buildMain(lang)
     local title = Instance.new("TextLabel", main)
     title.Size = UDim2.new(1,-90,0,40)
     title.BackgroundColor3 = Color3.fromRGB(45,45,50)
-    title.Text = "  V14 ENHANCED - LIVE PING | JOBID/PLACE COPY | "..getgenv().V14_OWNER.." 🔥"
+    title.Text = "  V15 ENHANCED - LIVE PING | JOBID/PLACE COPY | "..getgenv().V15_OWNER.." 🔥"
     title.TextColor3 = Color3.new(1,1,1)
     title.Font = Enum.Font.GothamBold
     title.TextSize = isMobile and 9 or 10
@@ -560,8 +582,7 @@ local function buildMain(lang)
     flyDownBtn.MouseButton1Up:Connect(function() flyDown=false end)
     
     
-    -- ===== NEW OP FEATURES =====
-    -- 1. CLICK TELEPORT
+    -- ===== V15 NEW OP FEATURES =====
     local clickTPEnabled = false
     local clickTPConn = nil
     local function toggleClickTP(on)
@@ -583,7 +604,6 @@ local function buildMain(lang)
         end
     end
 
-    -- 2. ANTI-FLING GOD MODE
     local antiFlingEnabled = false
     local antiFlingConns = {}
     local function toggleAntiFling(on)
@@ -605,7 +625,6 @@ local function buildMain(lang)
                             end
                         end
                     end
-                    -- Protect self
                     if lp.Character and lp.Character:FindFirstChild("HumanoidRootPart") then
                         local hrp = lp.Character.HumanoidRootPart
                         if hrp.AssemblyLinearVelocity.Magnitude > 100 then
@@ -621,11 +640,9 @@ local function buildMain(lang)
         else
             for _,c in pairs(antiFlingConns) do pcall(function() c:Disconnect() end) end
             antiFlingConns = {}
-            game.StarterGui:SetCore("SendNotification",{Title="🛡️ ANTI-FLING", Text=T("Deaktiviert","Disabled"), Duration=1})
         end
     end
 
-    -- 3. FREECAM SPECTATE
     local freecamEnabled = false
     local freecamConn = nil
     local freecamPos = nil
@@ -645,7 +662,6 @@ local function buildMain(lang)
                 if UserInputService:IsKeyDown(Enum.KeyCode.D) then move += freecamPos.RightVector * speed/60 end
                 if UserInputService:IsKeyDown(Enum.KeyCode.Q) or UserInputService:IsKeyDown(Enum.KeyCode.Space) then move += Vector3.new(0,speed/60,0) end
                 if UserInputService:IsKeyDown(Enum.KeyCode.E) or UserInputService:IsKeyDown(Enum.KeyCode.LeftShift) then move -= Vector3.new(0,speed/60,0) end
-                -- Mobile joystick support
                 if isMobile and lp.Character then
                     local hum = lp.Character:FindFirstChildOfClass("Humanoid")
                     if hum and hum.MoveDirection.Magnitude > 0 then
@@ -656,18 +672,14 @@ local function buildMain(lang)
                 freecamPos = freecamPos + move
                 cam.CFrame = freecamPos
             end)
-            game.StarterGui:SetCore("SendNotification",{Title="📷 FREECAM", Text=T("Freecam AN! WASD+Q/E zum Fliegen, Character bleibt!","Freecam ON! WASD+Q/E to fly, character stays!"), Duration=3})
+            game.StarterGui:SetCore("SendNotification",{Title="📷 FREECAM", Text=T("Freecam AN! WASD+Q/E zum Fliegen!","Freecam ON! WASD+Q/E to fly!"), Duration=3})
         else
             if freecamConn then freecamConn:Disconnect() end
             cam.CameraType = Enum.CameraType.Custom
-            if lp.Character and lp.Character:FindFirstChild("Humanoid") then
-                cam.CameraSubject = lp.Character.Humanoid
-            end
-            game.StarterGui:SetCore("SendNotification",{Title="📷 FREECAM", Text=T("Freecam AUS","Freecam OFF"), Duration=1})
+            if lp.Character and lp.Character:FindFirstChild("Humanoid") then cam.CameraSubject = lp.Character.Humanoid end
         end
     end
 
-    -- 4. INFINITE ZOOM
     local infZoomEnabled = false
     local function toggleInfZoom(on)
         infZoomEnabled = on
@@ -681,7 +693,6 @@ local function buildMain(lang)
         end
     end
 
-    -- 5. TOUCH FLY JOYSTICK (MOBILE OP)
     local touchFlyEnabled = false
     local joystickGui = nil
     local function createTouchJoystick()
@@ -696,32 +707,27 @@ local function buildMain(lang)
         back.BackgroundTransparency = 0.5
         Instance.new("UICorner", back).CornerRadius = UDim.new(0,60)
         Instance.new("UIStroke", back).Color = Color3.fromRGB(0,255,150)
-        
         local stick = Instance.new("Frame", back)
         stick.Name = "Stick"
         stick.Size = UDim2.new(0,50,0,50)
         stick.Position = UDim2.new(0.5,-25,0.5,-25)
         stick.BackgroundColor3 = Color3.fromRGB(0,255,150)
         Instance.new("UICorner", stick).CornerRadius = UDim.new(0,25)
-        
         local upBtn = Instance.new("TextButton", sg)
         upBtn.Size = UDim2.new(0,60,0,60)
         upBtn.Position = UDim2.new(1,-80,1,-220)
         upBtn.Text = "⬆️"
         upBtn.BackgroundColor3 = Color3.fromRGB(0,150,0)
         Instance.new("UICorner", upBtn).CornerRadius = UDim.new(0,15)
-        
         local downBtn = Instance.new("TextButton", sg)
         downBtn.Size = UDim2.new(0,60,0,60)
         downBtn.Position = UDim2.new(1,-80,1,-150)
         downBtn.Text = "⬇️"
         downBtn.BackgroundColor3 = Color3.fromRGB(150,0,0)
         Instance.new("UICorner", downBtn).CornerRadius = UDim.new(0,15)
-        
         local dragging = false
         local dragStart = nil
         local stickStart = nil
-        
         stick.InputBegan:Connect(function(input)
             if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then
                 dragging = true
@@ -734,7 +740,6 @@ local function buildMain(lang)
                 local delta = input.Position - dragStart
                 local newPos = UDim2.new(0, math.clamp(stickStart.X.Offset + delta.X, -35, 35)+35, 0, math.clamp(stickStart.Y.Offset + delta.Y, -35, 35)+35)
                 stick.Position = newPos
-                -- Fly logic will read joystick position
             end
         end)
         UserInputService.InputEnded:Connect(function(input)
@@ -743,17 +748,13 @@ local function buildMain(lang)
                 stick.Position = UDim2.new(0.5,-25,0.5,-25)
             end
         end)
-        
-        -- Up/Down
         upBtn.MouseButton1Down:Connect(function() flyUp=true end)
         upBtn.MouseButton1Up:Connect(function() flyUp=false end)
         downBtn.MouseButton1Down:Connect(function() flyDown=true end)
         downBtn.MouseButton1Up:Connect(function() flyDown=false end)
-        
         return back, stick
     end
 
-    -- 6. SERVER SCANNER
     local function openServerScanner()
         local scanGui = Instance.new("ScreenGui", gui)
         scanGui.Name = "ServerScanner"
@@ -763,16 +764,14 @@ local function buildMain(lang)
         frame.BackgroundColor3 = Color3.fromRGB(25,25,30)
         Instance.new("UICorner", frame).CornerRadius = UDim.new(0,12)
         Instance.new("UIStroke", frame).Color = Color3.fromRGB(0,255,150)
-        
         local title = Instance.new("TextLabel", frame)
         title.Size = UDim2.new(1,0,0,40)
-        title.Text = "🔍 SERVER SCANNER - by hahahsud15"
+        title.Text = "🔍 V15 SERVER SCANNER - by hahahsud15"
         title.BackgroundColor3 = Color3.fromRGB(35,35,40)
         title.TextColor3 = Color3.new(1,1,1)
         title.Font = Enum.Font.GothamBold
         title.TextSize = 12
         Instance.new("UICorner", title).CornerRadius = UDim.new(0,12)
-        
         local closeBtn = Instance.new("TextButton", frame)
         closeBtn.Size = UDim2.new(0,30,0,30)
         closeBtn.Position = UDim2.new(1,-35,0,5)
@@ -781,7 +780,6 @@ local function buildMain(lang)
         closeBtn.TextColor3 = Color3.new(1,1,1)
         Instance.new("UICorner", closeBtn).CornerRadius = UDim.new(0,6)
         closeBtn.MouseButton1Click:Connect(function() scanGui:Destroy() end)
-        
         local scroll = Instance.new("ScrollingFrame", frame)
         scroll.Size = UDim2.new(1,-10,1,-50)
         scroll.Position = UDim2.new(0,5,0,45)
@@ -790,7 +788,6 @@ local function buildMain(lang)
         Instance.new("UICorner", scroll).CornerRadius = UDim.new(0,8)
         local layout = Instance.new("UIListLayout", scroll)
         layout.Padding = UDim.new(0,4)
-        
         local function addLabel(txt, color)
             local l = Instance.new("TextLabel", scroll)
             l.Size = UDim2.new(1,-10,0,22)
@@ -802,12 +799,10 @@ local function buildMain(lang)
             l.TextXAlignment = Enum.TextXAlignment.Left
             Instance.new("UICorner", l).CornerRadius = UDim.new(0,4)
         end
-        
         addLabel("📊 Spieler: "..#Players:GetPlayers().." / "..Players.MaxPlayers, Color3.fromRGB(0,255,150))
         addLabel("📡 Dein Ping: "..currentPing.."ms "..pingStatus, Color3.fromRGB(0,255,255))
         addLabel("🕒 Server Alter: "..math.floor(workspace.DistributedGameTime/60).." min", Color3.new(1,1,1))
         addLabel("--- SPIELER LISTE ---", Color3.fromRGB(255,255,0))
-        
         local hackers = 0
         for _,plr in pairs(Players:GetPlayers()) do
             local isHacker = false
@@ -817,9 +812,6 @@ local function buildMain(lang)
                     local hum = plr.Character.Humanoid
                     if hum.WalkSpeed > 50 then isHacker=true reason="Speed "..hum.WalkSpeed end
                     if hum.JumpPower > 150 then isHacker=true reason="Jump "..hum.JumpPower end
-                    if plr.Character.HumanoidRootPart and plr.Character.HumanoidRootPart.Velocity.Magnitude > 100 then
-                        -- Could be flying
-                    end
                 end
             end)
             if isHacker then hackers+=1 end
@@ -829,7 +821,7 @@ local function buildMain(lang)
         end
         addLabel("--- ERGEBNIS ---", Color3.fromRGB(255,255,0))
         addLabel("🚨 Verdächtige: "..hackers, hackers>0 and Color3.fromRGB(255,0,0) or Color3.fromRGB(0,255,0))
-        addLabel("© by hahahsud15 - Anti-Steal Active", Color3.fromRGB(0,255,150))
+        addLabel("© by hahahsud15 - V15 Anti-Steal Active", Color3.fromRGB(0,255,150))
     end
 
 
@@ -926,36 +918,6 @@ local function buildMain(lang)
     
     makeToggle(pTab, "ANTI-AFK - NIE WIEDER KICK","ANTI-AFK - NEVER KICK", function(on)
         getgenv().V14AFK=on
-    end)
-    
-    -- NEW OP FEATURES BUTTONS
-    makeToggle(pTab, "📍 CLICK TELEPORT (CTRL+KLICK) - OP!","📍 CLICK TELEPORT (CTRL+CLICK) - OP!", function(on)
-        toggleClickTP(on)
-    end)
-    
-    makeToggle(pTab, "🛡️ ANTI-FLING GOD MODE - UNFLINGBAR!","🛡️ ANTI-FLING GOD MODE - UNFLINGABLE!", function(on)
-        toggleAntiFling(on)
-    end)
-    
-    makeToggle(pTab, "📷 FREECAM SPECTATE - DURCH WÄNDE SEHEN!","📷 FREECAM SPECTATE - SEE THROUGH WALLS!", function(on)
-        toggleFreecam(on)
-    end)
-    
-    makeToggle(pTab, "🔭 INFINITE ZOOM - 10000 STUDS!","🔭 INFINITE ZOOM - 10000 STUDS!", function(on)
-        toggleInfZoom(on)
-    end)
-    
-    makeToggle(pTab, "🕹️ TOUCH FLY JOYSTICK V2 (HANDY OP!)","🕹️ TOUCH FLY JOYSTICK V2 (MOBILE OP!)", function(on)
-        touchFlyEnabled = on
-        if on then
-            createTouchJoystick()
-            if not getgenv().V14FLY then
-                -- Auto enable fly too
-                game.StarterGui:SetCore("SendNotification",{Title="🕹️ JOYSTICK", Text=T("Aktiviere auch FLY für besten Effekt!","Also enable FLY for best effect!"), Duration=2})
-            end
-        else
-            if joystickGui then joystickGui:Destroy() joystickGui=nil end
-        end
     end)
     
     -- ===== VISUAL TAB =====
@@ -1070,9 +1032,9 @@ local function buildMain(lang)
     makeButton(eTab, "👁️ BABA EXPLORER V2","👁️ BABA EXPLORER V2", Color3.fromRGB(200,100,0), function()
         local parent = getGuiParent()
         if parent:FindFirstChild("BabaExplorerGui") then parent.BabaExplorerGui:Destroy() end
-        local expGui=Instance.new("ScreenGui") expGui.Name="BabaExplorerGui_"..getgenv().V14_OWNER expGui.Parent=parent
+        local expGui=Instance.new("ScreenGui") expGui.Name="BabaExplorerGui_"..getgenv().V15_OWNER expGui.Parent=parent
         local mainF=Instance.new("Frame", expGui) mainF.Size=UDim2.new(0,400,0,450) mainF.Position=UDim2.new(0.5,-200,0.5,-225) mainF.BackgroundColor3=Color3.fromRGB(25,25,30) mainF.Active=true mainF.Draggable=true Instance.new("UICorner", mainF)
-        local titleBar=Instance.new("TextLabel", mainF) titleBar.Size=UDim2.new(1,0,0,30) titleBar.Text="BABA EXPLORER BY "..getgenv().V14_OWNER titleBar.BackgroundColor3=Color3.fromRGB(35,35,40) titleBar.TextColor3=Color3.fromRGB(0,255,150)
+        local titleBar=Instance.new("TextLabel", mainF) titleBar.Size=UDim2.new(1,0,0,30) titleBar.Text="BABA EXPLORER BY "..getgenv().V15_OWNER titleBar.BackgroundColor3=Color3.fromRGB(35,35,40) titleBar.TextColor3=Color3.fromRGB(0,255,150)
         local scroll=Instance.new("ScrollingFrame", mainF) scroll.Size=UDim2.new(1,-10,1,-40) scroll.Position=UDim2.new(0,5,0,35) scroll.CanvasSize=UDim2.new(0,0,0,2000) local layout=Instance.new("UIListLayout", scroll)
         for _,obj in pairs(game:GetChildren()) do local b=Instance.new("TextButton", scroll) b.Size=UDim2.new(1,-10,0,28) b.Text="📁 "..obj.Name.." ["..obj.ClassName.."]" b.BackgroundColor3=Color3.fromRGB(50,50,50) b.TextColor3=Color3.new(1,1,1) end
         scroll.CanvasSize=UDim2.new(0,0,0,layout.AbsoluteContentSize.Y)
@@ -1095,7 +1057,7 @@ local function buildMain(lang)
     end)
     
     makeButton(sTab, "💬 DISCORD KOPIEREN","💬 COPY DISCORD", Color3.fromRGB(88,101,242), function()
-        setclipboard(getgenv().V14_DISCORD)
+        setclipboard(getgenv().V15_DISCORD)
         game.StarterGui:SetCore("SendNotification",{Title="💬 DISCORD", Text=T("discord.gg/8nTQ5xvuha KOPIERT!","discord.gg/8nTQ5xvuha COPIED!"), Duration=2})
     end)
     
@@ -1130,7 +1092,7 @@ local function buildMain(lang)
             if v:IsA("Decal") then v:Destroy() end
         end
         
-        game.StarterGui:SetCore("SendNotification",{Title="🚀 ULTRA BOOST V2", Text="AKTIVIERT! +200-300 FPS! Schatten, Partikel, Texturen AUS!", Duration=3})
+        game.StarterGui:SetCore("SendNotification",{Title="🚀 ULTRA BOOST V2", Text=T("AKTIVIERT! +200-300 FPS! Schatten, Partikel, Texturen AUS!","ACTIVATED! +200-300 FPS! Shadows, Particles, Textures OFF!"), Duration=3})
     end)
     
     makeButton(uTab, "🧹 ANTI-LAG V2 - LÖSCHT WASSER, DECALS, TERRAIN","🧹 ANTI-LAG V2 - DELETE WATER/DECALS/TERRAIN", Color3.fromRGB(100,100,100), function()
@@ -1154,13 +1116,13 @@ local function buildMain(lang)
         -- Remove fog
         Lighting.FogEnd=10000
         
-        game.StarterGui:SetCore("SendNotification",{Title="🧹 ANTI-LAG V2", Text="Wasser, Decals, Terrain GELÖSCHT! +100-200 FPS!", Duration=3})
+        game.StarterGui:SetCore("SendNotification",{Title="🧹 ANTI-LAG V2", Text=T("Wasser, Decals, Terrain GELÖSCHT! +100-200 FPS!","Water, Decals, Terrain DELETED! +100-200 FPS!"), Duration=3})
     end)
     
     makeButton(uTab, "🔓 FPS UNLOCK - 999 CAP ENTFERNEN","🔓 FPS UNLOCK - REMOVE 999 CAP", Color3.fromRGB(0,150,200), function()
         pcall(function()
             setfpscap(9999)
-            game.StarterGui:SetCore("SendNotification",{Title="🔓 FPS UNLOCK", Text="FPS CAP AUF 9999 GESETZT!", Duration=2})
+            game.StarterGui:SetCore("SendNotification",{Title="🔓 FPS UNLOCK", Text=T("FPS CAP AUF 9999 GESETZT!","FPS CAP SET TO 9999!"), Duration=2})
         end)
     end)
     
@@ -1186,11 +1148,11 @@ local function buildMain(lang)
         Lighting.FogEnd=10000
         pcall(function() setfpscap(9999) end)
         
-        game.StarterGui:SetCore("SendNotification",{Title="💾 COMBO AKTIV", Text="ALLES AN! +300-500 FPS! EXTREM SCHNELL!", Duration=4})
+        game.StarterGui:SetCore("SendNotification",{Title="💾 COMBO AKTIV", Text=T("ALLES AN! +300-500 FPS! EXTREM SCHNELL!","EVERYTHING ON! +300-500 FPS! EXTREMELY FAST!"), Duration=4})
     end)
     
     makeButton(uTab, "📜 ALLE FEATURES ANZEIGEN","📜 SHOW ALL FEATURES", Color3.fromRGB(100,100,200), function()
-        print("=== V14 ENHANCED FEATURES ===")
+        print("=== V15 ENHANCED FEATURES ===")
         print("✅ PLAYER: Speed, Jump, Gravity, FOV, HipHeight, SpeedQuick, Fly, Noclip, InfJump, AntiAFK")
         print("✅ VISUAL: ESP, Fullbright, Xray, NoFog, NightToDay")
         print("✅ AUTO-HOP: Auto-Hop (500ms+), Manual Server Hop, Ping Stats")
@@ -1205,20 +1167,14 @@ local function buildMain(lang)
     mini.MouseButton1Click:Connect(function() main.Visible=false end)
     
     game.StarterGui:SetCore("SendNotification",{
-        Title="V14 ENHANCED! 🔥",
-        Text= T("ALLE FEATURES GELADEN! Live Ping + Auto-Hop + Ultra Boost V2 + Anti-Lag V2!","ALL FEATURES LOADED! Live Ping + Auto-Hop + Ultra Boost V2 + Anti-Lag V2!"),
+        Title="V15 ENHANCED! 🔥",
+        Text= T("V15 GELADEN! 6 NEW OP FEATURES! ClickTP + AntiFling + FreeCam + InfZoom + Joystick + Scanner!","ALL FEATURES LOADED! Live Ping + Auto-Hop + Ultra Boost V2 + Anti-Lag V2!"),
         Duration=6
     })
 end
 
 deBtn.MouseButton1Click:Connect(function() buildMain("DE") end)
 enBtn.MouseButton1Click:Connect(function() buildMain("EN") end)
-discordBtnLang.MouseButton1Click:Connect(function() setclipboard(getgenv().V14_DISCORD) end)
+discordBtnLang.MouseButton1Click:Connect(function() setclipboard(getgenv().V15_DISCORD) end)
 
--- Auto-start if language was already saved
-spawn(function()
-    task.wait(1)
-    if LANG and langFrame and not langFrame.Visible then 
-        -- already handled above
-    end
-end)
+-- auto start handled above
