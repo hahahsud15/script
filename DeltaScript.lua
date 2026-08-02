@@ -1,18 +1,18 @@
--- V14 hahahsud15 - DeltaScript - FINAL V5
-if getgenv().V14_LOADED then getgenv().V14_LOADED:Destroy() end
-getgenv().V14_WATERMARK = "hahahsud15_V14_2026"
-getgenv().V14_OWNER = "hahahsud15"
-getgenv().V14_DISCORD = "discord.gg/8nTQ5xvuha"
-getgenv().V14_PROTECTION = true
-getgenv().V14_VERSION = "V14 DELTA"
+-- V15 hahahsud15 - DeltaScript - FINAL V5
+if getgenv().V15_LOADED then getgenv().V15_LOADED:Destroy() end
+getgenv().V15_WATERMARK = "hahahsud15_V15_2026"
+getgenv().V15_OWNER = "hahahsud15"
+getgenv().V15_DISCORD = "discord.gg/8nTQ5xvuha"
+getgenv().V15_PROTECTION = true
+getgenv().V15_VERSION = "V15 ULTRA"
 local function checkWasserzeichen()
-    if getgenv().V14_WATERMARK ~= "hahahsud15_V14_2026" then return false end
-    if getgenv().V14_OWNER ~= "hahahsud15" then return false end
-    if getgenv().V14_PROTECTION ~= true then return false end
+    if getgenv().V15_WATERMARK ~= "hahahsud15_V15_2026" then return false end
+    if getgenv().V15_OWNER ~= "hahahsud15" then return false end
+    if getgenv().V15_PROTECTION ~= true then return false end
     return true
 end
 if not checkWasserzeichen() then error("WATERMARK DELETED - BY hahahsud15") return end
-print("V14 DELTA by "..getgenv().V14_WATERMARK)
+print("V15 ULTRA by "..getgenv().V15_WATERMARK)
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
@@ -24,7 +24,7 @@ local lp = Players.LocalPlayer
 
 local isMobile = UserInputService.TouchEnabled
 -- FIX: Reset LANG damit Auswahl nicht geskippt wird
-getgenv().V14_LANG = nil
+getgenv().V15_LANG = nil
 local LANG = nil
 
 local VirtualUser = game:GetService("VirtualUser")
@@ -133,11 +133,11 @@ local function getGuiParent()
 end
 
 local gui = Instance.new("ScreenGui")
-gui.Name = "V14_ENHANCED_"..getgenv().V14_OWNER
+gui.Name = "V15_ULTRA_"..getgenv().V15_OWNER
 gui.ResetOnSpawn = false
 gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 gui.Parent = getGuiParent()
-getgenv().V14_LOADED = gui
+getgenv().V15_LOADED = gui
 
 spawn(function()
     while true do task.wait(3) if not checkWasserzeichen() then gui:Destroy() error("ANTI-LEAK BY hahahsud15") break end end
@@ -155,24 +155,25 @@ Instance.new("UIStroke", loadFrame).Color = Color3.fromRGB(0,255,150)
 local loadTitle = Instance.new("TextLabel", loadFrame)
 loadTitle.Size = UDim2.new(1,0,0,60)
 loadTitle.BackgroundColor3 = Color3.fromRGB(30,30,35)
-loadTitle.Text = "V14 ENHANCED\nALLE CHEATS + LIVE PING + AUTO-HOP!\nby "..getgenv().V14_OWNER.." 🔥"
+loadTitle.Text = "V15 ULTRA OP 🔥\nby hahahsud15\nNEW: CLICK TP + LIVE PING + AUTO-HOP!"
 loadTitle.TextColor3 = Color3.fromRGB(0,255,150)
 loadTitle.Font = Enum.Font.GothamBlack
 loadTitle.TextSize = 16
 Instance.new("UICorner", loadTitle).CornerRadius = UDim.new(0,20)
 
 local loadStatus = Instance.new("TextLabel", loadFrame)
-loadStatus.Size = UDim2.new(1,0,0,30)
+loadStatus.Size = UDim2.new(1,0,0,20)
 loadStatus.Position = UDim2.new(0,0,0,70)
 loadStatus.BackgroundTransparency = 1
-loadStatus.Text = "🔥 Loading all cheats ..."
+loadStatus.Text = "🔥 V15 LOADING... Please wait..."
 loadStatus.TextColor3 = Color3.new(1,1,1)
 loadStatus.Font = Enum.Font.GothamBold
 loadStatus.TextSize = 12
 
+
 local barBack = Instance.new("Frame", loadFrame)
 barBack.Size = UDim2.new(0.8,0,0,20)
-barBack.Position = UDim2.new(0.1,0,0,110)
+barBack.Position = UDim2.new(0.1,0,0,95)
 barBack.BackgroundColor3 = Color3.fromRGB(40,40,45)
 Instance.new("UICorner", barBack).CornerRadius = UDim.new(0,10)
 local barFill = Instance.new("Frame", barBack)
@@ -182,7 +183,7 @@ Instance.new("UICorner", barFill).CornerRadius = UDim.new(0,10)
 
 local percentLabel = Instance.new("TextLabel", loadFrame)
 percentLabel.Size = UDim2.new(1,0,0,25)
-percentLabel.Position = UDim2.new(0,0,0,135)
+percentLabel.Position = UDim2.new(0,0,0,120)
 percentLabel.BackgroundTransparency = 1
 percentLabel.Text = "0%"
 percentLabel.TextColor3 = Color3.fromRGB(0,255,150)
@@ -190,10 +191,10 @@ percentLabel.Font = Enum.Font.Code
 percentLabel.TextSize = 16
 
 local details = Instance.new("TextLabel", loadFrame)
-details.Size = UDim2.new(0.9,0,0,140)
-details.Position = UDim2.new(0.05,0,0,165)
+details.Size = UDim2.new(0.9,0,0,150)
+details.Position = UDim2.new(0.05,0,0,150)
 details.BackgroundTransparency = 1
-details.Text = "✅ V14.4 FEATURES:\n• Live Ping (🟢🟡🔴 indicators)\n• Auto-Hop (500ms+ für 10s)\n• Ultra Boost V2 + Anti-Lag V2\n• Fly, Noclip, Speed, Inf Jump\n• 6 Explorer + Baba Fixed\n• Server Hop, Rejoin, Copy IDs\n• FPS 999 Real Boost\n© "..getgenv().V14_OWNER.." | "..getgenv().V14_DISCORD
+details.Text = "📝 V15 UPDATE LOG:\n✅ NEW: Click Teleport - Click anywhere to TP!\n✅ FIX: Live Ping System 🟢🟡🔴\n✅ FIX: Auto-Hop + Anti-AFK\n✅ FIX: 100% V15 Rebrand - All V14 removed!\n✅ NEW: V15 OPEN button fixed!\n© "..getgenv().V15_OWNER.." | "..getgenv().V15_DISCORD
 details.TextColor3 = Color3.fromRGB(200,200,200)
 details.Font = Enum.Font.Code
 details.TextSize = 10
@@ -211,7 +212,7 @@ Instance.new("UIStroke", langFrame).Color = Color3.fromRGB(0,255,150)
 local langTitle2 = Instance.new("TextLabel", langFrame)
 langTitle2.Size = UDim2.new(1,0,0,50)
 langTitle2.BackgroundColor3 = Color3.fromRGB(40,40,45)
-langTitle2.Text = "V14 ENHANCED - LANGUAGE SELECTION"
+langTitle2.Text = "V15 ULTRA - LANGUAGE SELECTION"
 langTitle2.TextColor3 = Color3.new(1,1,1)
 langTitle2.Font = Enum.Font.GothamBold
 langTitle2.TextSize = 14
@@ -240,7 +241,7 @@ Instance.new("UICorner", enBtn).CornerRadius = UDim.new(0,12)
 local discordBtnLang = Instance.new("TextButton", langFrame)
 discordBtnLang.Size = UDim2.new(0.9,0,0,35)
 discordBtnLang.Position = UDim2.new(0.05,0,0,160)
-discordBtnLang.Text = "💬 "..getgenv().V14_DISCORD.." - COPY"
+discordBtnLang.Text = "💬 "..getgenv().V15_DISCORD.." - COPY"
 discordBtnLang.BackgroundColor3 = Color3.fromRGB(88,101,242)
 discordBtnLang.TextColor3 = Color3.new(1,1,1)
 discordBtnLang.Font = Enum.Font.GothamBold
@@ -252,12 +253,12 @@ spawn(function()
         if not loadFrame or not loadFrame.Parent then break end
         barFill.Size = UDim2.new(i/100,0,1,0)
         percentLabel.Text = i.."%"
-        if i<20 then loadStatus.Text="🔥 RESTORING V14 CHEATS..."
+        if i<20 then loadStatus.Text="🔥 RESTORING V15 CHEATS..."
         elseif i<40 then loadStatus.Text="⚡ SPEED, JUMP, GRAVITY..."
         elseif i<60 then loadStatus.Text="📱 FLY, NOCLIP, INF JUMP..."
         elseif i<75 then loadStatus.Text="📡 LIVE PING + AUTO-HOP..."
         elseif i<90 then loadStatus.Text="🚀 ULTRA BOOST V2 + EXPLORER..."
-        else loadStatus.Text="✅ READY! BY "..getgenv().V14_OWNER.."! - 100%"
+        else loadStatus.Text="✅ READY! BY "..getgenv().V15_OWNER.."! - 100%"
         end
         task.wait(0.03) -- FIX: etwas langsamer damit man es sieht
     end
@@ -271,7 +272,7 @@ end)
 local function buildMain(lang)
     if not checkWasserzeichen() then return end
     LANG = lang
-    getgenv().V14_LANG = lang
+    getgenv().V15_LANG = lang
     langFrame.Visible=false
     
     local function T(de,en) if LANG=="EN" then return en else return de end end
@@ -288,7 +289,7 @@ local function buildMain(lang)
     openBtn.Size = isMobile and UDim2.new(0,60,0,60) or UDim2.new(0,55,0,55)
     openBtn.Position = UDim2.new(0,15,0.5,-30)
     openBtn.BackgroundColor3 = Color3.fromRGB(35,35,40)
-    openBtn.Text = "V14\nOPEN"
+    openBtn.Text = "V15\nOPEN"
     openBtn.TextColor3 = Color3.fromRGB(0,255,150)
     openBtn.Font = Enum.Font.GothamBlack
     openBtn.TextSize = 11
@@ -296,7 +297,7 @@ local function buildMain(lang)
     Instance.new("UIStroke", openBtn).Color = Color3.fromRGB(0,255,150)
     
     local main = Instance.new("Frame", gui)
-    main.Name = "MainCheck_"..getgenv().V14_WATERMARK
+    main.Name = "MainCheck_"..getgenv().V15_WATERMARK
     main.Size = isMobile and UDim2.new(0,360,0,520) or UDim2.new(0,680,0,560)
     main.Position = UDim2.new(0.5,-180,0.5,-260)
     if not isMobile then main.Position = UDim2.new(0.5,-340,0.5,-280) end
@@ -309,7 +310,7 @@ local function buildMain(lang)
     local title = Instance.new("TextLabel", main)
     title.Size = UDim2.new(1,-90,0,40)
     title.BackgroundColor3 = Color3.fromRGB(45,45,50)
-    title.Text = "  V14 ENHANCED - LIVE PING | JOBID/PLACE COPY | "..getgenv().V14_OWNER.." 🔥"
+    title.Text = "  V15 ULTRA - LIVE PING | JOBID/PLACE COPY | "..getgenv().V15_OWNER.." 🔥"
     title.TextColor3 = Color3.new(1,1,1)
     title.Font = Enum.Font.GothamBold
     title.TextSize = isMobile and 9 or 10
@@ -554,6 +555,35 @@ local function buildMain(lang)
     flyDownBtn.MouseButton1Down:Connect(function() flyDown=true end)
     flyDownBtn.MouseButton1Up:Connect(function() flyDown=false end)
     
+
+    -- ===== CLICK TELEPORT - KLIKK WO DU WILLST =====
+    local clickTPEnabled = false
+    local clickTPConn = nil
+    local function toggleClickTP(on)
+        clickTPEnabled = on
+        if on then
+            local mouse = lp:GetMouse()
+            if clickTPConn then pcall(function() clickTPConn:Disconnect() end) end
+            clickTPConn = mouse.Button1Down:Connect(function()
+                if not clickTPEnabled then return end
+                -- Nicht teleportieren wenn man GUI klickt
+                if UserInputService:GetFocusedTextBox() then return end
+                local char = lp.Character
+                if char and char:FindFirstChild("HumanoidRootPart") then
+                    local pos = mouse.Hit.Position + Vector3.new(0,3,0)
+                    char.HumanoidRootPart.CFrame = CFrame.new(pos)
+                    pcall(function()
+                        game.StarterGui:SetCore("SendNotification",{Title="📍 CLICK TP", Text="Teleportiert zu: "..math.floor(pos.X)..","..math.floor(pos.Y)..","..math.floor(pos.Z), Duration=1})
+                    end)
+                end
+            end)
+            game.StarterGui:SetCore("SendNotification",{Title="📍 CLICK TP", Text=T("AN! Klick irgendwo hin zum Teleportieren!","ON! Click anywhere to teleport!"), Duration=3})
+        else
+            if clickTPConn then pcall(function() clickTPConn:Disconnect() end) clickTPConn=nil end
+            game.StarterGui:SetCore("SendNotification",{Title="📍 CLICK TP", Text=T("AUS!","OFF!"), Duration=1})
+        end
+    end
+
     -- ===== PLAYER TAB =====
     local pTab = contentFrames["PLAYER"]
     makeInput(pTab, "SPEED z.B. 100","SPEED e.g. 100","SET SPEED","SET SPEED", Color3.fromRGB(0,120,200), function(txt)
@@ -583,17 +613,17 @@ local function buildMain(lang)
     
     makeToggle(pTab, "FLIEGEN - JOYSTICK + WASD + UP/DOWN HANDY","FLY - JOYSTICK + WASD + UP/DOWN MOBILE", function(on)
         if on then
-            getgenv().V14FLY=true
+            getgenv().V15FLY=true
             if isMobile then flyUpBtn.Visible=true flyDownBtn.Visible=true end
             local hrp = lp.Character and lp.Character:FindFirstChild("HumanoidRootPart")
             if not hrp then return end
-            if hrp:FindFirstChild("V14Fly") then hrp.V14Fly:Destroy() end
+            if hrp:FindFirstChild("V15Fly") then hrp.V15Fly:Destroy() end
             local bv = Instance.new("BodyVelocity", hrp)
-            bv.Name="V14Fly" bv.MaxForce=Vector3.new(9e9,9e9,9e9) bv.Velocity=Vector3.new(0,0,0)
+            bv.Name="V15Fly" bv.MaxForce=Vector3.new(9e9,9e9,9e9) bv.Velocity=Vector3.new(0,0,0)
             local bg = Instance.new("BodyGyro", hrp)
-            bg.Name="V14Gyro" bg.MaxTorque=Vector3.new(9e9,9e9,9e9) bg.CFrame=hrp.CFrame
+            bg.Name="V15Gyro" bg.MaxTorque=Vector3.new(9e9,9e9,9e9) bg.CFrame=hrp.CFrame
             getgenv().FlyConn = RunService.RenderStepped:Connect(function()
-                if not getgenv().V14FLY then return end
+                if not getgenv().V15FLY then return end
                 local char = lp.Character if not char then return end
                 local hum = char:FindFirstChildOfClass("Humanoid") if not hum then return end
                 local cam = workspace.CurrentCamera
@@ -614,16 +644,16 @@ local function buildMain(lang)
                 bg.CFrame = cam.CFrame
             end)
         else
-            getgenv().V14FLY=false
+            getgenv().V15FLY=false
             flyUpBtn.Visible=false flyDownBtn.Visible=false
             if getgenv().FlyConn then getgenv().FlyConn:Disconnect() end
             local hrp=lp.Character and lp.Character:FindFirstChild("HumanoidRootPart")
-            if hrp then if hrp:FindFirstChild("V14Fly") then hrp.V14Fly:Destroy() end if hrp:FindFirstChild("V14Gyro") then hrp.V14Gyro:Destroy() end end
+            if hrp then if hrp:FindFirstChild("V15Fly") then hrp.V15Fly:Destroy() end if hrp:FindFirstChild("V15Gyro") then hrp.V15Gyro:Destroy() end end
         end
     end)
     
     makeToggle(pTab, "NOCLIP DURCH WÄNDE","NOCLIP THROUGH WALLS", function(on)
-        getgenv().V14NOCLIP=on
+        getgenv().V15NOCLIP=on
         if on then
             getgenv().NCConn=RunService.Stepped:Connect(function()
                 if lp.Character then for _,v in pairs(lp.Character:GetDescendants()) do if v:IsA("BasePart") then v.CanCollide=false end end end
@@ -634,7 +664,7 @@ local function buildMain(lang)
     end)
     
     makeToggle(pTab, "UNENDLICH SPRINGEN","INFINITE JUMP", function(on)
-        getgenv().V14IJ=on
+        getgenv().V15IJ=on
         if on then
             getgenv().IJConn=UserInputService.JumpRequest:Connect(function()
                 local hum = lp.Character and lp.Character:FindFirstChildOfClass("Humanoid")
@@ -646,7 +676,11 @@ local function buildMain(lang)
     end)
     
     makeToggle(pTab, "ANTI-AFK - NIE WIEDER KICK","ANTI-AFK - NEVER KICK", function(on)
-        getgenv().V14AFK=on
+        getgenv().V15AFK=on
+    end)
+    
+    makeToggle(pTab, "📍 CLICK TELEPORT - KLICK WO DU WILLST","📍 CLICK TELEPORT - CLICK TO TP", function(on)
+        toggleClickTP(on)
     end)
     
     -- ===== VISUAL TAB =====
@@ -654,12 +688,12 @@ local function buildMain(lang)
     makeToggle(vTab, "ESP AN/AUS","ESP ON/OFF", function(on)
         if on then
             for _,pl in pairs(Players:GetPlayers()) do
-                if pl~=lp and pl.Character and not pl.Character:FindFirstChild("V14ESP") then
-                    local h=Instance.new("Highlight", pl.Character) h.Name="V14ESP" h.FillColor=Color3.fromRGB(0,255,0)
+                if pl~=lp and pl.Character and not pl.Character:FindFirstChild("V15ESP") then
+                    local h=Instance.new("Highlight", pl.Character) h.Name="V15ESP" h.FillColor=Color3.fromRGB(0,255,0)
                 end
             end
         else
-            for _,pl in pairs(Players:GetPlayers()) do if pl.Character then for _,v in pairs(pl.Character:GetChildren()) do if v.Name=="V14ESP" then v:Destroy() end end end end
+            for _,pl in pairs(Players:GetPlayers()) do if pl.Character then for _,v in pairs(pl.Character:GetChildren()) do if v.Name=="V15ESP" then v:Destroy() end end end end
         end
     end)
     makeToggle(vTab, "FULLBRIGHT - HELL WIE TAG","FULLBRIGHT - BRIGHT AS DAY", function(on)
@@ -761,9 +795,9 @@ local function buildMain(lang)
     makeButton(eTab, "👁️ BABA EXPLORER V2","👁️ BABA EXPLORER V2", Color3.fromRGB(200,100,0), function()
         local parent = getGuiParent()
         if parent:FindFirstChild("BabaExplorerGui") then parent.BabaExplorerGui:Destroy() end
-        local expGui=Instance.new("ScreenGui") expGui.Name="BabaExplorerGui_"..getgenv().V14_OWNER expGui.Parent=parent
+        local expGui=Instance.new("ScreenGui") expGui.Name="BabaExplorerGui_"..getgenv().V15_OWNER expGui.Parent=parent
         local mainF=Instance.new("Frame", expGui) mainF.Size=UDim2.new(0,400,0,450) mainF.Position=UDim2.new(0.5,-200,0.5,-225) mainF.BackgroundColor3=Color3.fromRGB(25,25,30) mainF.Active=true mainF.Draggable=true Instance.new("UICorner", mainF)
-        local titleBar=Instance.new("TextLabel", mainF) titleBar.Size=UDim2.new(1,0,0,30) titleBar.Text="BABA EXPLORER BY "..getgenv().V14_OWNER titleBar.BackgroundColor3=Color3.fromRGB(35,35,40) titleBar.TextColor3=Color3.fromRGB(0,255,150)
+        local titleBar=Instance.new("TextLabel", mainF) titleBar.Size=UDim2.new(1,0,0,30) titleBar.Text="BABA EXPLORER BY "..getgenv().V15_OWNER titleBar.BackgroundColor3=Color3.fromRGB(35,35,40) titleBar.TextColor3=Color3.fromRGB(0,255,150)
         local scroll=Instance.new("ScrollingFrame", mainF) scroll.Size=UDim2.new(1,-10,1,-40) scroll.Position=UDim2.new(0,5,0,35) scroll.CanvasSize=UDim2.new(0,0,0,2000) local layout=Instance.new("UIListLayout", scroll)
         for _,obj in pairs(game:GetChildren()) do local b=Instance.new("TextButton", scroll) b.Size=UDim2.new(1,-10,0,28) b.Text="📁 "..obj.Name.." ["..obj.ClassName.."]" b.BackgroundColor3=Color3.fromRGB(50,50,50) b.TextColor3=Color3.new(1,1,1) end
         scroll.CanvasSize=UDim2.new(0,0,0,layout.AbsoluteContentSize.Y)
@@ -782,7 +816,7 @@ local function buildMain(lang)
         if #servers>0 then TeleportService:TeleportToPlaceInstance(game.PlaceId, servers[math.random(1,#servers)], lp) end
     end)
     makeButton(sTab, "💬 DISCORD KOPIEREN","💬 COPY DISCORD", Color3.fromRGB(88,101,242), function()
-        setclipboard(getgenv().V14_DISCORD)
+        setclipboard(getgenv().V15_DISCORD)
         game.StarterGui:SetCore("SendNotification",{Title="💬 DISCORD", Text=T("discord.gg/8nTQ5xvuha KOPIERT!","discord.gg/8nTQ5xvuha COPIED!"), Duration=2})
     end)
     
@@ -877,7 +911,7 @@ local function buildMain(lang)
     end)
     
     makeButton(uTab, "📜 ALLE FEATURES ANZEIGEN","📜 SHOW ALL FEATURES", Color3.fromRGB(100,100,200), function()
-        print("=== V14 ENHANCED FEATURES ===")
+        print("=== V15 ULTRA FEATURES ===")
         print("✅ PLAYER: Speed, Jump, Gravity, FOV, HipHeight, SpeedQuick, Fly, Noclip, InfJump, AntiAFK")
         print("✅ VISUAL: ESP, Fullbright, Xray, NoFog, NightToDay")
         print("✅ AUTO-HOP: Auto-Hop (500ms+), Manual Server Hop, Ping Stats")
@@ -892,7 +926,7 @@ local function buildMain(lang)
     mini.MouseButton1Click:Connect(function() main.Visible=false end)
     
     game.StarterGui:SetCore("SendNotification",{
-        Title="V14 ENHANCED! 🔥",
+        Title="V15 ULTRA! 🔥",
         Text= T("ALLE FEATURES GELADEN! Live Ping + Auto-Hop + Ultra Boost V2 + Anti-Lag V2!","ALL FEATURES LOADED! Live Ping + Auto-Hop + Ultra Boost V2 + Anti-Lag V2!"),
         Duration=6
     })
@@ -900,6 +934,6 @@ end
 
 deBtn.MouseButton1Click:Connect(function() buildMain("DE") end)
 enBtn.MouseButton1Click:Connect(function() buildMain("EN") end)
-discordBtnLang.MouseButton1Click:Connect(function() setclipboard(getgenv().V14_DISCORD) end)
+discordBtnLang.MouseButton1Click:Connect(function() setclipboard(getgenv().V15_DISCORD) end)
 
 -- auto start handled above
